@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="อาจารย์ ดร.วราวุฒิ นาคบุญนำ">
+<meta name="copyright" content="© 2568 อาจารย์ ดร.วราวุฒิ นาคบุญนำ — สงวนลิขสิทธิ์">
+<title>OBE Constructive Alignment Tool (พกพา) — อ.ดร.วราวุฒิ นาคบุญนำ</title>
+<style>
+:root{color-scheme:light;--navy:#1f3864;--blue:#2f5597;--green:#1e6b2f;--rust:#9c270b;--purple:#6b21a8;--bg:#f4f6fb;--line:#d9dee8;}
+*{box-sizing:border-box;font-family:"TH Sarabun New","Sarabun","Segoe UI",Tahoma,sans-serif;}
+body{margin:0;background:#fff;color:#20242c;font-size:16px;}
+header{background:var(--navy);color:#fff;padding:12px 20px;}
+header h1{margin:0;font-size:20px;} header p{margin:3px 0 0;font-size:13px;opacity:.85;}
+.chain{display:flex;gap:5px;flex-wrap:wrap;padding:8px 20px;background:#eef2f9;font-size:12px;color:#42506b;align-items:center;}
+.chain b{background:#fff;border:1px solid var(--line);border-radius:12px;padding:2px 8px;font-weight:600;}
+.tabs{display:flex;gap:2px;background:#e7ecf5;padding:0 10px;flex-wrap:wrap;}
+.tab{padding:9px 13px;cursor:pointer;border:none;background:transparent;font-size:14.5px;color:#42506b;border-bottom:3px solid transparent;}
+.tab.active{color:var(--navy);font-weight:700;border-bottom-color:var(--blue);background:#fff;}
+main{padding:16px 20px;max-width:1180px;margin:0 auto;}
+.panel{display:none;} .panel.active{display:block;}
+h2{color:var(--navy);margin:4px 0 8px;font-size:19px;} h3{color:var(--navy);margin:14px 0 6px;font-size:16px;}
+button{cursor:pointer;border:1px solid var(--blue);background:var(--blue);color:#fff;border-radius:6px;padding:6px 12px;font-size:14px;}
+button.ghost{background:#fff;color:var(--blue);} button.ai{background:var(--purple);border-color:var(--purple);}
+button.sm{padding:2px 8px;font-size:13px;} button.danger{background:#fff;color:var(--rust);border-color:var(--rust);}
+table{border-collapse:collapse;width:100%;background:#fff;margin:6px 0;}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+th{background:#eef2f9;color:var(--navy);}
+input,select,textarea{width:100%;padding:4px 6px;border:1px solid var(--line);border-radius:5px;font-size:14px;background:#fff;}
+textarea{resize:vertical;min-height:36px;}
+.hint{color:#5b6472;font-size:13.5px;} .mini{font-size:12.5px;color:#6b7280;}
+.pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:12px;margin:1px;}
+.I{background:#dbe8ff;color:#1c4587;} .R{background:#fff3cd;color:#8a6d00;} .M{background:#d6f0dd;color:#1e6b2f;}
+.mapcell{text-align:center;cursor:pointer;font-weight:700;user-select:none;min-width:40px;}
+.mapcell.I{background:#dbe8ff;} .mapcell.R{background:#fff3cd;} .mapcell.M{background:#d6f0dd;}
+.warn{background:#fdecea;border-left:4px solid var(--rust);padding:7px 11px;margin:5px 0;border-radius:4px;font-size:14px;}
+.ok{background:#e7f6ec;border-left:4px solid var(--green);padding:7px 11px;margin:5px 0;border-radius:4px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px;margin:9px 0;}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:flex-start;} .grow{flex:1;min-width:120px;}
+.path{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:3px 0;}
+.step{border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:13px;}
+/* modal */
+#ov{display:none;position:fixed;inset:0;background:rgba(20,24,40,.55);z-index:50;padding:24px;overflow:auto;}
+#ov .box{max-width:760px;margin:20px auto;background:#fff;border-radius:10px;padding:16px 18px;}
+#ov h3{margin-top:0;}
+.step-n{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;text-align:center;font-size:13px;line-height:22px;margin-right:6px;}
+@media print{.tabs,.chain,button,.no-print,#ov{display:none!important}.panel{display:block!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>เครื่องมือ OBE — Constructive Alignment (ฉบับพกพา)</h1>
+  <p>ไฟล์เดียว ใช้ได้ทุกเครื่อง • บันทึกอัตโนมัติ • AI แบบคัดลอก-วาง (ใช้ AI อะไรก็ได้ที่มี)</p>
+</header>
+<div class="chain">
+  บริบท/วิสัยทัศน์ → <b>Graduate Profile</b> → <b>PLO</b> → <b>✓ ตรวจ TQF</b> → รายวิชา → <b>IRM พัฒนาการ</b> → CLO → Teaching → Assessment → Evidence → <i>วนทวนสอบ GP</i>
+</div>
+<div class="tabs" id="tabs"></div>
+<main>
+  <!-- 1 CONTEXT -->
+  <section class="panel" id="t-ctx">
+    <h2>1) บริบท / วิสัยทัศน์ / ความต้องการผู้มีส่วนได้ส่วนเสีย</h2>
+    <div class="card">
+      <div class="row"><div class="grow"><span class="mini">ชื่อหลักสูตร</span><input id="cx-prog" oninput="S.ctx.prog=this.value;save()"></div>
+      <div style="width:200px"><span class="mini">ระดับปริญญา (ใช้ตรวจระดับ Bloom)</span><select id="cx-degree" onchange="S.ctx.degree=this.value;save();renderChecks()"></select></div></div>
+      <span class="mini">ปรัชญา / วิสัยทัศน์ / พันธกิจ (มหาวิทยาลัยและคณะ)</span><textarea id="cx-vision" oninput="S.ctx.vision=this.value;save()"></textarea>
+      <span class="mini">ความต้องการผู้มีส่วนได้ส่วนเสีย (ผู้ใช้บัณฑิต / วิชาชีพ / ตลาดแรงงาน / สังคม)</span><textarea id="cx-stake" oninput="S.ctx.stake=this.value;save()"></textarea>
+      <span class="mini">มาตรฐานวิชาชีพ / มคอ.1 ที่เกี่ยวข้อง (ถ้ามี — ใช้เป็นด่านตรวจ)</span><input id="cx-prof" oninput="S.ctx.profStd=this.value;save()">
+      <span class="mini">บันทึกการทบทวน/ปรับปรุงหลักสูตร (AUN 2.7)</span><input id="cx-review" oninput="S.ctx.reviewNote=this.value;save()" placeholder="เช่น ทบทวนรอบปี 2568 โดย กก.บริหารหลักสูตร ...">
+    </div>
+    <div class="card"><b>การตั้งค่าเกณฑ์การออกแบบ</b>
+      <div class="row" style="margin-top:6px">
+        <div><span class="mini">Bloom ขั้นต่ำ ป.ตรี</span><select id="fl-ปริญญาตรี" onchange="S.ctx.floors['ปริญญาตรี']=this.value;save();renderChecks()"></select></div>
+        <div><span class="mini">Bloom ขั้นต่ำ ป.โท</span><select id="fl-ปริญญาโท" onchange="S.ctx.floors['ปริญญาโท']=this.value;save();renderChecks()"></select></div>
+        <div><span class="mini">Bloom ขั้นต่ำ ป.เอก</span><select id="fl-ปริญญาเอก" onchange="S.ctx.floors['ปริญญาเอก']=this.value;save();renderChecks()"></select></div>
+        <div><span class="mini">จำนวน PLO ที่เหมาะสม</span><br><input id="pl-min" type="number" style="width:56px;display:inline" oninput="S.ctx.ploMin=+this.value;save();renderChecks()"> ถึง <input id="pl-max" type="number" style="width:56px;display:inline" oninput="S.ctx.ploMax=+this.value;save();renderChecks()"></div>
+      </div>
+      <div class="mini">แนะนำ PLO 5–8 ข้อ — มากไปวัด/ทวนสอบยาก น้อยไปไม่ครอบคลุมอัตลักษณ์บัณฑิต</div>
+    </div>
+  </section>
+
+  <!-- 2 GRADUATE PROFILE -->
+  <section class="panel" id="t-gp">
+    <h2>2) Graduate Profile — “เราอยากเห็นบัณฑิตเป็นแบบไหน”</h2>
+    <p class="hint">ระบุ<b>ภาพรวมอัตลักษณ์บัณฑิต</b> แล้วแตกเป็น<b>คุณลักษณะย่อย</b> (แต่ละคุณลักษณะจะกลายเป็น PLO ที่วัดได้)</p>
+    <span class="mini">ภาพรวมอัตลักษณ์บัณฑิต (ประโยคเดียว)</span>
+    <textarea id="gp-text" oninput="S.ctx.gpText=this.value;save()" placeholder="เช่น นักธุรกิจสมัยใหม่ที่คิดวิเคราะห์ ใช้เทคโนโลยี สร้างนวัตกรรม และดำเนินธุรกิจอย่างรับผิดชอบ"></textarea>
+    <table id="gpTable" style="margin-top:8px"></table>
+    <div class="row no-print"><button class="ghost" onclick="addTrait()">+ เพิ่มคุณลักษณะ</button>
+      <button class="ai" onclick="bridgePLO()">✨ แตก Graduate Profile → PLO (คัดลอก-วาง)</button></div>
+    <p class="mini">GP = “อยากให้เขาเป็นใคร” · PLO = “ต้องทำอะไรได้จึงจะเป็นคนนั้น”</p>
+  </section>
+
+  <!-- 3 PLO -->
+  <section class="panel" id="t-plo">
+    <h2>3) PLO — “เมื่อจบแล้วเขาทำอะไรได้”</h2>
+    <div class="row no-print"><button class="ai" onclick="bridgePLO()">✨ ช่วยร่าง PLO (คัดลอก-วาง)</button><button class="ghost" onclick="addPLO()">+ เพิ่ม PLO เอง</button></div>
+    <table id="ploTable"></table>
+  </section>
+
+  <!-- 4 TQF CHECK -->
+  <section class="panel" id="t-tqf">
+    <h2>4) ✓ ตรวจสอบกับ TQF / มาตรฐานคุณวุฒิ</h2>
+    <p class="hint">PLO ที่ร่างต้องครอบคลุมผลลัพธ์การเรียนรู้ทั้ง 4 ด้าน (มาตรฐานคุณวุฒิ พ.ศ. 2565) — TQF เป็น “ด่านตรวจ” ไม่ใช่ต้นทาง</p>
+    <div id="tqfCheck"></div>
+  </section>
+
+  <!-- 5 COURSES + CLO -->
+  <section class="panel" id="t-course">
+    <h2>5) รายวิชา → CLO (แตกจากคำอธิบายรายวิชา)</h2>
+    <div id="courseList"></div>
+    <button class="ghost" onclick="addCourse()">+ เพิ่มรายวิชา</button>
+  </section>
+
+  <!-- 6 MAPPING + DEVELOPMENT -->
+  <section class="panel" id="t-map">
+    <h2>6) Curriculum Mapping (I-R-M) และเส้นทางพัฒนาการ</h2>
+    <p class="hint">คลิกช่องสลับ ว่าง→<span class="pill I">I</span>→<span class="pill R">R</span>→<span class="pill M">M</span> — ด้านล่างแสดง “พัฒนาการราย PLO” ตามชั้นปี</p>
+    <div style="overflow:auto"><table id="mapTable"></table></div>
+    <h3>เส้นทางพัฒนาการของนิสิต (ราย PLO)</h3>
+    <div id="pathways"></div>
+  </section>
+
+  <!-- 7 ALIGN -->
+  <section class="panel" id="t-align">
+    <h2>7) Teaching &amp; Learning · Assessment · Evidence</h2>
+    <div id="alignList"></div>
+  </section>
+
+  <!-- 8 CHECK + EXPORT -->
+  <section class="panel" id="t-check">
+    <h2>8) ตรวจสอบความสอดคล้อง และส่งออก</h2>
+    <div id="checks"></div>
+    <div class="row no-print" style="margin-top:10px">
+      <button onclick="exportJSON()">⬇ บันทึกไฟล์ (JSON)</button>
+      <button class="ghost" onclick="document.getElementById('imp').click()">⬆ เปิดไฟล์ (JSON)</button>
+      <input id="imp" type="file" accept=".json" style="display:none" onchange="importJSON(event)">
+      <button class="ghost" onclick="window.print()">🖨 พิมพ์ / PDF</button>
+      <button class="danger" onclick="resetAll()">ล้างข้อมูล</button>
+    </div>
+    <div id="exportView"></div>
+  </section>
+</main>
+
+<footer style="text-align:center;padding:14px;color:#6b7280;font-size:12.5px;border-top:1px solid var(--line);margin-top:20px">
+  © 2568 (2025) สงวนลิขสิทธิ์ &nbsp;•&nbsp; <b>อาจารย์ ดร.วราวุฒิ นาคบุญนำ</b> &nbsp;•&nbsp; เครื่องมือ OBE Constructive Alignment<br>
+  <span style="font-size:11.5px">อนุญาตให้ใช้เพื่อการศึกษาและพัฒนาหลักสูตร โปรดอ้างอิงผู้พัฒนาเมื่อเผยแพร่ต่อ</span>
+</footer>
+
+<!-- AI BRIDGE MODAL -->
+<div id="ov"><div class="box">
+  <h3 id="ov-title">AI ช่วยงาน (คัดลอก-วาง)</h3>
+  <p class="mini"><span class="step-n">1</span>กด “คัดลอกคำสั่ง” แล้วนำไปวางใน Claude / ChatGPT / Gemini ที่คุณมี &nbsp; <span class="step-n">2</span>คัดลอกคำตอบ (JSON) กลับมาวางด้านล่าง &nbsp; <span class="step-n">3</span>กด “นำเข้าผล”</p>
+  <textarea id="ov-prompt" readonly style="min-height:120px;background:#f7f8fb"></textarea>
+  <div class="row" style="margin:6px 0"><button onclick="copyPrompt()">📋 คัดลอกคำสั่ง</button><span id="ov-copied" class="mini"></span></div>
+  <span class="mini">วางคำตอบ JSON ที่ได้จาก AI ที่นี่</span>
+  <textarea id="ov-result" style="min-height:110px" placeholder='[ ... ]'></textarea>
+  <div class="row" style="margin-top:8px"><button onclick="doImportBridge()">นำเข้าผล</button><button class="ghost" onclick="closeOv()">ปิด</button><span id="ov-msg" class="mini"></span></div>
+</div></div>
+
+<script>
+const DOMAINS=["ด้านความรู้","ด้านทักษะ","ด้านจริยธรรม","ด้านลักษณะบุคคล"];
+const BLOOM=["จำ","เข้าใจ","ประยุกต์","วิเคราะห์","ประเมินค่า","สร้างสรรค์"];
+const BVERB={"จำ":"บอก ระบุ","เข้าใจ":"อธิบาย สรุป จำแนก","ประยุกต์":"ประยุกต์ใช้ แก้ปัญหา ปฏิบัติ","วิเคราะห์":"วิเคราะห์ ตรวจสอบ","ประเมินค่า":"ประเมิน วิพากษ์ ตัดสิน","สร้างสรรค์":"ออกแบบ สร้าง พัฒนา บูรณาการ"};
+const WEAK=["เข้าใจ","รู้","ทราบ","ตระหนัก","เรียนรู้","ซาบซึ้ง"];
+const BIDX={"จำ":1,"เข้าใจ":2,"ประยุกต์":3,"วิเคราะห์":4,"ประเมินค่า":5,"สร้างสรรค์":6};
+const DEGREES=["ปริญญาตรี","ปริญญาโท","ปริญญาเอก"];
+const DFLOOR={"ปริญญาตรี":3,"ปริญญาโท":4,"ปริญญาเอก":5}; // Bloom ขั้นต่ำที่คาดหวังต่อระดับปริญญา
+const LS="obeTool_v2"; let S=load();
+function load(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(LS)))}catch(e){return blank()}}
+function blank(){return{ctx:{prog:"",degree:"ปริญญาตรี",vision:"",stake:"",profStd:"",gpText:"",gpTraits:[],domains:DOMAINS.map(d=>({name:d,on:true})),floors:{"ปริญญาตรี":"ประยุกต์","ปริญญาโท":"วิเคราะห์","ปริญญาเอก":"ประเมินค่า"},ploMin:5,ploMax:8,reviewNote:""},plos:[],courses:[],map:{}}}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
+function uid(){return Math.random().toString(36).slice(2,8);}
+function esc(s){return(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function opt(a,s){return a.map(o=>`<option ${o==s?"selected":""}>${o}</option>`).join("");}
+function weak(t){t=(t||"").replace(/^ผู้เรียน(สามารถ)?/,"").trim();for(const w of WEAK)if(t.startsWith(w))return w;return"";}
+function mkey(c,p){return c+"|"+p;}
+
+const TABS=[["t-ctx","บริบท"],["t-gp","Graduate Profile"],["t-plo","PLO"],["t-tqf","✓ ตรวจ TQF"],["t-course","รายวิชา & CLO"],["t-map","Mapping & พัฒนาการ"],["t-align","T&L/Assess/Evidence"],["t-check","ตรวจสอบ & ส่งออก"]];
+const tabsEl=document.getElementById("tabs");
+TABS.forEach(([id,l],i)=>{const b=document.createElement("button");b.className="tab"+(i==0?" active":"");b.textContent=l;b.onclick=()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");renderAll();};tabsEl.appendChild(b);});
+document.getElementById("t-ctx").classList.add("active");
+
+/* ---------- AI bridge ---------- */
+let bridgeHandler=null;
+function openBridge(title,prompt,handler){
+ document.getElementById("ov-title").textContent=title;
+ document.getElementById("ov-prompt").value=prompt;
+ document.getElementById("ov-result").value="";
+ document.getElementById("ov-msg").textContent="";document.getElementById("ov-copied").textContent="";
+ bridgeHandler=handler;document.getElementById("ov").style.display="block";
+ copyPrompt();
+}
+function closeOv(){document.getElementById("ov").style.display="none";}
+function copyPrompt(){const t=document.getElementById("ov-prompt");t.select();try{navigator.clipboard.writeText(t.value);}catch(e){document.execCommand&&document.execCommand("copy");}document.getElementById("ov-copied").textContent="✓ คัดลอกแล้ว";}
+function grabJSON(t){const m=t.match(/\[[\s\S]*\]|\{[\s\S]*\}/);if(!m)throw new Error("ไม่พบ JSON");return JSON.parse(m[0]);}
+function doImportBridge(){try{const j=grabJSON(document.getElementById("ov-result").value);bridgeHandler(j);document.getElementById("ov-msg").textContent="✓ นำเข้าเรียบร้อย";save();renderAll();setTimeout(closeOv,700);}catch(e){document.getElementById("ov-msg").textContent="⚠ "+e.message;}}
+
+/* ---------- context ---------- */
+function renderCtx(){["prog","vision","stake","profStd"].forEach(k=>{const el=document.getElementById("cx-"+(k=="profStd"?"prof":k));if(el)el.value=S.ctx[k]||"";});
+ const dg=document.getElementById("cx-degree");if(dg)dg.innerHTML=opt(DEGREES,S.ctx.degree||"ปริญญาตรี");
+ const rv=document.getElementById("cx-review");if(rv)rv.value=S.ctx.reviewNote||"";
+ DEGREES.forEach(d=>{const s=document.getElementById("fl-"+d);if(s)s.innerHTML=opt(BLOOM,(S.ctx.floors&&S.ctx.floors[d])||"ประยุกต์");});
+ const mn=document.getElementById("pl-min");if(mn)mn.value=S.ctx.ploMin||5;const mx=document.getElementById("pl-max");if(mx)mx.value=S.ctx.ploMax||8;}
+
+/* ---------- Graduate Profile ---------- */
+function addTrait(){S.ctx.gpTraits.push({trait:"",plo:""});save();renderGP();}
+function renderGP(){
+ document.getElementById("gp-text").value=S.ctx.gpText||"";
+ let h="<tr><th style='width:45%'>คุณลักษณะบัณฑิต (trait)</th><th>จะกลายเป็น PLO ว่า...</th><th style='width:44px'></th></tr>";
+ (S.ctx.gpTraits||[]).forEach((g,i)=>{h+=`<tr>
+   <td><input value="${esc(g.trait)}" oninput="S.ctx.gpTraits[${i}].trait=this.value;save()" placeholder="เช่น สร้างนวัตกรรม"></td>
+   <td><input value="${esc(g.plo)}" oninput="S.ctx.gpTraits[${i}].plo=this.value;save()" placeholder="เช่น พัฒนาโซลูชันธุรกิจที่สร้างคุณค่าได้"></td>
+   <td><button class="danger sm" onclick="S.ctx.gpTraits.splice(${i},1);save();renderGP()">ลบ</button></td></tr>`;});
+ document.getElementById("gpTable").innerHTML=h;
+}
+function bridgePLO(){
+ const doms=S.ctx.domains.filter(d=>d.on).map(d=>d.name).join(", ");
+ const traits=(S.ctx.gpTraits||[]).map(g=>g.trait+(g.plo?(" → "+g.plo):"")).filter(x=>x.trim()).join(" | ");
+ const prompt=`คุณเป็นผู้เชี่ยวชาญ OBE (Outcome-Based Education) ระดับอุดมศึกษาไทย\n`+
+  `ช่วยแตก "Graduate Profile" ต่อไปนี้ให้เป็นผลลัพธ์การเรียนรู้ระดับหลักสูตร (PLO) 5-8 ข้อ\n`+
+  `เงื่อนไข: แต่ละ PLO ขึ้นต้นด้วย "ผู้เรียนสามารถ" ใช้คำกริยาที่วัดผลได้ (ห้าม เข้าใจ/รู้/ตระหนัก) ครอบคลุมด้าน: ${doms}\n`+
+  `หลักสูตร: ${S.ctx.prog}\nอัตลักษณ์บัณฑิต: ${S.ctx.gpText}\nคุณลักษณะย่อย: ${traits}\n`+
+  `ความต้องการผู้มีส่วนได้ส่วนเสีย: ${S.ctx.stake}\nมาตรฐานวิชาชีพ/มคอ.1: ${S.ctx.profStd}\n`+
+  `ตอบเป็น JSON array เท่านั้น ห้ามมีข้อความอื่น: [{"text":"...","domain":"หนึ่งใน: ${doms}","bloom":"หนึ่งใน: จำ/เข้าใจ/ประยุกต์/วิเคราะห์/ประเมินค่า/สร้างสรรค์"}]`;
+ openBridge("แตก Graduate Profile → PLO",prompt,arr=>{arr.forEach(o=>S.plos.push({id:"",text:o.text||"",domain:DOMAINS.includes(o.domain)?o.domain:DOMAINS[0],bloom:BLOOM.includes(o.bloom)?o.bloom:"ประยุกต์"}));});
+}
+
+/* ---------- PLO ---------- */
+function addPLO(){S.plos.push({id:"",text:"",domain:DOMAINS[0],bloom:"เข้าใจ"});save();renderPLO();}
+function renderPLO(){
+ let h="<tr><th style='width:56px'>รหัส</th><th>ข้อความ PLO</th><th style='width:140px'>ด้าน</th><th style='width:120px'>ประเภท (AUN 1.3)</th><th style='width:110px'>Bloom</th><th style='width:44px'></th></tr>";
+ S.plos.forEach((p,i)=>{p.id="PLO"+(i+1);const w=weak(p.text);
+  h+=`<tr><td><b>${p.id}</b></td>
+   <td><textarea onchange="S.plos[${i}].text=this.value;save();renderPLO()" placeholder="ผู้เรียนสามารถ...">${esc(p.text)}</textarea>${w?`<div class="mini" style="color:var(--rust)">⚠ "${w}" วัดยาก — ลองใช้: ${BVERB[p.bloom]}</div>`:""}</td>
+   <td><select onchange="S.plos[${i}].domain=this.value;save();renderTQF()">${opt(DOMAINS,p.domain)}</select></td>
+   <td><select onchange="S.plos[${i}].kind=this.value;save();renderChecks()">${opt(["Generic","เฉพาะสาขา"],p.kind||"เฉพาะสาขา")}</select></td>
+   <td><select onchange="S.plos[${i}].bloom=this.value;save();renderChecks()">${opt(BLOOM,p.bloom)}</select></td>
+   <td><button class="danger sm" onclick="S.plos.splice(${i},1);clean();save();renderPLO()">ลบ</button></td></tr>`;});
+ document.getElementById("ploTable").innerHTML=h;
+}
+
+/* ---------- TQF check ---------- */
+function renderTQF(){
+ let h="<table><tr><th>ด้าน (มาตรฐานคุณวุฒิ 2565)</th><th>PLO ที่รองรับ</th><th>สถานะ</th></tr>";
+ S.ctx.domains.filter(d=>d.on).forEach(d=>{const ps=S.plos.filter(p=>p.domain===d.name).map(p=>p.id);
+  h+=`<tr><td>${d.name}</td><td>${ps.map(x=>`<span class="pill" style="background:#eef">${x}</span>`).join(" ")||"<span class='mini'>—</span>"}</td><td>${ps.length?"<span style='color:var(--green)'>✓ ครอบคลุม</span>":"<span style='color:var(--rust)'>⚠ ยังไม่มี PLO</span>"}</td></tr>`;});
+ h+="</table>";
+ if(S.ctx.profStd)h+=`<div class="card mini"><b>มาตรฐานวิชาชีพ/มคอ.1:</b> ${esc(S.ctx.profStd)} — ตรวจว่า PLO สอดคล้องกับมาตรฐานนี้ครบถ้วน</div>`;
+ document.getElementById("tqfCheck").innerHTML=h;
+}
+
+/* ---------- Courses / CLO ---------- */
+function addCourse(){S.courses.push({id:uid(),code:"",name:"",credits:"",group:"วิชาเอกบังคับ",year:"",desc:"",clos:[]});save();renderCourse();}
+function renderCourse(){
+ let h="";
+ S.courses.forEach((c,ci)=>{
+  h+=`<div class="card"><div class="row">
+   <div style="width:120px"><span class="mini">รหัสวิชา</span><input value="${esc(c.code)}" onchange="S.courses[${ci}].code=this.value;save();renderMap()"></div>
+   <div class="grow"><span class="mini">ชื่อวิชา</span><input value="${esc(c.name)}" onchange="S.courses[${ci}].name=this.value;save();renderMap()"></div>
+   <div style="width:78px"><span class="mini">หน่วยกิต</span><input value="${esc(c.credits)}" onchange="S.courses[${ci}].credits=this.value;save()"></div>
+   <div style="width:64px"><span class="mini">ชั้นปี</span><input value="${esc(c.year)}" onchange="S.courses[${ci}].year=this.value;save();renderMap()"></div>
+   <div style="width:145px"><span class="mini">กลุ่มวิชา</span><select onchange="S.courses[${ci}].group=this.value;save()">${opt(["วิชาแกน/พื้นฐาน","วิชาเอกบังคับ","วิชาเอกเลือก","วิชาเลือกเสรี","วิทยานิพนธ์/IS"],c.group)}</select></div>
+   <div><button class="danger sm" onclick="S.courses.splice(${ci},1);clean();save();renderCourse()">ลบ</button></div></div>
+   <span class="mini">คำอธิบายรายวิชา</span><textarea style="min-height:50px" onchange="S.courses[${ci}].desc=this.value;save()" placeholder="วางคำอธิบายรายวิชา...">${esc(c.desc)}</textarea>
+   <div class="row no-print" style="margin:6px 0"><button class="ai sm" onclick="bridgeCLO(${ci})">✨ แตกเป็น CLO + เสนอ mapping (คัดลอก-วาง)</button></div>
+   <table><tr><th>CLO</th><th style='width:112px'>Bloom</th><th style='width:190px'>สนับสนุน PLO</th><th style='width:64px'>ระดับ</th><th style='width:42px'></th></tr>`;
+  c.clos.forEach((cl,li)=>{h+=`<tr><td><textarea onchange="S.courses[${ci}].clos[${li}].text=this.value;save()" placeholder="ผู้เรียนสามารถ...">${esc(cl.text)}</textarea></td>
+   <td><select onchange="S.courses[${ci}].clos[${li}].bloom=this.value;save()">${opt(BLOOM,cl.bloom)}</select></td>
+   <td>${ploChk(ci,li,cl.plos||[])}</td>
+   <td><select onchange="setLevel(${ci},${li},this.value)">${opt(["","I","R","M"],cl.level||"")}</select></td>
+   <td><button class="danger sm" onclick="S.courses[${ci}].clos.splice(${li},1);save();renderCourse()">ลบ</button></td></tr>`;});
+  h+=`</table><button class="ghost sm" onclick="S.courses[${ci}].clos.push({text:'',bloom:'เข้าใจ',plos:[],level:''});save();renderCourse()">+ เพิ่ม CLO เอง</button></div>`;});
+ document.getElementById("courseList").innerHTML=h||"<p class='hint'>ยังไม่มีรายวิชา</p>";
+}
+function ploChk(ci,li,sel){if(!S.plos.length)return"<span class='mini'>ยังไม่มี PLO</span>";return S.plos.map(p=>`<label class="mini" style="margin-right:4px"><input type="checkbox" style="width:auto" ${sel.includes(p.id)?"checked":""} onchange="togglePlo(${ci},${li},'${p.id}',this.checked)"> ${p.id}</label>`).join("");}
+function togglePlo(ci,li,pid,on){const cl=S.courses[ci].clos[li];cl.plos=cl.plos||[];const x=cl.plos.indexOf(pid);if(on&&x<0)cl.plos.push(pid);if(!on&&x>=0)cl.plos.splice(x,1);applyLevel(ci,li);save();renderMap();}
+function setLevel(ci,li,v){S.courses[ci].clos[li].level=v;applyLevel(ci,li);save();renderMap();}
+function applyLevel(ci,li){const c=S.courses[ci],cl=c.clos[li],rk={"":0,I:1,R:2,M:3};(cl.plos||[]).forEach(pid=>{const k=mkey(c.id,pid),cur=S.map[k]||"";if(rk[cl.level||""]>=rk[cur]&&cl.level)S.map[k]=cl.level;});}
+function bridgeCLO(ci){
+ const c=S.courses[ci];if(!c.desc){alert("ยังไม่มีคำอธิบายรายวิชา");return;}
+ const plist=S.plos.map(p=>`${p.id}: ${p.text}`).join(" | ")||"(ยังไม่มี PLO)";
+ const prompt=`คุณเป็นผู้เชี่ยวชาญ OBE ช่วยแตก "คำอธิบายรายวิชา" เป็น CLO 3-5 ข้อ\n`+
+  `เงื่อนไข: CLO ขึ้นต้น "ผู้เรียนสามารถ" ใช้คำกริยาวัดผลได้; ระบุระดับ Bloom; เลือกรหัส PLO ที่ CLO สนับสนุนจากรายการ; เสนอระดับพัฒนาการ I/R/M โดยดูจากระดับ Bloom และวิชานี้เป็นชั้นปีที่ ${c.year||"?"} (ปีต้น→I, กลาง→R, ปลาย/บูรณาการ→M)\n`+
+  `สำคัญ: ระดับ Bloom ของ CLO ต้อง "ไม่เกิน" ระดับ Bloom ของ PLO ที่ CLO นั้นสนับสนุน (PLO เป็นเพดานปลายทาง) และวิชาระดับ ${S.ctx.degree} ควรอยู่ในช่วงที่เหมาะสมกับระดับปริญญา\n`+
+  `รายวิชา: ${c.code} ${c.name}\nคำอธิบายรายวิชา: ${c.desc}\nรายการ PLO: ${plist}\n`+
+  `ตอบ JSON array เท่านั้น: [{"text":"...","bloom":"...","plos":["PLOx"],"level":"I|R|M"}]`;
+ openBridge("แตกคำอธิบายรายวิชา → CLO + mapping",prompt,arr=>{arr.forEach(o=>{const cl={text:o.text||"",bloom:BLOOM.includes(o.bloom)?o.bloom:"ประยุกต์",plos:(o.plos||[]).filter(x=>S.plos.some(p=>p.id===x)),level:["I","R","M"].includes(o.level)?o.level:""};c.clos.push(cl);});c.clos.forEach((_,li)=>applyLevel(ci,li));});
+}
+
+/* ---------- Map + pathways ---------- */
+function cycle(cid,pid){const k=mkey(cid,pid),nx={"":"I",I:"R",R:"M",M:""}[S.map[k]||""];if(nx)S.map[k]=nx;else delete S.map[k];save();renderMap();}
+function clean(){const cs=S.courses.map(c=>c.id),ps=S.plos.map((p,i)=>"PLO"+(i+1));Object.keys(S.map).forEach(k=>{const[c,p]=k.split("|");if(!cs.includes(c)||!ps.includes(p))delete S.map[k];});}
+function renderMap(){
+ const t=document.getElementById("mapTable");
+ if(!S.plos.length||!S.courses.length){t.innerHTML="<tr><td class='hint'>ต้องมี PLO และรายวิชาก่อน</td></tr>";document.getElementById("pathways").innerHTML="";return;}
+ let h="<tr><th>รายวิชา (ปี)</th>"+S.plos.map((p,i)=>`<th>PLO${i+1}</th>`).join("")+"</tr>";
+ S.courses.forEach(c=>{h+=`<tr><td>${esc(c.code)} ${esc(c.name)} ${c.year?`<span class='mini'>(ปี ${esc(c.year)})</span>`:""}</td>`+S.plos.map((p,i)=>{const v=S.map[mkey(c.id,"PLO"+(i+1))]||"";return`<td class="mapcell ${v}" onclick="cycle('${c.id}','PLO${i+1}')">${v}</td>`;}).join("")+"</tr>";});
+ t.innerHTML=h;
+ // pathways
+ let ph="";
+ S.plos.forEach((p,i)=>{const id="PLO"+(i+1);
+  const list=S.courses.filter(c=>S.map[mkey(c.id,id)]).map(c=>({y:parseFloat(c.year)||99,code:c.code||c.name,lv:S.map[mkey(c.id,id)]})).sort((a,b)=>a.y-b.y);
+  const lvs=list.map(x=>x.lv);const isGrad=(S.ctx.degree||"")!=="ปริญญาตรี";let msg="";
+  if(!list.length)msg="<span style='color:var(--rust)'>⚠ ยังไม่มีรายวิชารองรับ &nbsp;<b>วิธีแก้:</b> map อย่างน้อย 1 วิชาที่พัฒนา PLO นี้ และให้มีจุด Master (M)</span>";
+  else if(!lvs.includes("M"))msg="<span style='color:var(--rust)'>⚠ ยังไม่มีจุด Master (M) — ยังไม่รู้ว่านิสิตบรรลุ PLO นี้ที่ไหน &nbsp;<b>วิธีแก้:</b> มาร์กวิชาบูรณาการ/วิทยานิพนธ์/โครงงาน/สหกิจ เป็น M สำหรับ PLO นี้</span>";
+  else if(!lvs.includes("I")){msg=isGrad
+    ?"<span style='color:#1c4587'>ℹ ระดับ"+esc(S.ctx.degree)+" เริ่มที่ R ได้ (นิสิตมีพื้นจากระดับก่อน) — มีจุด M ครบถือว่าเพียงพอ หากต้องการปูพื้นให้มาร์กวิชาต้นเป็น I</span>"
+    :"<span style='color:#8a6d00'>△ มี M แต่ยังไม่มี Introduce (I) — พัฒนาการยังไม่ต่อเนื่อง &nbsp;<b>วิธีแก้:</b> มาร์กวิชาปีต้นที่แนะนำ PLO นี้เป็น I หรือเพิ่มวิชาปูพื้น</span>";}
+  else msg="<span style='color:var(--green)'>✓ ไล่ระดับครบ และมีจุดเก็บหลักฐานที่ M</span>";
+  ph+=`<div class="card"><b>${id}</b> ${esc(p.text)}<div class="path">${list.map(x=>`<span class="step ${x.lv}">${x.lv} · ${esc(x.code)}${x.y<99?" (ปี "+x.y+")":""}</span>`).join(" → ")||"<span class='mini'>—</span>"}</div>${msg}</div>`;});
+ document.getElementById("pathways").innerHTML=ph;
+}
+
+/* ---------- Align ---------- */
+function renderAlign(){
+ let h="";
+ S.courses.forEach((c,ci)=>{if(!c.clos.length)return;
+  h+=`<div class="card"><b>${esc(c.code)} ${esc(c.name)}</b><table><tr><th style='width:25%'>CLO</th><th>การเรียนการสอน</th><th>การวัดและประเมิน</th><th>หลักฐาน (Evidence)</th></tr>`;
+  c.clos.forEach((cl,li)=>{h+=`<tr><td class="mini">${esc(cl.text)} <span class="pill ${cl.level||''}">${cl.level||""}</span></td>
+   <td><textarea onchange="S.courses[${ci}].clos[${li}].tl=this.value;save()" placeholder="เช่น บรรยาย+PBL, กรณีศึกษา, ปฏิบัติ">${esc(cl.tl||"")}</textarea></td>
+   <td><textarea onchange="S.courses[${ci}].clos[${li}].assess=this.value;save()" placeholder="เช่น rubric ชิ้นงาน, สอบปฏิบัติ, นำเสนอ">${esc(cl.assess||"")}</textarea></td>
+   <td><textarea onchange="S.courses[${ci}].clos[${li}].evidence=this.value;save()" placeholder="เช่น ผลงาน/คะแนน rubric/แฟ้มสะสมงาน">${esc(cl.evidence||"")}</textarea></td></tr>`;});
+  h+=`</table><div class="row no-print" style="margin-top:6px"><button class="ai sm" onclick="bridgeAlign(${ci})">✨ เสนอ T&L/Assessment/Evidence (คัดลอก-วาง)</button></div></div>`;});
+ document.getElementById("alignList").innerHTML=h||"<p class='hint'>ยังไม่มี CLO ในรายวิชาใด</p>";
+}
+function bridgeAlign(ci){
+ const c=S.courses[ci];const clos=c.clos.map((cl,i)=>`(${i}) ${cl.text} [Bloom:${cl.bloom}, ระดับ:${cl.level||"-"}]`).join(" | ");
+ const prompt=`สำหรับรายวิชา "${c.name}" ต่อ CLO แต่ละข้อ ช่วยเสนอ กิจกรรมการเรียนการสอน (tl) วิธีวัดและประเมิน (assess) และหลักฐาน (evidence) ที่สอดคล้องกับระดับ Bloom (constructive alignment)\nตอบ JSON array เรียงตามลำดับ CLO เท่านั้น: [{"tl":"...","assess":"...","evidence":"..."}]\nรายการ CLO: ${clos}`;
+ openBridge("เสนอ Teaching/Assessment/Evidence",prompt,arr=>{arr.forEach((o,i)=>{if(c.clos[i]){c.clos[i].tl=o.tl||c.clos[i].tl;c.clos[i].assess=o.assess||c.clos[i].assess;c.clos[i].evidence=o.evidence||c.clos[i].evidence;}});});
+}
+
+/* ---------- Checks ---------- */
+function renderChecks(){
+ let w=[];
+ S.ctx.domains.filter(d=>d.on).forEach(d=>{if(!S.plos.some(p=>p.domain===d.name))w.push(`TQF: ยังไม่มี PLO ครอบคลุมด้าน "${d.name}"`);});
+ // จำนวน PLO
+ const mn=+S.ctx.ploMin||5,mx=+S.ctx.ploMax||8;
+ if(S.plos.length>mx)w.push(`มี PLO ${S.plos.length} ข้อ เกินช่วงที่กำหนด (${mn}–${mx}) → PLO มากไปทำให้วัด/ทวนสอบยาก ควรยุบรวมให้กระชับ`);
+ else if(S.plos.length&&S.plos.length<mn)w.push(`มี PLO ${S.plos.length} ข้อ น้อยกว่าช่วงที่กำหนด (${mn}–${mx}) → อาจครอบคลุมอัตลักษณ์บัณฑิตไม่ครบ`);
+ // Generic vs Subject-specific (AUN 1.3)
+ if(S.plos.length){if(!S.plos.some(p=>(p.kind||"เฉพาะสาขา")==="Generic"))w.push(`ยังไม่มี PLO แบบ Generic → AUN 1.3 ต้องมีทั้ง Generic และเฉพาะสาขา`);if(!S.plos.some(p=>(p.kind||"เฉพาะสาขา")==="เฉพาะสาขา"))w.push(`ยังไม่มี PLO แบบเฉพาะสาขา → AUN 1.3`);}
+ const floorName=(S.ctx.floors&&S.ctx.floors[S.ctx.degree])||"ประยุกต์";const floor=BIDX[floorName];
+ S.plos.forEach((p,i)=>{const id="PLO"+(i+1);const lv=S.courses.map(c=>S.map[mkey(c.id,id)]).filter(Boolean);
+  if(!lv.length)w.push(`${id} ยังไม่มีรายวิชารองรับ → map อย่างน้อย 1 วิชาที่พัฒนา PLO นี้`);else if(!lv.includes("M"))w.push(`${id} ยังไม่มีจุด Master → มาร์กวิชาบูรณาการ/วิทยานิพนธ์/โครงงาน เป็น M`);
+  if(weak(p.text))w.push(`${id} ใช้คำที่วัดยาก → เปลี่ยนเป็นคำกริยาที่วัดได้ (${BVERB[p.bloom]})`);
+  // (2) ระดับ Bloom ของ PLO เทียบระดับปริญญา
+  if(BIDX[p.bloom]<floor)w.push(`${id} ระดับ Bloom "${p.bloom}" ต่ำกว่าที่คาดหวังของ${S.ctx.degree} (ควร ≥ "${floorName}")`);
+  // (4) มี CLO ไปถึงระดับ PLO หรือยัง
+  const cbl=[];S.courses.forEach(c=>c.clos.forEach(cl=>{if((cl.plos||[]).includes(id))cbl.push(BIDX[cl.bloom]||0);}));
+  if(cbl.length&&Math.max(...cbl)<BIDX[p.bloom])w.push(`${id} ยังไม่มี CLO ที่ไปถึงระดับ "${p.bloom}" — PLO อาจยังไม่ถูกบรรลุจริง (ควรมี CLO ที่จุด M แตะระดับนี้)`);});
+ // (3) CLO ไม่ควรเกินระดับ PLO ที่รองรับ
+ S.courses.forEach(c=>c.clos.forEach(cl=>{
+  if(cl.text&&!(cl.plos||[]).length)w.push(`CLO วิชา ${esc(c.code)} ยังไม่ผูก PLO → ติ๊ก PLO ที่ CLO นี้สนับสนุน`);
+  if(cl.text&&!cl.assess)w.push(`CLO วิชา ${esc(c.code)} ยังไม่มีวิธีวัดประเมิน → ระบุใน T&L/Assessment/Evidence`);
+  const pm=Math.max(0,...(cl.plos||[]).map(pid=>{const p=S.plos.find((x,i)=>"PLO"+(i+1)===pid);return p?BIDX[p.bloom]:0;}));
+  if((cl.plos||[]).length&&BIDX[cl.bloom]>pm)w.push(`CLO วิชา ${esc(c.code)} (Bloom "${cl.bloom}") สูงกว่าระดับ PLO ที่รองรับ — ควรยก PLO ขึ้น หรือลดระดับ CLO`);}));
+ const sum=`<div class="card"><b>สรุป:</b> GP ${S.ctx.gpTraits.length} คุณลักษณะ · PLO ${S.plos.length} · รายวิชา ${S.courses.length} · CLO ${S.courses.reduce((a,c)=>a+c.clos.length,0)} · จุด mapping ${Object.keys(S.map).length}</div>`;
+ const loop=`<div class="ok" style="border-left-color:var(--purple)">↻ อย่าลืมปิด loop: นำผลจาก Assessment/Evidence (จุด M) กลับมาทวนสอบว่า “Graduate Profile” บรรลุจริงหรือไม่ แล้วปรับ PLO/หลักสูตร (PDCA)</div>`;
+ document.getElementById("checks").innerHTML=sum+(w.length?w.slice(0,40).map(x=>`<div class="warn">${x}</div>`).join(""):`<div class="ok">✓ สอดคล้องครบทั้งสาย GP→PLO→TQF→IRM→CLO→Teaching→Assessment</div>`)+loop;
+}
+
+/* ---------- Export ---------- */
+function renderExport(){
+ let h="<h3>Curriculum Mapping (คัดลอกไป Word/Excel)</h3>";
+ if(S.plos.length&&S.courses.length){h+="<table><tr><th>รายวิชา</th>"+S.plos.map((p,i)=>`<th>PLO${i+1}</th>`).join("")+"</tr>";
+  S.courses.forEach(c=>{h+=`<tr><td>${esc(c.code)} ${esc(c.name)}</td>`+S.plos.map((p,i)=>`<td style="text-align:center">${S.map[mkey(c.id,"PLO"+(i+1))]||""}</td>`).join("")+"</tr>";});h+="</table><p class='mini'>I=Introduce R=Reinforce M=Master</p>";}
+ // ===== ส่งออกเพื่อตอบ AUN-QA =====
+ h+="<h3 style='margin-top:16px;border-top:2px solid var(--purple);padding-top:8px'>📋 ส่งออกเพื่อตอบ AUN-QA (คัดลอกลง SAR)</h3>";
+ h+=`<div class="card"><b>Criterion 1.1 / 1.3 — Expected Learning Outcomes (PLO)</b><p class='mini'>ครอบคลุมทั้ง Generic และ Subject-specific และ 4 ด้านของมาตรฐานคุณวุฒิ</p>`+
+   "<table><tr><th>รหัส</th><th>PLO</th><th>ด้าน</th><th>ประเภท</th><th>Bloom</th></tr>"+
+   S.plos.map((p,i)=>`<tr><td>PLO${i+1}</td><td>${esc(p.text)}</td><td>${p.domain}</td><td>${p.kind||"เฉพาะสาขา"}</td><td>${p.bloom}</td></tr>`).join("")+"</table></div>";
+ // 1.5 — where each PLO is assessed
+ h+=`<div class="card"><b>Criterion 1.5 — การบรรลุและการประเมิน ELO (PLO ประเมินที่ไหน)</b><table><tr><th>PLO</th><th>วิชาที่เป็นจุด Master (M)</th><th>วิธีวัด/ประเมิน &amp; หลักฐาน</th></tr>`;
+ S.plos.forEach((p,i)=>{const id="PLO"+(i+1);const ms=S.courses.filter(c=>S.map[mkey(c.id,id)]==="M");
+   const cell=ms.map(c=>`${esc(c.code)} ${esc(c.name)}`).join("<br>")||"<span style='color:var(--rust)'>ยังไม่ระบุจุดประเมิน</span>";
+   const asr=[];ms.forEach(c=>c.clos.forEach(cl=>{if((cl.plos||[]).includes(id)&&(cl.assess||cl.evidence))asr.push((cl.assess||"")+(cl.evidence?(" / "+cl.evidence):""));}));
+   h+=`<tr><td>${id}</td><td>${cell}</td><td class="mini">${asr.map(esc).join("<br>")||"—"}</td></tr>`;});
+ h+="</table></div>";
+ // 2.4 & 2.5 note
+ h+=`<div class="card"><b>Criterion 2.4 / 2.5 — การมีส่วนของแต่ละวิชาต่อ ELO และการเรียงลำดับ (I-R-M)</b><p class='mini'>ใช้ตาราง Curriculum Mapping ด้านบน และเส้นทางพัฒนาการรายชั้นปีในแท็บ “Mapping &amp; พัฒนาการ” เป็นหลักฐานการออกแบบเชิง constructive alignment และการเรียงลำดับที่สมเหตุผล</p>`+
+   (S.ctx.reviewNote?`<div class="mini"><b>Criterion 2.7 การทบทวนหลักสูตร:</b> ${esc(S.ctx.reviewNote)}</div>`:"")+`</div>`;
+ document.getElementById("exportView").innerHTML=h;
+}
+function exportJSON(){const b=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="obe-data.json";a.click();}
+function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{S=Object.assign(blank(),JSON.parse(r.result));save();renderAll();alert("นำเข้าเรียบร้อย");}catch(x){alert("ไฟล์ไม่ถูกต้อง");}};r.readAsText(f);}
+function resetAll(){if(confirm("ล้างข้อมูลทั้งหมด?")){S=blank();save();renderAll();}}
+
+function renderAll(){renderCtx();renderGP();renderPLO();renderTQF();renderCourse();renderMap();renderAlign();renderChecks();renderExport();}
+renderAll();
+</script>
+</body>
+</html>

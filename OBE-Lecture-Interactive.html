@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="อาจารย์ ดร.วราวุฒิ นาคบุญนำ">
+<title>OBE: จาก Graduate Profile สู่ PLO และ CLO — สไลด์บรรยาย</title>
+<style>
+:root{--navy:#1f3864;--blue:#2f5597;--sky:#4a86e8;--green:#1e6b2f;--rust:#c0392b;--purple:#6b21a8;--amber:#c77d0a;--ink:#1c2230;--soft:#eef2f9;--line:#d3dbea;}
+*{box-sizing:border-box;font-family:"TH Sarabun New","Sarabun","Segoe UI",Tahoma,sans-serif;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;height:100%;}
+body{background:radial-gradient(circle at 30% 10%,#20345c,#0e1830 70%);color:var(--ink);overflow:hidden;}
+
+/* stage */
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:64px 28px 82px;}
+.slide{display:none;width:min(960px,100%);max-height:100%;overflow-y:auto;background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.45);padding:42px 52px;animation:in .38s ease;}
+.slide.active{display:block;}
+@keyframes in{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:none}}
+.kicker{color:var(--sky);font-weight:700;font-size:17px;letter-spacing:.5px;}
+h1{color:var(--navy);font-size:33px;margin:4px 0 14px;line-height:1.25;}
+h2{color:var(--blue);font-size:23px;margin:18px 0 8px;}
+p,li{font-size:20px;line-height:1.5;}
+ul{margin:10px 0;padding-left:26px;} li{margin:7px 0;}
+.big{font-size:24px;}
+.dim{color:#5a6478;}
+.k{color:var(--navy);font-weight:700;}
+b{color:var(--navy);}
+
+/* cover */
+.cover{text-align:center;background:linear-gradient(135deg,#1f3864,#2f5597);color:#fff;}
+.cover h1{color:#fff;font-size:40px;}
+.cover .sub{font-size:24px;color:#dce6fb;margin-top:6px;}
+.cover .badge{display:inline-block;margin-top:26px;padding:8px 20px;border:1px solid rgba(255,255,255,.5);border-radius:30px;font-size:18px;color:#eaf1ff;}
+.cover .by{margin-top:40px;font-size:21px;font-weight:700;color:#fff;}
+.cover .hint{margin-top:14px;font-size:16px;color:#c6d4f0;}
+
+/* pieces */
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0;}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-weight:700;color:var(--navy);font-size:17px;}
+.arrow{color:var(--sky);font-weight:900;font-size:20px;}
+.callout{border-left:6px solid var(--blue);background:#eef3fb;padding:12px 18px;border-radius:0 10px 10px 0;margin:14px 0;font-size:19px;}
+.callout.warn{border-left-color:var(--rust);background:#fdecea;}
+.callout.loop{border-left-color:var(--purple);background:#f5eefb;}
+.callout.ok{border-left-color:var(--green);background:#eaf6ec;}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:18px;}
+th,td{border:1px solid #c7cfdd;padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:var(--navy);color:#fff;}
+tr:nth-child(even) td{background:#f6f8fc;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0;}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#fbfcfe;}
+.card h3{margin:0 0 6px;font-size:20px;}
+.gp{border-top:5px solid var(--amber);} .gp h3{color:var(--amber);}
+.plo{border-top:5px solid var(--green);} .plo h3{color:var(--green);}
+
+/* reveal / interactive */
+.reveal{opacity:.32;filter:blur(.4px);transition:.35s;cursor:pointer;}
+.reveal.show{opacity:1;filter:none;}
+.tapnote{font-size:15px;color:var(--sky);font-weight:700;}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;}
+.opt{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 16px;font-size:19px;cursor:pointer;transition:.2s;font-weight:600;color:var(--ink);}
+.opt:hover{border-color:var(--sky);}
+.opt.right{border-color:var(--green);background:#eaf6ec;color:var(--green);}
+.opt.wrong{border-color:var(--rust);background:#fdecea;color:var(--rust);}
+.feedback{font-size:19px;font-weight:700;margin-top:8px;min-height:26px;}
+
+/* bloom bars */
+.bloom{margin:10px 0;}
+.brow{display:flex;align-items:center;gap:10px;margin:6px 0;cursor:pointer;}
+.blabel{width:150px;font-weight:700;color:var(--navy);font-size:18px;}
+.bbar{height:24px;border-radius:6px;background:linear-gradient(90deg,var(--sky),var(--navy));transition:width .5s;}
+.bverb{font-size:16px;color:#556;}
+
+/* pathway */
+.path{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.step{flex:1;min-width:150px;border-radius:12px;padding:12px;color:#fff;text-align:center;}
+.step .yr{font-size:15px;opacity:.9;}
+.step .lv{font-size:26px;font-weight:800;margin:2px 0;}
+.step .ds{font-size:15px;}
+.i{background:#7d97c4;} .r1{background:#4a86e8;} .r2{background:#2f5597;} .m{background:#1e6b2f;}
+
+/* source grid + funnel */
+.srcgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.src{border:1px solid var(--line);border-left:5px solid var(--sky);border-radius:10px;padding:9px 13px;background:#fbfcfe;font-size:17.5px;}
+.src b{color:var(--navy);}
+.src .n{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:var(--navy);color:#fff;border-radius:50%;font-size:15px;margin-right:7px;}
+.funnel{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0;}
+.frow{border-radius:10px;color:#fff;font-weight:700;text-align:center;padding:10px;font-size:19px;}
+.f1{width:100%;background:#7d97c4;} .f2{width:78%;background:#4a86e8;} .f3{width:56%;background:#2f5597;} .f4{width:40%;background:#1e6b2f;}
+.fdown{color:var(--sky);font-size:22px;font-weight:900;}
+.gv{border-radius:10px;overflow:hidden;border:1px solid var(--line);margin:12px 0;}
+.gv .h{display:grid;grid-template-columns:1fr 1fr;background:var(--navy);color:#fff;font-weight:700;}
+.gv .h div{padding:9px 13px;}
+.gv .r{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
+.gv .r div{padding:9px 13px;font-size:18px;}
+.gv .bad{background:#fdecea;color:#8a2013;} .gv .good{background:#eaf6ec;color:#155724;}
+.abcd{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0;}
+.ab{border-radius:8px;padding:7px 12px;font-size:16.5px;font-weight:700;color:#fff;}
+.ab.a{background:#c77d0a} .ab.b{background:#1e6b2f} .ab.c{background:#2f5597} .ab.d{background:#6b21a8}
+
+/* chrome */
+#top{position:fixed;top:0;left:0;right:0;height:6px;background:rgba(255,255,255,.15);z-index:20;}
+#bar{height:100%;width:0;background:linear-gradient(90deg,var(--sky),#8fd0ff);transition:width .35s;}
+#nav{position:fixed;bottom:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:center;gap:18px;color:#dce6fb;z-index:20;}
+.ctrl{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:20px;width:44px;height:44px;border-radius:50%;cursor:pointer;transition:.2s;}
+.ctrl:hover{background:rgba(255,255,255,.28);}
+#count{font-size:17px;min-width:70px;text-align:center;font-weight:700;}
+#dots{position:fixed;top:16px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:20;flex-wrap:wrap;padding:0 12px;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:.2s;}
+.dot.on{background:#8fd0ff;transform:scale(1.35);}
+#brand{position:fixed;bottom:8px;right:16px;color:rgba(255,255,255,.5);font-size:12.5px;z-index:20;}
+@media(max-width:640px){.slide{padding:26px 22px}h1{font-size:26px}.cover h1{font-size:30px}.two{grid-template-columns:1fr}.blabel{width:110px}p,li{font-size:18px}}
+</style>
+</head>
+<body>
+<div id="top"><div id="bar"></div></div>
+<div id="dots"></div>
+
+<div id="stage">
+
+<!-- 1 COVER -->
+<section class="slide active cover">
+  <div class="kicker" style="color:#bcd0f5">เอกสารบรรยาย · Outcome-Based Education</div>
+  <h1>จาก Graduate Profile<br>สู่ PLO และ CLO</h1>
+  <div class="sub">ออกแบบหลักสูตรที่วัดผลได้จริง ด้วยแนวคิด Constructive Alignment</div>
+  <div class="badge">สำหรับอาจารย์ผู้รับผิดชอบหลักสูตร & อาจารย์ผู้สอน</div>
+  <div class="by">โดย อาจารย์ ดร.วราวุฒิ นาคบุญนำ</div>
+  <div class="hint">▶ ใช้ลูกศร ← → หรือปุ่มด้านล่างเพื่อเปลี่ยนสไลด์ · กด F เพื่อเต็มจอ</div>
+</section>
+
+<!-- 2 คำถามตั้งต้น -->
+<section class="slide">
+  <div class="kicker">เปลี่ยนวิธีคิด</div>
+  <h1>OBE เปลี่ยนคำถามตั้งต้น</h1>
+  <div class="two">
+    <div class="card gp"><h3>❌ แบบเดิม</h3><p class="big">“เราจะ<b>สอนอะไร</b>?”<br><span class="dim">ยึดเนื้อหา/ตำราเป็นตัวตั้ง</span></p></div>
+    <div class="card plo"><h3>✅ แบบ OBE</h3><p class="big">“จบแล้วผู้เรียน<b>ทำอะไรได้</b>?”<br><span class="dim">ยึดผลลัพธ์เป็นตัวตั้ง</span></p></div>
+  </div>
+  <div class="callout ok">หัวใจคือ <b>Constructive Alignment</b> — สิ่งที่<b>วัด</b> = สิ่งที่<b>สอน</b> = สิ่งที่<b>ตั้งเป้า</b> ให้ผู้เรียนบรรลุจริง</div>
+</section>
+
+<!-- 3 ภาพรวม chain -->
+<section class="slide">
+  <div class="kicker">ภาพรวมกระบวนการ</div>
+  <h1>ห่วงโซ่ความสอดคล้อง</h1>
+  <div class="chain">
+    <span class="chip">บริบท / Stakeholder</span><span class="arrow">→</span>
+    <span class="chip">Graduate Profile</span><span class="arrow">→</span>
+    <span class="chip">PLO</span><span class="arrow">→</span>
+    <span class="chip">✓ TQF/วิชาชีพ</span><span class="arrow">→</span>
+    <span class="chip">Mapping (I-R-M)</span><span class="arrow">→</span>
+    <span class="chip">CLO</span><span class="arrow">→</span>
+    <span class="chip">สอน</span><span class="arrow">→</span>
+    <span class="chip">วัด/ประเมิน</span><span class="arrow">→</span>
+    <span class="chip">หลักฐาน</span>
+  </div>
+  <div class="callout loop">↻ <b>ปิด loop (PDCA):</b> นำหลักฐานกลับมาทวนสอบว่า “อัตลักษณ์บัณฑิต” บรรลุจริงไหม แล้วปรับปรุงหลักสูตรรอบถัดไป</div>
+</section>
+
+<!-- GLOSSARY -->
+<section class="slide">
+  <div class="kicker">รู้จักศัพท์ก่อน</div>
+  <h1>PLO · CLO · GP ต่างกันอย่างไร</h1>
+  <table>
+    <tr><th style="width:26%">คำ</th><th>ความหมาย</th></tr>
+    <tr><td><b>GP</b><br><span class="dim">Graduate Profile</span></td><td>ภาพอัตลักษณ์บัณฑิต — เขา “เป็นใคร” เมื่อจบ</td></tr>
+    <tr><td><b>PLO</b><br><span class="dim">Programme LO</span></td><td>ผลลัพธ์ระดับ<b>หลักสูตร</b> — จบทั้งหลักสูตรทำอะไรได้ (5–8 ข้อ)</td></tr>
+    <tr><td><b>CLO</b><br><span class="dim">Course LO</span></td><td>ผลลัพธ์ระดับ<b>รายวิชา</b> — จบวิชานี้ทำอะไรได้ (3–5 ข้อ/วิชา) ต้องหนุน PLO</td></tr>
+  </table>
+  <div class="callout"><b>ลำดับชั้น:</b> GP → PLO → (ผลลัพธ์รายชั้นปี) → CLO → จุดประสงค์รายคาบ &nbsp;·&nbsp; <span class="dim">หมายเหตุ: AUN-QA เรียก PLO ว่า <b>ELO</b> (Expected LO)</span></div>
+</section>
+
+<!-- ที่มาของ PLO — sources -->
+<section class="slide">
+  <div class="kicker">ที่มาของ PLO (1/2)</div>
+  <h1>PLO ไม่ได้คิดเอง — สังเคราะห์จาก 8 แหล่ง</h1>
+  <div class="srcgrid">
+    <div class="src"><span class="n">1</span><b>ปรัชญา/วิสัยทัศน์/พันธกิจ</b> + อัตลักษณ์ ของสถาบัน–คณะ–หลักสูตร</div>
+    <div class="src"><span class="n">2</span><b>ความต้องการผู้มีส่วนได้ส่วนเสีย</b> — ผู้ใช้บัณฑิต/นายจ้าง ศิษย์เก่า นิสิต อาจารย์</div>
+    <div class="src"><span class="n">3</span><b>มาตรฐานคุณวุฒิ พ.ศ.2565</b> + มคอ.1 สาขา (ถ้ามี)</div>
+    <div class="src"><span class="n">4</span><b>มาตรฐาน/สภาวิชาชีพ</b> — เช่น คุรุสภา สภาการพยาบาล สภาวิศวกร</div>
+    <div class="src"><span class="n">5</span><b>ความต้องการตลาดแรงงาน</b> & ทักษะอนาคต (future skills)</div>
+    <div class="src"><span class="n">6</span><b>การเทียบเคียง (Benchmarking)</b> หลักสูตรชั้นนำใน/ต่างประเทศ</div>
+    <div class="src"><span class="n">7</span><b>นโยบายชาติ/สากล</b> — แผนพัฒนาฯ, SDGs, Thailand 4.0/EEC</div>
+    <div class="src"><span class="n">8</span><b>ผลประเมิน & ทวนสอบหลักสูตรรอบก่อน</b> (ปิด loop PDCA)</div>
+  </div>
+  <div class="callout ok">AUN-QA Criterion <b>1.1–1.2</b> กำหนดชัด: ELO/PLO ต้อง<b>ขับเคลื่อนจากความต้องการผู้มีส่วนได้ส่วนเสีย</b> — ต้องมีหลักฐานว่ารับฟังใครมา</div>
+</section>
+
+<!-- ที่มาของ PLO — funnel -->
+<section class="slide">
+  <div class="kicker">ที่มาของ PLO (2/2)</div>
+  <h1>สังเคราะห์ 8 แหล่ง → GP → PLO</h1>
+  <div class="funnel">
+    <div class="frow f1">8 แหล่งข้อมูลนำเข้า (ความต้องการ + มาตรฐาน + บริบท)</div>
+    <div class="fdown">▼ สังเคราะห์/สรุปเป็นภาพรวม</div>
+    <div class="frow f2">Graduate Profile — บัณฑิต “เป็นใคร”</div>
+    <div class="fdown">▼ แปลงเป็นสิ่งที่ “ทำได้” + วัดได้</div>
+    <div class="frow f3">PLO 5–8 ข้อ (Bloom เหมาะกับระดับปริญญา)</div>
+    <div class="fdown">▼ ตรวจย้อนกลับ (traceability)</div>
+    <div class="frow f4">Mapping PLO ↔ แหล่งที่มา + มาตรฐาน</div>
+  </div>
+  <div class="callout warn">อย่าลืม<b>ตรวจย้อน</b>: ทุก PLO ต้องสืบกลับได้ว่ามาจากแหล่งใด และทุกความต้องการสำคัญ/มาตรฐานต้องมี PLO รองรับ — ไม่มีข้อไหนตกหล่นหรือเกินมาลอย ๆ</div>
+</section>
+
+<!-- 4 GP != PLO concept -->
+<section class="slide">
+  <div class="kicker">แก่นที่มักสับสน</div>
+  <h1>Graduate Profile ≠ PLO</h1>
+  <div class="two">
+    <div class="card gp"><h3>Graduate Profile</h3><p>เราอยากให้เขา<b> “เป็นใคร” </b>เมื่อจบ</p><p class="dim">ภาพรวม อัตลักษณ์ — ประเมินตรง ๆ ยาก</p></div>
+    <div class="card plo"><h3>PLO</h3><p>เพื่อเป็นคนนั้น เขาต้อง<b> “ทำอะไรได้” </b></p><p class="dim">เขียนให้วัดได้ ด้วยคำกริยาเชิงพฤติกรรม</p></div>
+  </div>
+  <div class="callout"><b>ลำดับคิด:</b> GP (จะเป็นใคร) → PLO (ต้องทำอะไรได้) → TQF (ได้มาตรฐานไหม) → I-R-M (พัฒนาเขาอย่างไร)</div>
+</section>
+
+<!-- 5 GP -> PLO example (reveal) -->
+<section class="slide">
+  <div class="kicker">ตัวอย่าง · หลักสูตรบริหารนวัตกรรม</div>
+  <h1>แปลงคุณลักษณะ → PLO ที่วัดได้</h1>
+  <p class="tapnote">👆 คลิกแต่ละแถวเพื่อเปิดคำตอบทีละข้อ</p>
+  <table>
+    <tr><th style="width:33%">อัตลักษณ์บัณฑิต</th><th>PLO ที่วัดได้</th></tr>
+    <tr><td>คิดวิเคราะห์</td><td class="reveal" onclick="this.classList.add('show')">PLO1 วิเคราะห์ปัญหาทางธุรกิจโดยใช้ข้อมูลที่เหมาะสมได้</td></tr>
+    <tr><td>ใช้เทคโนโลยี</td><td class="reveal" onclick="this.classList.add('show')">PLO2 ประยุกต์เครื่องมือดิจิทัลเพื่อสนับสนุนการตัดสินใจได้</td></tr>
+    <tr><td>สร้างนวัตกรรม</td><td class="reveal" onclick="this.classList.add('show')">PLO3 พัฒนาโซลูชันทางธุรกิจที่สร้างคุณค่าได้</td></tr>
+    <tr><td>ทำงานจริง</td><td class="reveal" onclick="this.classList.add('show')">PLO4 บูรณาการความรู้เพื่อแก้ปัญหาในสถานการณ์จริงได้</td></tr>
+    <tr><td>ทำงานร่วมกับผู้อื่น</td><td class="reveal" onclick="this.classList.add('show')">PLO5 สื่อสาร ทำงานเป็นทีม และเป็นผู้นำได้เหมาะสม</td></tr>
+    <tr><td>รับผิดชอบต่อสังคม</td><td class="reveal" onclick="this.classList.add('show')">PLO6 ปฏิบัติงานโดยคำนึงถึงจริยธรรมและผลกระทบต่อสังคม</td></tr>
+  </table>
+</section>
+
+<!-- 6 quiz GP vs PLO -->
+<section class="slide">
+  <div class="kicker">ลองคิดดู</div>
+  <h1>ข้อไหนคือ PLO ที่ “ดี”?</h1>
+  <p class="big">เลือกข้อความที่เขียนเป็น PLO ได้ถูกต้อง</p>
+  <div class="btnrow" id="q1">
+    <button class="opt" data-ok="0" onclick="ans(this,'q1','ยังกว้างและวัดยาก — นี่คือ Graduate Profile')">นิสิตเป็นผู้มีความรับผิดชอบต่อสังคม</button>
+    <button class="opt" data-ok="0" onclick="ans(this,'q1','“เข้าใจ” วัดไม่ได้ — เปลี่ยนเป็นคำกริยาเชิงพฤติกรรม')">นิสิตเข้าใจหลักการตลาดดิจิทัล</button>
+    <button class="opt" data-ok="1" onclick="ans(this,'q1','ถูกต้อง! มีคำกริยาวัดได้ + บริบทชัด')">วิเคราะห์ปัญหาธุรกิจจากข้อมูลจริงและเสนอแนวทางได้</button>
+  </div>
+  <div class="feedback" id="q1f"></div>
+</section>
+
+<!-- 7 PLO 5 หลัก -->
+<section class="slide">
+  <div class="kicker">การเขียน PLO</div>
+  <h1>PLO ที่ดี ยึด 5 หลัก</h1>
+  <ul>
+    <li><b>วัดได้</b> — คำกริยา Bloom เลี่ยง “เข้าใจ/รู้/ตระหนัก”</li>
+    <li><b>ครอบคลุม 4 ด้าน</b> ตามมาตรฐานคุณวุฒิ 2565 (ความรู้ · ทักษะ · จริยธรรม · ลักษณะบุคคล)</li>
+    <li>มีทั้ง <b>Generic</b> และ <b>เฉพาะสาขา</b> (ตามที่ AUN-QA กำหนด)</li>
+    <li><b>จำนวนเหมาะสม 5–8 ข้อ</b> — มากไปวัดยาก น้อยไปไม่ครอบคลุม</li>
+    <li><b>ระดับ Bloom เหมาะกับระดับปริญญา</b></li>
+  </ul>
+</section>
+
+<!-- 4 domains + generic/subject -->
+<section class="slide">
+  <div class="kicker">ต้องครอบให้ครบ</div>
+  <h1>4 ด้าน (มาตรฐาน 2565) × Generic / เฉพาะสาขา</h1>
+  <div class="two">
+    <div class="card"><h3 style="color:var(--navy)">4 ด้านผลลัพธ์</h3>
+      <ul style="margin:0"><li>ความรู้ (Knowledge)</li><li>ทักษะ (Skills)</li><li>จริยธรรม (Ethics)</li><li>ลักษณะบุคคล (Character)</li></ul></div>
+    <div class="card"><h3 style="color:var(--navy)">2 ประเภท (AUN-QA)</h3>
+      <ul style="margin:0"><li><b>Generic</b> — ทั่วไป ข้ามสาขา เช่น สื่อสาร ทำงานเป็นทีม คิดวิเคราะห์ จริยธรรม</li><li><b>เฉพาะสาขา (Subject-specific)</b> — สมรรถนะแกนวิชาชีพของสาขานั้น</li></ul></div>
+  </div>
+  <div class="callout">ตรวจ PLO ทั้งชุดว่ากระจายครบ 4 ด้าน และมีทั้ง Generic + เฉพาะสาขา — ไม่กระจุกอยู่แต่ “ด้านความรู้/เฉพาะสาขา”</div>
+</section>
+
+<!-- PLO good vs bad -->
+<section class="slide">
+  <div class="kicker">เขียนให้ถูก</div>
+  <h1>PLO ไม่ดี → เขียนใหม่ให้ดี</h1>
+  <div class="gv">
+    <div class="h"><div>❌ ไม่ดี</div><div>✅ ดี</div></div>
+    <div class="r"><div class="bad">“นิสิต<u>เข้าใจ</u>หลักการบริหาร<u>และมีความรับผิดชอบ</u>”</div><div class="good">“วิเคราะห์ปัญหาการบริหารจากกรณีจริง และเสนอแนวทางที่คำนึงถึงจริยธรรมได้”</div></div>
+  </div>
+  <p><b>ปัญหาข้อเดิม:</b> “เข้าใจ” วัดไม่ได้ · ยัด 2 เรื่องในข้อเดียว · ไม่มีเงื่อนไข/ระดับ</p>
+  <h2>สูตรเขียน PLO — ABCD</h2>
+  <div class="abcd">
+    <span class="ab a">A ผู้เรียน</span><span class="ab b">B พฤติกรรม (กริยา Bloom)</span><span class="ab c">C เงื่อนไข/บริบท</span><span class="ab d">D ระดับ/เกณฑ์</span>
+  </div>
+  <p class="dim">นิสิต (A) วิเคราะห์และเสนอแนวทาง (B) จากกรณีธุรกิจจริง (C) ได้อย่างมีเหตุผลและถูกจริยธรรม (D)</p>
+</section>
+
+<!-- 8 Bloom interactive -->
+<section class="slide">
+  <div class="kicker">เครื่องมือ · Bloom’s Taxonomy</div>
+  <h1>6 ระดับ + คำกริยาที่วัดได้</h1>
+  <p class="tapnote">👆 คลิกแต่ละระดับเพื่อดูคำกริยาตัวอย่าง</p>
+  <div class="bloom" id="bloom">
+    <div class="brow" onclick="bv(this)"><div class="blabel">1 จำ</div><div class="bbar" style="width:34%"></div><div class="bverb" hidden>บอก ระบุ เรียงลำดับ จับคู่</div></div>
+    <div class="brow" onclick="bv(this)"><div class="blabel">2 เข้าใจ</div><div class="bbar" style="width:45%"></div><div class="bverb" hidden>อธิบาย สรุป จำแนก ยกตัวอย่าง</div></div>
+    <div class="brow" onclick="bv(this)"><div class="blabel">3 ประยุกต์</div><div class="bbar" style="width:58%"></div><div class="bverb" hidden>ประยุกต์ใช้ แก้ปัญหา คำนวณ สาธิต</div></div>
+    <div class="brow" onclick="bv(this)"><div class="blabel">4 วิเคราะห์</div><div class="bbar" style="width:70%"></div><div class="bverb" hidden>วิเคราะห์ จำแนกองค์ประกอบ ตรวจสอบ</div></div>
+    <div class="brow" onclick="bv(this)"><div class="blabel">5 ประเมินค่า</div><div class="bbar" style="width:84%"></div><div class="bverb" hidden>ประเมิน วิพากษ์ ตัดสิน เสนอแนะ</div></div>
+    <div class="brow" onclick="bv(this)"><div class="blabel">6 สร้างสรรค์</div><div class="bbar" style="width:98%"></div><div class="bverb" hidden>ออกแบบ สร้าง พัฒนา บูรณาการ</div></div>
+  </div>
+</section>
+
+<!-- 9 Bloom by degree -->
+<section class="slide">
+  <div class="kicker">ระดับที่คาดหวัง</div>
+  <h1>Bloom ตามระดับปริญญา</h1>
+  <table>
+    <tr><th>ระดับ</th><th>ช่วง Bloom</th><th>ขั้นต่ำที่แนะนำ</th></tr>
+    <tr><td>ปริญญาตรี</td><td>ประยุกต์–ประเมินค่า (3–5)</td><td>ประยุกต์ (บางหลักสูตร ≥ วิเคราะห์)</td></tr>
+    <tr><td>ปริญญาโท</td><td>วิเคราะห์–สร้างสรรค์ (4–6)</td><td>วิเคราะห์</td></tr>
+    <tr><td>ปริญญาเอก</td><td>ประเมินค่า–สร้างสรรค์ (5–6)</td><td>ประเมินค่า</td></tr>
+  </table>
+  <div class="callout">TQF ทำหน้าที่เป็น <b>“ด่านตรวจ”</b> (เพดาน/ขอบเขต) ไม่ใช่จุดตั้งต้นของการเขียน PLO — ยกเว้นสาขาที่มีวิชาชีพเข้มงวด (เช่น ครุศาสตร์)</div>
+</section>
+
+<!-- 10 CLO -->
+<section class="slide">
+  <div class="kicker">จากรายวิชา สู่ CLO</div>
+  <h1>แตกคำอธิบายรายวิชา → CLO</h1>
+  <ul>
+    <li>นำ<b>คำอธิบายรายวิชา</b>แตกเป็น CLO 3–5 ข้อ (“ผู้เรียนสามารถ...”)</li>
+    <li>ระบุว่าแต่ละ CLO สนับสนุน <b>PLO ข้อใด</b></li>
+    <li>กำหนดระดับพัฒนาการ <b>I / R / M</b> ของวิชาต่อ PLO นั้น</li>
+  </ul>
+  <div class="callout warn"><b>กฎ Bloom แนวตั้ง #1:</b> ระดับ CLO <b>ไม่ควรเกิน</b> ระดับ PLO ที่มันสนับสนุน — ถ้าเกิน = PLO ตั้งต่ำไป หรือ CLO เคลมเกิน</div>
+  <div class="callout ok"><b>กฎ Bloom แนวตั้ง #2:</b> ต้องมี CLO ที่จุด <b>Master</b> ไปถึงระดับ Bloom ของ PLO — ไม่งั้น PLO ไม่ถูกบรรลุจริง</div>
+</section>
+
+<!-- worked example course -> CLO -->
+<section class="slide">
+  <div class="kicker">ทำจริง · วิชาการตลาดดิจิทัล</div>
+  <h1>แตกคำอธิบายรายวิชา → CLO</h1>
+  <div class="callout"><b>คำอธิบายรายวิชา:</b> “ศึกษาแนวคิดการตลาดดิจิทัล เครื่องมือและช่องทาง การวางแผนแคมเปญ และการวัดผล”</div>
+  <table>
+    <tr><th>CLO (ผู้เรียนสามารถ...)</th><th style="width:20%">Bloom</th><th style="width:14%">หนุน PLO</th><th style="width:10%">I/R/M</th></tr>
+    <tr><td>อธิบายแนวคิดและองค์ประกอบการตลาดดิจิทัลได้</td><td>เข้าใจ (2)</td><td>PLO1</td><td>I</td></tr>
+    <tr><td>เลือกใช้เครื่องมือ/ช่องทางให้เหมาะกับวัตถุประสงค์ได้</td><td>ประยุกต์ (3)</td><td>PLO2</td><td>R</td></tr>
+    <tr><td>ออกแบบแผนแคมเปญพร้อมตัวชี้วัดวัดผลได้</td><td>สร้างสรรค์ (6)</td><td>PLO3</td><td><b>M</b></td></tr>
+  </table>
+  <div class="callout ok">CLO ไล่ระดับ<b>ต่ำ→สูง</b>ภายในวิชา · ข้อ M (ออกแบบแคมเปญ) คือจุดเก็บหลักฐานบรรลุ PLO3 · ทุก CLO ≤ ระดับ PLO ที่หนุน</div>
+</section>
+
+<!-- 11 I-R-M pathway -->
+<section class="slide">
+  <div class="kicker">Curriculum Mapping คือการออกแบบพัฒนาการ</div>
+  <h1>เส้นทาง I → R → M (ตัวอย่าง PLO3)</h1>
+  <div class="path">
+    <div class="step i"><div class="yr">ปี 1</div><div class="lv">I</div><div class="ds">รู้จัก Innovation / Design Thinking</div></div>
+    <div class="step r1"><div class="yr">ปี 2</div><div class="lv">R</div><div class="ds">วิเคราะห์ Business Model</div></div>
+    <div class="step r2"><div class="yr">ปี 3</div><div class="lv">R</div><div class="ds">พัฒนา Prototype / Solution</div></div>
+    <div class="step m"><div class="yr">ปี 4</div><div class="lv">M</div><div class="ds">Capstone / สหกิจ — เก็บหลักฐานบรรลุ PLO3</div></div>
+  </div>
+  <div class="callout"><b>I</b>=แนะนำครั้งแรก · <b>R</b>=ฝึกให้ลึกขึ้น · <b>M</b>=บูรณาการจนบรรลุ + <b>จุดเก็บหลักฐาน</b></div>
+  <div class="callout loop">ป.โท/เอก มีพื้นฐานแล้ว เริ่มที่ R ได้ — แต่ <b>ทุก PLO ต้องมีจุด M</b></div>
+</section>
+
+<!-- 12 align teaching-assess-evidence -->
+<section class="slide">
+  <div class="kicker">เชื่อมให้ครบวง</div>
+  <h1>CLO → สอน → วัด → หลักฐาน</h1>
+  <table>
+    <tr><th>ระดับ CLO</th><th>สอนด้วย</th><th>วัดด้วย</th><th>หลักฐาน</th></tr>
+    <tr><td>สร้างสรรค์</td><td>โครงงาน/ลงมือทำ</td><td>Rubric ชิ้นงาน</td><td>ผลงาน/แฟ้มสะสม</td></tr>
+    <tr><td>วิเคราะห์</td><td>กรณีศึกษา</td><td>รายงานวิเคราะห์</td><td>รายงาน + เกณฑ์</td></tr>
+    <tr><td>จำ/เข้าใจ</td><td>บรรยาย</td><td>ข้อสอบ</td><td>คะแนนสอบ</td></tr>
+  </table>
+  <div class="callout warn">อย่าวัด CLO ระดับ “สร้างสรรค์” ด้วยข้อสอบปรนัย — ระดับ Bloom ของวิธีวัดต้อง<b>สอดคล้อง</b>กับ CLO</div>
+</section>
+
+<!-- 13 pitfalls -->
+<section class="slide">
+  <div class="kicker">ระวัง</div>
+  <h1>ข้อผิดพลาดที่พบบ่อย</h1>
+  <table>
+    <tr><th>ข้อผิดพลาด</th><th>วิธีแก้</th></tr>
+    <tr><td>เขียน PLO ว่า “เข้าใจ/รู้”</td><td>ใช้คำกริยา Bloom ที่วัดได้</td></tr>
+    <tr><td>สับสน GP กับ PLO</td><td>แตก GP เป็น PLO ที่ทำได้จริง</td></tr>
+    <tr><td>CLO สูงกว่า PLO</td><td>ยก PLO ขึ้น หรือลดระดับ CLO</td></tr>
+    <tr><td>PLO ไม่มีจุด M</td><td>มาร์กวิชาบูรณาการ/วิทยานิพนธ์เป็น M</td></tr>
+    <tr><td>Mapping มี M แต่ไม่มี I</td><td>ออกแบบ I→R→M ตามชั้นปี</td></tr>
+    <tr><td>PLO เกิน 8 ข้อ</td><td>ยุบรวมเหลือ 5–8 ข้อ</td></tr>
+  </table>
+</section>
+
+<!-- 14 AUN mapping -->
+<section class="slide">
+  <div class="kicker">เชื่อมกับเกณฑ์</div>
+  <h1>ผลผลิต → ตอบ AUN-QA ข้อไหน</h1>
+  <table>
+    <tr><th>ผลผลิตจากกระบวนการ</th><th>AUN-QA Criterion</th></tr>
+    <tr><td>รายการ PLO + Generic/เฉพาะสาขา + ด้าน</td><td>1.1, 1.3</td></tr>
+    <tr><td>สรุป PLO บรรลุ/ประเมินที่ใด (จุด M)</td><td>1.5</td></tr>
+    <tr><td>ตาราง Curriculum Mapping (I-R-M)</td><td>2.4</td></tr>
+    <tr><td>เส้นทางพัฒนาการรายชั้นปี</td><td>2.5</td></tr>
+    <tr><td>CLO → การสอน → การประเมิน</td><td>2.2, 4</td></tr>
+  </table>
+</section>
+
+<!-- 15 summary/tool -->
+<section class="slide cover" style="background:linear-gradient(135deg,#1e6b2f,#2f5597)">
+  <div class="kicker" style="color:#cdeed3">บทสรุป</div>
+  <h1 style="font-size:32px">อยากให้บัณฑิต “เป็นใคร”<br>→ แปลงเป็นสิ่งที่เขา “ทำได้”</h1>
+  <p class="sub">8 แหล่ง → GP → PLO (วัดได้) → ✓TQF → I-R-M (พัฒนาการ) → CLO–สอน–วัด (สอดคล้อง) → ↻ ทวนสอบ</p>
+  <div class="badge">มีเครื่องมือช่วย: “OBE Constructive Alignment Tool” (HTML ใช้ได้ทุกเครื่อง)</div>
+  <div class="by">ขอบคุณครับ — อาจารย์ ดร.วราวุฒิ นาคบุญนำ</div>
+</section>
+
+</div>
+
+<div id="nav">
+  <button class="ctrl" onclick="go(-1)" aria-label="ก่อนหน้า">‹</button>
+  <span id="count">1 / 15</span>
+  <button class="ctrl" onclick="go(1)" aria-label="ถัดไป">›</button>
+</div>
+<div id="brand">© 2568 อาจารย์ ดร.วราวุฒิ นาคบุญนำ</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const dots=document.getElementById('dots');
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>show(i);dots.appendChild(d);});
+const allDots=[...document.querySelectorAll('.dot')];
+function show(n){
+  cur=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  allDots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  document.getElementById('count').textContent=(cur+1)+' / '+slides.length;
+  document.getElementById('bar').style.width=((cur+1)/slides.length*100)+'%';
+  const a=slides[cur].querySelector('.active')||slides[cur];slides[cur].scrollTop=0;
+}
+function go(d){show(cur+d);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(1);e.preventDefault();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);}
+  else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}
+  else if(e.key==='f'||e.key==='F'){toggleFS();}
+});
+function toggleFS(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
+// swipe
+let x0=null;
+document.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)go(dx<0?1:-1);x0=null;},{passive:true});
+// interactions
+function ans(btn,q,msg){
+  const ok=btn.dataset.ok==='1';
+  btn.classList.add(ok?'right':'wrong');
+  document.getElementById(q+'f').textContent=(ok?'✓ ':'✗ ')+msg;
+  document.getElementById(q+'f').style.color=ok?'#1e6b2f':'#c0392b';
+}
+function bv(row){const v=row.querySelector('.bverb');v.hidden=!v.hidden;row.querySelector('.bbar').style.opacity=v.hidden?1:.85;}
+show(0);
+</script>
+</body>
+</html>
