@@ -84,6 +84,10 @@ td.c{text-align:center}
 .cb{display:none}.cb.on{display:block}
 body.all .cb{display:block}
 #blocks{display:flex;flex-direction:column}#k0{order:-1}
+.sarbtn{margin-top:8px;border:1px solid var(--cc);background:#fff;color:var(--cc);border-radius:20px;padding:4px 12px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.sarbtn:hover{background:var(--cc);color:#fff}
+.sartoast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14284d;color:#fff;padding:9px 16px;border-radius:10px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:60}.sartoast.on{opacity:1}
+@media print{.sarbtn{display:none}}
 .side a.t0{font-weight:700;border:1px solid var(--line);margin-bottom:6px}
 .lnk{border:none;background:none;color:var(--accent);cursor:pointer;font-family:inherit;font-size:13px;padding:0;text-decoration:underline}
 .side .allbtn{display:block;width:100%;margin-top:8px;border:1px dashed var(--line);background:#fff;border-radius:8px;padding:6px;font-family:inherit;font-size:13px;color:var(--muted);cursor:pointer}
@@ -119,6 +123,7 @@ footer{max-width:1240px;margin:0 auto;padding:16px;color:var(--muted);font-size:
     <main><div id="blocks"></div><div class="evalbox" id="evalbox"></div></main>
   </div>
 </div>
+<div class="sartoast" id="sartoast"></div>
 <footer>หลักสูตรบริหารธุรกิจมหาบัณฑิต และหลักสูตรปรัชญาดุษฎีบัณฑิต สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล · คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · <span id="upd"></span></footer>
 <script>
 (async function(){
@@ -228,11 +233,29 @@ function wireDiagram(G){
   REDRAW=()=>setTimeout(draw,40);draw();addEventListener("resize",draw);
 }
 
+
+// ---------- ข้อมูลสำหรับเขียน SAR รายเกณฑ์ย่อย (AUN-QA v4.0) ----------
+const SUBT={"1.1":"ELO formulated by learning taxonomy, aligned to vision and mission","1.2":"ELO of all courses aligned to programme ELO","1.3":"ELO include generic and subject-specific outcomes","1.4":"Stakeholder requirements gathered and reflected in ELO","1.5":"ELO achieved by the time students graduate",
+"2.1":"Programme and course specifications comprehensive, up-to-date, communicated","2.2":"Curriculum constructively aligned with ELO","2.3":"Curriculum design includes stakeholder feedback","2.4":"Contribution of each course to ELO is clear","2.5":"Courses logically structured and sequenced","2.6":"Options for major/minor specialisation","2.7":"Curriculum reviewed periodically",
+"3.1":"Educational philosophy articulated and reflected in teaching","3.2":"Students participate responsibly in learning","3.3":"Active learning","3.4":"Learning how to learn and life-long learning","3.5":"New ideas, creativity, innovation, entrepreneurial mindset","3.6":"Teaching and learning continuously improved",
+"4.1":"Variety of assessment methods aligned to ELO","4.2":"Assessment and appeal policies explicit and communicated","4.3":"Standards for progression and completion explicit","4.4":"Rubrics, marking schemes, timelines, regulations","4.5":"Assessment measures achievement of ELO","4.6":"Timely feedback","4.7":"Assessment continuously reviewed and improved",
+"5.1":"Academic staff planning","5.2":"Workload measured and monitored","5.3":"Staff competences determined and evaluated","5.4":"Duties appropriate to qualifications and experience","5.5":"Promotion based on merit","5.6":"Rights, privileges, accountability, academic freedom","5.7":"Training and development needs identified","5.8":"Performance management, reward and recognition",
+"6.1":"Intake policy, admission criteria and procedures","6.2":"Planning of academic and non-academic support","6.3":"Monitoring of student progress and workload","6.4":"Co-curricular activities and support services","6.5":"Competences of support staff","6.6":"Support services evaluated and enhanced",
+"7.1":"Physical resources sufficient","7.2":"Laboratories and equipment","7.3":"Digital library","7.4":"IT systems","7.5":"Computer and network infrastructure","7.6":"Environment, health, safety, special needs","7.7":"Conducive physical, social, psychological environment","7.8":"Competences of facility support staff","7.9":"Facilities evaluated and enhanced",
+"8.1":"Pass rate, dropout rate, average time to graduate","8.2":"Employability, entrepreneurship, further studies","8.3":"Research and creative output of staff and students","8.4":"Direct data on achievement of programme outcomes","8.5":"Satisfaction of stakeholders"};
+const WT=(head,rows)=>'<table border="1" cellpadding="4" style="border-collapse:collapse;font-size:12pt">'+(head?"<tr>"+head.map(h=>"<th>"+esc(h)+"</th>").join("")+"</tr>":"")+rows.map(r=>"<tr>"+r.map(c=>"<td>"+esc(cT(c)).replace(/\n/g,"<br>")+"</td>").join("")+"</tr>").join("")+"</table>";
+const WG=rows=>rows&&rows.length?WT(null,rows):"";
+let SAR={};
+async function copySar(html,label){const txt=html.replace(/<br>/g,"\n").replace(/<\/(p|li|tr|h\d)>/g,"\n").replace(/<\/t[dh]>/g,"\t").replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/\n{3,}/g,"\n\n");
+  const full='<div style="font-family:TH Sarabun New,Sarabun,sans-serif;font-size:14pt">'+html+"</div>";
+  try{await navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([full],{type:"text/html"}),"text/plain":new Blob([txt],{type:"text/plain"})})]);}
+  catch(e){const d=document.createElement("div");d.contentEditable="true";d.innerHTML=full;d.style.cssText="position:fixed;left:-9999px";document.body.appendChild(d);const r=document.createRange();r.selectNodeContents(d);const sl=getSelection();sl.removeAllRanges();sl.addRange(r);document.execCommand("copy");sl.removeAllRanges();d.remove();}
+  const t=document.getElementById("sartoast");t.textContent="คัดลอก"+label+"แล้ว วางใน Word ได้ทันที";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2600);}
 // ---------- บล็อกรายเกณฑ์ ----------
 const CRIT=[[1,"ผลการเรียนรู้ที่คาดหวัง","Expected Learning Outcomes"],[2,"โครงสร้างและเนื้อหาของหลักสูตร","Programme Structure and Content"],[3,"แนวทางการเรียนการสอน","Teaching and Learning Approach"],[4,"การประเมินผู้เรียน","Student Assessment"],[5,"บุคลากรสายวิชาการ","Academic Staff"],[6,"การบริการสนับสนุนผู้เรียน","Student Support Services"],[7,"สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน","Facilities and Infrastructure"],[8,"ผลผลิตและผลลัพธ์","Output and Outcomes"]];
 function mk7(n){const R=MK7&&MK7[P+"-2566"]?[MK7[P+"-2566"]]:Object.values(MK7||{}).filter(x=>x.level===P);if(!R.length)return'<div class="empty">ยังไม่มีรายงานผลการดำเนินงาน (มคอ.7) ของหลักสูตรนี้ในระบบ</div>';
   return R.map(r=>{const subs=Object.entries(r.subs).filter(([k,v])=>v.crit===n&&v.body.length);return subs.length?"<p class='sub'>ปีการศึกษา "+esc(r.year)+" · ที่มา: "+esc(r.source)+"</p>"+subs.map(([k,v])=>DET(k+" "+(t=>t.length>120?t.slice(0,120)+"…":t)(v.en.split("✔")[0].trim()),v.body.slice(0,14).map(x=>"<p>"+esc(x)+"</p>").join("")+(v.body.length>14?"<p class='sub'>… ฉบับเต็มในเอกสารสำหรับผู้ประเมิน</p>":""))).join(""):"";}).join("")||'<div class="empty">ไม่พบเนื้อหาของเกณฑ์นี้ในรายงาน</div>';}
-function block(n,ev,status,body){const c=CRIT[n-1];return'<section class="cb" id="k'+n+'" style="--cc:var(--c'+n+')"><header><div class="no">เกณฑ์ที่ '+n+" · "+c[2]+"</div><h2>"+c[1]+'</h2><div class="ev"><span class="chip '+status[0]+'">'+status[1]+"</span>"+ev.map(e=>'<span class="chip">'+esc(e)+"</span>").join("")+'</div></header><div class="bd">'+body+(n>=1?"<h3>ผลการดำเนินงานและการปรับปรุงที่ผ่านมา (มคอ.7)</h3>"+mk7(n):"")+"</div></section>";}
+function block(n,ev,status,body){const c=CRIT[n-1];return'<section class="cb" id="k'+n+'" style="--cc:var(--c'+n+')"><header><div class="no">เกณฑ์ที่ '+n+" · "+c[2]+"</div><h2>"+c[1]+'</h2><div class="ev"><span class="chip '+status[0]+'">'+status[1]+"</span>"+ev.map(e=>'<span class="chip">'+esc(e)+"</span>").join("")+'</div><button class="sarbtn" data-sar="'+n+'">📋 คัดลอกข้อมูลเกณฑ์นี้ไปเขียน SAR</button></header><div class="bd">'+body+(n>=1?"<h3>ผลการดำเนินงานและการปรับปรุงที่ผ่านมา (มคอ.7)</h3>"+mk7(n):"")+"</div></section>";}
 
 function semNo(k){const m=k.match(/^([12])\/(25\d\d)$/),c=D.term.label.match(/^([12])\/(25\d\d)$/);if(!m||!c)return 0;return(+c[2]-+m[2])*2+(+c[1]-+m[1])+1;}
 function semTxt(k){const n=semNo(k),pl=D.programs[P].plan;if(!n)return"–";if(pl&&n>pl.slots.length)return"ภาคที่ "+n+" (เกินระยะเวลาตามแผน "+pl.slots.length+" ภาค)";return"ภาคที่ "+n+(pl?" · "+pl.slots[n-1][1]+" ของแผน":"");}
@@ -250,7 +273,7 @@ function render(){
   $("tabs").innerHTML=Object.entries(D.programs).map(([k,v])=>'<button class="'+(k===P?"on":"")+'" data-k="'+k+'">'+esc(v.short)+" "+esc(v.name.replace(/^หลักสูตร/,"").split(" สาขา")[0])+"</button>").join("");
   $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{P=b.dataset.k;render();});
   $("sum").innerHTML=[[g.info.credits.length+" แผน",g.info.credits.map(x=>x.match(/\((.+?)\)|แบบ [\d.]+/)?.[0]||"").join(" · ")],[P6.length+" PLO",P6.reduce((a,x)=>a+x.s.length,0)+" ข้อย่อย"],[term.length+" วิชา","เปิดภาค "+D.term.label],[REG&&REG[P]?REG[P].enrolled+" คน":(st?st.total+" คน":"–"),"นิสิตกำลังศึกษา "+D.term.label],[(STF&&STF.programs[P]?STF.programs[P].staff.length:g.faculty.length)+" คน","อาจารย์ผู้รับผิดชอบหลักสูตร"]].map(x=>"<div><b>"+esc(x[0])+"</b><span>"+esc(x[1])+"</span></div>").join("");
-  $("nav").innerHTML='<a href="#'+P+'-k0" data-k="0" role="tab" class="t0"><i style="background:var(--c0)">★</i>ภาคการศึกษานี้ ('+esc(D.term.label)+')</a><div class="h">เกณฑ์ AUN-QA</div>'+CRIT.map(c=>'<a href="#'+P+'-k'+c[0]+'" data-k="'+c[0]+'" role="tab"><i style="background:var(--c'+c[0]+')">'+c[0]+"</i>"+c[1]+"</a>").join("")+'<button class="allbtn" id="allbtn">แสดงทุกเกณฑ์ (สำหรับพิมพ์)</button>';
+  $("nav").innerHTML='<a href="#'+P+'-k0" data-k="0" role="tab" class="t0"><i style="background:var(--c0)">★</i>ภาคการศึกษานี้ ('+esc(D.term.label)+')</a><div class="h">เกณฑ์ AUN-QA</div>'+CRIT.map(c=>'<a href="#'+P+'-k'+c[0]+'" data-k="'+c[0]+'" role="tab"><i style="background:var(--c'+c[0]+')">'+c[0]+"</i>"+c[1]+"</a>").join("")+'<button class="allbtn" id="allbtn">แสดงทุกเกณฑ์ (สำหรับพิมพ์)</button><button class="allbtn" id="sarall">📋 คัดลอกข้อมูลทุกเกณฑ์ไปเขียน SAR</button>';
   const G=diagram(g);
   let H="";
   // 1
@@ -333,6 +356,56 @@ function render(){
     (SP?"<h3>8.3 ผลงานวิจัยของอาจารย์ผู้รับผิดชอบหลักสูตร (5 ปี)</h3>"+TB(["ปี"].concat(STF.years.map(y=>String(+y+543))).concat(["รวม","ต่ออาจารย์"]),[["จำนวนผลงาน (ไม่นับซ้ำ)"].concat(STF.years.map(y=>SP.byYear[y])).concat([SP.uniqueWorks,SP.perStaff])])+"<p class='sub'>รายละเอียดรายบุคคลในเกณฑ์ 5 · ผลงานของนิสิตรอข้อมูลจากหลักสูตร</p>":"")+
     '<div id="c8body"></div>');
   $("evalbox").innerHTML=D.evaluatorLink?'<a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="sub">(ต้องได้รับสิทธิ์เข้าถึง)</span>':'<div class="empty">หลักฐานที่ระบุตัวบุคคลจัดเก็บในระบบของมหาวิทยาลัย หลักสูตรจะแจ้งช่องทางเข้าถึงแก่ผู้ประเมินโดยตรง</div>';
+
+  // ----- ข้อมูล SAR รายเกณฑ์ย่อย (ข้อเท็จจริงจากหน้านี้เท่านั้น ไม่เขียนเนื้อความแทนหลักสูตร) -----
+  {const S={},A=(k,facts,tables,src,miss)=>{S[k]={facts:facts||[],tables:tables||"",src:src||[],miss:miss||[]};};
+   const PN=D.programs[P].name,TL=D.term.label,M=missions(g),ADV=REG&&REG.advisorLoadByStaff,SP=STF&&STF.programs[P];
+   const plans=planNames(g),cov=plans.map(pn=>{const pp=planParts(g,pn);return[pn,"PLO-"+uni(pp.core.map(c=>c.pl)).join(",")||"–","PLO-"+inter(pp.elective.map(c=>c.pl)).join(",")||"–","PLO-"+uni(pp.research.map(c=>c.pl)).join(",")||"–"];});
+   const M2="มคอ.2 หลักสูตรปรับปรุง พ.ศ. 2567",M3="มคอ.3 ภาค "+TL+" ("+term.length+" วิชา)";
+   A("1.1",["ปรัชญาการศึกษามหาวิทยาลัย: "+UNIV,"ปรัชญาหลักสูตร: "+g.philosophy.join(" ")].concat(M.p.map(x=>"สอดคล้องกับพันธกิจโดย "+x)).concat(P6.map(p=>p.c+" "+p.t+(p.s.length?" (ข้อย่อย "+p.s.map(x=>x[0]).join(" ")+")":""))),
+     "<p>ความสัมพันธ์วัตถุประสงค์กับ PLO</p>"+WG(g.objPlo)+"<p>PLO จำแนกตาม Bloom's Taxonomy</p>"+WG(g.bloom),[M2+" หมวด 1 ข้อ 12.2, หมวด 2 ข้อ 1, หมวด 4 ข้อ 1.3–1.7"]);
+   A("1.2",["รายวิชาภาค "+TL+" ทุกวิชากำหนด CLO พร้อมระดับ Bloom และเชื่อมกับ PLO"],term.length?WT(["รายวิชา","PLO","CLO"],term.flatMap(c=>c.ploClo.map((x,i)=>[i?"":c.codeFmt+" "+c.nameTh,x.plo,x.clo]))):"",[M3+" หมวด 2"],["CLO ของรายวิชาที่เปิดในภาคอื่น"]);
+   A("1.3",["PLO ด้านความรู้และทักษะเฉพาะสาขา: PLO-1 ถึง PLO-3","PLO ด้านทั่วไป (ทีม คุณธรรม ภาวะผู้นำ): PLO-4 ถึง PLO-6"].concat(g.tqf.map(x=>"TQF: "+x)),"",[M2+" หมวด 4 ข้อ 1.3"]);
+   A("1.4",["ผู้มีส่วนได้ส่วนเสีย "+Math.max(0,(g.vos||[]).length-1)+" กลุ่ม (ภายใน ภายนอก และอนาคต)"],"<p>ความต้องการของผู้มีส่วนได้ส่วนเสีย</p>"+WG(g.vos)+"<p>วิธีและรอบการรับฟัง</p>"+WG(g.vosMethods)+"<p>VOS กับ PLO</p>"+WG(g.vosPlo),[M2+" หมวด 1 ข้อ 11.3–11.4, หมวด 4 ข้อ 1.2"],["ตาราง VOS รายความต้องการ → PLO ข้อย่อย","ปีที่เก็บข้อมูลและจำนวนผู้ตอบ"]);
+   A("1.5",[],"",[],["ผลการบรรลุ PLO ของผู้สำเร็จการศึกษา (ดู 8.4)"]);
+   A("2.1",["เผยแพร่ มคอ.2 และ มคอ.3 บนหน้าข้อมูลหลักสูตรสาธารณะ ("+location.origin+location.pathname+")","มคอ.3 ภาค "+TL+": "+term.map(c=>c.codeFmt+" "+c.nameTh).join(", ")],"<p>โครงสร้างหลักสูตร</p>"+WG(g.structure),[M2,M3],["มคอ.2 และ มคอ.3 ฉบับที่ผ่านกรรมการ"]);
+   A("2.2",["PLO ที่แต่ละแผนการเรียนรับประกันให้นิสิตทุกคน (วิชาเลือกนับเฉพาะ PLO ที่วิชาเลือกทุกวิชาตอบ)"],WT(["แผน","วิชาบังคับ","วิชาเลือก (ทุกวิชา)","งานวิจัย"],cov),[M2+" หมวด 4 ข้อ 3 (curriculum mapping)"]);
+   A("2.3",[],"<p>การพัฒนาหลักสูตรจากหลักสูตรเดิม</p>"+WG(g.improve),[M2+" หมวด 2 ข้อ 1.2"],["หลักฐานการนำความเห็นผู้มีส่วนได้ส่วนเสียภายนอกมาปรับรายวิชา"]);
+   A("2.4",["รายวิชาภาคนี้กับ PLO: "+term.map(c=>c.codeFmt+" → "+c.plos.join(" ")).join(" · ")],"",[M2+" หมวด 4 ข้อ 3",M3]);
+   A("2.5",["แผนการศึกษาตลอดหลักสูตรแยกตามแผนการเรียน"],pl?WT(["ภาคที่ของแผน"].concat(pl.tracks),pl.slots.map((s2,i)=>["ภาคที่ "+(i+1)+" "+s2[1]].concat(s2[2].map(a=>(a||[]).map(x=>x.code==="elective"?"วิชาเลือก "+x.cr+" นก.":x.code+" "+x.name+" "+x.cr+" นก.").join("\n"))))):"",[pl?pl.source:M2]);
+   A("2.6",["แผนการเรียน: "+plans.join(", "),"กลุ่มวิชาเลือกให้นิสิตเลือกตามความสนใจ"],"",[M2+" หมวด 3 ข้อ 3.1"]);
+   A("2.7",g.info.status.filter(x=>/เริ่มใช้|ปรับปรุง/.test(x)),"",[M2+" หมวด 1 ข้อ 6"]);
+   A("3.1",["ปรัชญาการศึกษามหาวิทยาลัย: "+UNIV,"ปรัชญาหลักสูตร: "+g.philosophy.join(" ")],"",[M2,M3]);
+   const teachT=term.length?WT(["รายวิชา","CLO","วิธีการสอน"],term.flatMap(c=>c.clo.map((x,i)=>[i?"":c.codeFmt+" "+c.nameTh,x.clo,x.teach]))):"";
+   ["3.2","3.3","3.4","3.5"].forEach(k=>A(k,k==="3.2"?["วิธีการสอนออกแบบราย CLO ในทุกรายวิชา (ตารางด้านล่าง)"]:[],k==="3.2"?teachT:"",[M3+" หมวด 2 ข้อ 3"],["ตัวอย่างกิจกรรมที่เกิดขึ้นจริงและผลประเมินการสอนโดยนิสิต"]));
+   A("3.6",term.flatMap(c=>c.dev.slice(0,1).map(x=>c.codeFmt+": "+x)),"",[M3+" หมวด 2 ข้อ 4"]);
+   A("4.1",["สัดส่วนการวัดต่อรายวิชา: "+term.map(c=>{const[e,w]=mix(c);return c.codeFmt+" สอบ "+e+"% งาน "+w+"%";}).join(" · ")],term.length?WT(["รายวิชา","CLO","วิธีการประเมิน","สัปดาห์","สัดส่วน"],term.flatMap(c=>c.assess.filter(r=>!/^รวม/.test(r[0])).map((r,i)=>[i?"":c.codeFmt,r[0],r[1],r[3],r[4]]))):"",[M3+" หมวด 4 ข้อ 2.1"]);
+   A("4.2",[...new Set(term.flatMap(c=>c.appeal||[]))],term[0]&&term[0].grade.length?WT(["ระดับคะแนน","ช่วงคะแนน"],term[0].grade):"",[M3+" หมวด 4 ข้อ 2.3–2.4"]);
+   A("4.3",st?["นิสิตที่มีกำหนดสอบภาค "+TL+": มีที่ปรึกษาหลัก "+st.advisor+", ผ่าน QE/CE "+(st.qe??"–")+", สอบเค้าโครงแล้วหรือมีกำหนด "+st.ch3+", กำหนดสอบ 5 บท "+st.ch5now+" (จาก "+st.total+" คน)"]:[],"",["รายชื่อนิสิตมีกำหนดสอบ ภาค "+TL+" (นับรวม)"],["เกณฑ์และกระบวนการสอบ QE/CE เค้าโครง และวิทยานิพนธ์"]);
+   A("4.4",["รูบริกในรายวิชาภาคนี้ "+term.reduce((a,c)=>a+c.rubrics.length,0)+" ชุด: "+term.flatMap(c=>c.rubrics.map(r=>c.codeFmt+" "+r.title)).join(" · ")],"",[M3+" หมวด 4 ข้อ 2.2"],["รูบริกการสอบวิทยานิพนธ์"]);
+   A("4.5",["สัดส่วนคะแนนตาม CLO กำหนดในทุกรายวิชา"],"",[M3+" หมวด 4 ข้อ 2.1"],["ผลการบรรลุ CLO และ PLO จริง"]);
+   A("4.6",[],"",[],["หลักฐานการแจ้งผลการประเมินแก่นิสิตตามกำหนดเวลา"]);
+   A("4.7",term.flatMap(c=>c.verify.slice(0,1).map(x=>c.codeFmt+": "+x)),"",[M3+" หมวด 6"]);
+   A("5.1",[],"",[],["แผนอัตรากำลัง การสืบทอด และการพัฒนาตำแหน่งทางวิชาการ"]);
+   A("5.2",ADV?["นับเฉพาะที่ปรึกษาหลัก ไม่นับนิสิตที่สอบ 5 บทแล้ว ภาระเทียบเท่า = วิทยานิพนธ์ + การค้นคว้าอิสระ ÷ 3 กรอบ: อาจารย์ ดร. 5 คน ผู้มีตำแหน่งทางวิชาการ 10 คน"]:[],ADV&&SP?WT(["อาจารย์","ภาระเทียบเท่า","กรอบ","สอบ 5 บทแล้ว (ไม่นับ)","ที่ปรึกษาร่วม"],SP.staff.map(k=>{const f=STF.staff[k],L=ADV.staff[k]||{};return[f.title+(f.dr?" ดร.":" ")+f.name,L.equiv??"–",L.cap??"–",L.done5||0,(L.co_ma||0)+(L.co_phd||0)];})):"",["ทะเบียนสถานภาพนิสิต ภาค "+TL]);
+   A("5.3",SP?["อาจารย์ผู้รับผิดชอบหลักสูตร "+SP.staff.length+" คน คุณวุฒิปริญญาเอก "+SP.phdRatio+"% · ผลงาน 5 ปี "+SP.uniqueWorks+" เรื่อง (ต่ออาจารย์ "+SP.perStaff+")"]:[],SP?WT(["อาจารย์","ตำแหน่ง","คุณวุฒิ","ผลงาน 5 ปี","h-index"],SP.staff.map(k=>{const f=STF.staff[k];return[f.name,f.title,f.deg.map(x=>x[0]+" "+x[1]).join("\n"),f.works.length,f.h??"–"];})):"",[STF?STF.source:""],["ยืนยันตำแหน่งและคุณวุฒิกับ มคอ.2 ฉบับล่าสุด"]);
+   ["5.4","5.5","5.6","5.7","5.8"].forEach(k=>A(k,k==="5.5"&&SP?["ตำแหน่งทางวิชาการปัจจุบัน: "+Object.entries(SP.titles).map(([t,n])=>t+" "+n+" คน").join(", ")]:[],"",[],["ข้อมูลจากหลักสูตรหรือคณะ"]));
+   A("6.1",g.entry,"",[M2+" หมวด 3 ข้อ 2.2"],["จำนวนรับเข้าจริงเทียบแผนรายปี"]);
+   A("6.2",["ปัญหาของนิสิตแรกเข้า: "+strip(g.problems).join(" / "),"กลยุทธ์: "+strip(g.strategies).join(" / ")],"<p>ระบบการให้คำปรึกษา</p>"+WG(g.advising),[M2+" หมวด 2 ข้อ 2.3, หมวด 3 ข้อ 2.3–2.4"]);
+   A("6.3",REG&&REG[P]?["นิสิตกำลังศึกษา "+REG[P].enrolled+" คน พ้นสภาพสะสม "+(REG[P].status["พ้นสภาพ"]||0)+" นิสิตต่างชาติสะสม "+REG[P].international+(ADV?" · บันทึกที่ปรึกษาหลักแล้ว "+ADV.bizWithMain+" จาก "+ADV.bizEnrolled+" คน (ทั้งสองหลักสูตร)":"")]:[],REG&&REG[P]?WT(["ภาคที่เข้าศึกษา","กำลังศึกษา","พ้นสภาพ","ขณะนี้เรียนอยู่"],Object.entries(REG[P].byEntry).map(([k,v])=>[k,sup((v["ปกติ"]||0)+(v["ลาพัก"]||0)),sup(v["พ้นสภาพ"]||0),k==="ไม่ระบุ"?"–":semTxt(k)]).map(r=>r.map(x=>String(x).replace("&lt;","<")))):"",[REG?REG.source:""]);
+   ["6.4","6.5","6.6"].forEach(k=>A(k,[],"",[],["โครงการที่จัดจริง ผู้เข้าร่วม และผลประเมิน"]));
+   A("7.1",[],"<p>แผนทรัพยากรการเรียนการสอน</p>"+WG(g.resources),[M2+" หมวด 2 ข้อ 2.2"],["ห้องเรียนและอุปกรณ์ที่ใช้จริง"]);
+   ["7.2","7.3","7.4","7.5","7.6","7.7","7.8","7.9"].forEach(k=>A(k,[],"",[],["ข้อมูลจากคณะหรือมหาวิทยาลัย"]));
+   A("8.1",REG&&REG[P]?["ผู้สำเร็จการศึกษาสะสม "+REG[P].graduates+" คน พ้นสภาพสะสม "+(REG[P].status["พ้นสภาพ"]||0)+" คน สัดส่วนพ้นสภาพต่อผู้ออกจากหลักสูตร "+((REG.benchmark[P].find(r=>r.self)||{}).attrition)+"%","ผู้สำเร็จรายปี: "+Object.entries(REG[P].gradByYear).map(([y,n])=>y+" = "+n).join(", ")]:[],REG?WT(["หลักสูตร","กำลังศึกษา","สำเร็จ","พ้นสภาพ","พ้นสภาพต่อผู้ออก"],REG.benchmark[P].map(r=>[r.label,r.enrolled,r.graduates,r.dropped,r.attrition+"%"])):"",[REG?REG.source:""],["ระยะเวลาเฉลี่ยที่ใช้สำเร็จการศึกษา (ต้องมีปีเข้าและปีจบ)","คู่เทียบภายนอก"]);
+   A("8.2",[],"",[],["ภาวะการมีงานทำ การประกอบอาชีพอิสระ และความก้าวหน้าในงาน"]);
+   A("8.3",SP?["ผลงานอาจารย์ผู้รับผิดชอบหลักสูตร 5 ปี (ไม่นับซ้ำ) "+SP.uniqueWorks+" เรื่อง ต่ออาจารย์ "+SP.perStaff]:[],SP?WT(STF.years.map(y=>String(+y+543)),[STF.years.map(y=>SP.byYear[y])]):"",[STF?STF.source:""],["ผลงานตีพิมพ์ของนิสิตและบัณฑิต","quartile จาก Scopus"]);
+   A("8.4",[],"",[],["ผลการบรรลุ PLO รายข้อแบบวัดโดยตรง"]);
+   A("8.5",[],"",[],["ความพึงพอใจของนิสิต บัณฑิต ผู้ใช้บัณฑิต และอาจารย์"]);
+   const mk=(k)=>{const r=MK7&&(MK7[P+"-2566"]||Object.values(MK7).find(x=>x.level===P));const v=r&&r.subs[k];return v&&v.body.length?"<p><i>ผลการดำเนินงานเดิม (มคอ.7 ปีการศึกษา "+esc(r.year)+")</i></p><p>"+v.body.slice(0,6).map(esc).join("<br>")+"</p>":"";};
+   SAR={};for(let n=1;n<=8;n++){let h="<h2>เกณฑ์ที่ "+n+" "+CRIT[n-1][1]+" ("+CRIT[n-1][2]+")</h2><p>"+esc(PN)+" · ข้อมูล ณ ภาค "+esc(TL)+" · ปรับปรุง "+esc(D.updated)+"</p>";
+     Object.keys(SUBT).filter(k=>+k.split(".")[0]===n).forEach(k=>{const x=S[k]||{facts:[],tables:"",src:[],miss:[]};
+       h+="<h3>"+k+" "+esc(SUBT[k])+"</h3>"+(x.facts.length?"<ul>"+x.facts.map(f=>"<li>"+esc(f)+"</li>").join("")+"</ul>":"")+x.tables+(x.src.filter(Boolean).length?"<p><b>ที่มา:</b> "+x.src.filter(Boolean).map(esc).join(" · ")+"</p>":"")+(x.miss.length?"<p><b>ยังขาด:</b> "+x.miss.map(esc).join(" · ")+"</p>":"")+mk(k);});
+     SAR[n]=h;}}
   $("blocks").innerHTML=H;
     const n=Object.keys(p.values||{}).length;
   if($("c8body"))$("c8body").innerHTML=C8.map(s=>'<div class="sc"><h3>'+s[0]+" "+s[1]+'</h3><div class="q">'+s[2]+'</div><div class="tw"><table><thead><tr><th>ตัวชี้วัด</th>'+Y.map(y=>"<th>"+y+"</th>").join("")+"<th>เป้าหมาย</th><th>คู่เทียบ*</th></tr></thead><tbody>"+
@@ -343,6 +416,8 @@ function render(){
   document.querySelectorAll(".cb").forEach(s=>{const n=+s.id.slice(1);s.insertAdjacentHTML("beforeend",'<div class="bd" style="padding-top:0"><div class="pager">'+(n>0?'<button data-go="'+(n-1)+'">← '+(n===1?"ภาคการศึกษานี้":"เกณฑ์ที่ "+(n-1)+" "+CRIT[n-2][1])+"</button>":"<span></span>")+(n<8?'<button data-go="'+(n+1)+'">เกณฑ์ที่ '+(n+1)+" "+CRIT[n][1]+" →</button>":"")+"</div></div>");});
   document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(+b.dataset.go,true));
   $("nav").querySelectorAll("a").forEach(a=>a.onclick=e=>{e.preventDefault();show(+a.dataset.k,true);});
+  document.querySelectorAll(".sarbtn").forEach(b=>b.onclick=()=>copySar(SAR[b.dataset.sar],"ข้อมูลเกณฑ์ที่ "+b.dataset.sar));
+  $("sarall").onclick=()=>copySar(Object.values(SAR).join(""),"ข้อมูลทุกเกณฑ์");
   $("allbtn").onclick=()=>{document.body.classList.toggle("all");$("allbtn").textContent=document.body.classList.contains("all")?"แสดงทีละเกณฑ์":"แสดงทุกเกณฑ์ (สำหรับพิมพ์)";REDRAW();};
   wireDiagram(G);wireCohort();
   const m=location.hash.match(/k(\d)/);show(m?+m[1]:CUR);
