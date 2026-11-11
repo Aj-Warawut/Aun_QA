@@ -51,6 +51,33 @@ td.ind b{display:block;font-weight:700}td.ind span{display:block;font-size:12.5p
 footer{max-width:1040px;margin:24px auto 0;padding:16px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 @media(max-width:760px){.crit{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:23px}}
 @media print{.tabs,footer .gc-views{display:none}.sc,.crit>a,.crit>div{break-inside:avoid}}
+.h3{font-size:16.5px;margin:22px 0 8px}
+.why{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:15px}
+.why b{color:var(--accent)}
+table.plan th,table.plan td{border:1px solid var(--line)}
+table.plan td{font-size:13.5px;min-width:150px}table.plan td.sl{font-weight:700;white-space:nowrap;min-width:0}
+table.plan tr.cur td{background:var(--waitbg)}table.plan tr.cur td.sl::after{content:" ◀ ภาคนี้";color:var(--wait);font-size:12px}
+table.plan .cr{color:var(--muted);font-size:12px}
+.srcnote{font-size:12.5px;color:var(--muted);margin-top:6px}
+table.ov td.c{text-align:center;font-weight:700;color:var(--ok)}
+.bar2{display:flex;height:10px;border-radius:6px;overflow:hidden;min-width:90px;background:var(--nextbg)}.bar2 i{display:block;height:100%}
+.bar2 .ex{background:var(--accent)}.bar2 .wk{background:var(--ok)}
+.legend2{font-size:12.5px;color:var(--muted);margin-top:6px}.legend2 b{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 10px;vertical-align:-1px}
+details.course{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+details.course>summary{cursor:pointer;padding:12px 14px;list-style:none;display:flex;gap:12px;align-items:flex-start}
+details.course>summary::-webkit-details-marker{display:none}
+details.course>summary::before{content:"▸";color:var(--accent);font-weight:800;margin-top:1px}
+details.course[open]>summary::before{content:"▾"}
+details.course .cc{font-weight:800;color:var(--accent);white-space:nowrap}
+details.course .cn b{display:block}details.course .cn span{font-size:13px;color:var(--muted)}
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.chips .chip{background:var(--nextbg);color:var(--next)}.chips .chip.p{background:var(--soft);color:var(--accent)}
+.cbody{padding:0 16px 14px 36px}
+.cbody h4{font-size:14.5px;margin:14px 0 6px;color:var(--accent)}
+.cbody p{margin:4px 0;font-size:14.5px}
+.cbody td{font-size:13.5px}
+.cbody details{margin-top:6px}.cbody details summary{cursor:pointer;font-weight:700;font-size:14px}
+@media(max-width:760px){.cbody{padding:0 12px 12px}}
 </style>
 </head>
 <body>
@@ -67,13 +94,21 @@ footer{max-width:1040px;margin:24px auto 0;padding:16px;color:var(--muted);font-
 <p class="sub">จัดทำทีละเกณฑ์ เริ่มจากเกณฑ์ที่ 8 ผลผลิตและผลลัพธ์</p>
 <div class="crit" id="crit"></div>
 
-<h2 id="c8">เกณฑ์ที่ 8 ผลผลิตและผลลัพธ์ (Output and Outcomes)</h2>
-<p class="sub">ย้อนหลัง 5 ปีการศึกษา พร้อมเป้าหมายและคู่เทียบ · ตัวเลขสรุประดับหลักสูตร กลุ่มที่มีน้อยกว่า 5 คนแสดงเป็น "n&lt;5"</p>
-<div id="c8body"></div>
+<h2 id="term">แผนการเรียนและรายวิชาภาคการศึกษา <span id="termLbl"></span></h2>
+<p class="sub">เกณฑ์ที่ 2 โครงสร้างหลักสูตร · 3 การเรียนการสอน · 4 การประเมินผู้เรียน · ข้อมูลจาก มคอ.2 และ มคอ.3 ของหลักสูตร แสดงบนหน้าเว็บโดยไม่ต้องดาวน์โหลด</p>
+<div id="termWhy"></div>
+<h3 class="h3">แผนการศึกษาตลอดหลักสูตร</h3>
+<div class="tw"><table class="plan" id="planTbl"></table></div>
+<p class="srcnote" id="planSrc"></p>
+<h3 class="h3">ภาพรวมรายวิชาที่เปิดภาคนี้</h3>
+<div class="tw"><table class="ov" id="ovTbl"></table></div>
+<div id="ploList"></div>
+<h3 class="h3">รายละเอียดรายวิชา <span class="na" style="font-size:13.5px;font-weight:400">กดชื่อวิชาเพื่อดู CLO วิธีสอน การวัดและประเมินผล แผนรายสัปดาห์ และเกณฑ์การให้คะแนน</span></h3>
+<div id="courses"></div>
 
-<h2 id="docs">มคอ.3 รายวิชา</h2>
-<p class="sub">ฉบับเผยแพร่ ตัดอีเมลและเบอร์โทรศัพท์ออก</p>
-<div id="mko3"></div>
+<h2 id="c8">เกณฑ์ที่ 8 ผลผลิตและผลลัพธ์ (Output and Outcomes)</h2>
+<p class="sub">แบบเก็บข้อมูล: รวบรวมข้อมูลภาคการศึกษา 2/2569 เพื่อนำเสนอเดือนมิถุนายน 2570 · ย้อนหลัง 5 ปีการศึกษา พร้อมเป้าหมายและคู่เทียบ (ไม่เปิดเผยชื่อคู่เทียบบนหน้าเว็บ) · ตัวเลขสรุประดับหลักสูตร กลุ่มที่มีน้อยกว่า 5 คนแสดงเป็น "n&lt;5"</p>
+<div id="c8body"></div>
 
 <h2>หลักฐานที่เกี่ยวข้อง</h2>
 <div class="links">
@@ -111,29 +146,72 @@ const C8=[
    ["plo","ร้อยละการบรรลุ PLO รายข้อ (วัดโดยตรง)","ร้อยละนิสิตที่ได้ระดับ rubric ตามเกณฑ์ในรายวิชาที่เชื่อมกับ PLO นั้น","%"]]],
  ["8.5","ความพึงพอใจของผู้มีส่วนได้ส่วนเสีย","satisfaction of stakeholders",[
    ["satS","นิสิตปัจจุบัน","ค่าเฉลี่ย 5 ระดับ","/5"],["satG","บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satE","ผู้ใช้บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satF","อาจารย์","ค่าเฉลี่ย 5 ระดับ","/5"]]]];
-let D=null,P="ma";
+let D=null,P="ma",CRS=[];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
 const $=id=>document.getElementById(id);
 const fmt=v=>v==null||v===""?'<span class="na">–</span>':esc(v);
 function filled(p){return Object.keys(p.values||{}).length;}
+
+const TBL=(head,rows,cls)=>'<div class="tw"><table'+(cls?' class="'+cls+'"':'')+'><thead><tr>'+head.map(h=>"<th>"+esc(h)+"</th>").join("")+"</tr></thead><tbody>"+rows.map(r=>"<tr>"+r.map(c=>"<td>"+esc(c).replace(/\n/g,"<br>")+"</td>").join("")+"</tr>").join("")+"</tbody></table></div>";
+const crNum=c=>{const m=String(c.credits).match(/(\d+)\s*หน่วยกิต/);return m?+m[1]:0;};
+function renderTerm(p){
+  const T=D.term||{},pl=p.plan,cs=CRS.filter(c=>c.level===P);
+  $("termLbl").textContent=T.label||"";
+  if(!pl){$("planTbl").innerHTML="";return;}
+  // เหตุผลที่เปิดวิชาเหล่านี้: คำนวณจากแผนการศึกษาและรายวิชาที่เปิด
+  const cur=pl.slots.find(s=>s[0]===T.slot);
+  const need=cur?pl.tracks.map((t,i)=>[t,(cur[2][i]||[]).filter(x=>x.code==="elective").reduce((a,x)=>a+x.cr,0)]).filter(x=>x[1]):[];
+  const sum=cs.reduce((a,c)=>a+crNum(c),0);
+  $("termWhy").innerHTML='<div class="why"><b>ทำไมภาคนี้จึงเปิดรายวิชาเหล่านี้</b><br>'+esc(T.why||"")+
+    (need.length?" ซึ่งกำหนดให้เรียนวิชาเลือก "+need.map(x=>esc(x[0])+" "+x[1]+" หน่วยกิต").join(" และ ")+" หลักสูตรจึงเปิดวิชาเลือก "+cs.length+" วิชา รวม "+sum+" หน่วยกิต ให้นิสิตลงทะเบียนได้ครบตามแผน":"")+
+    (cs.length&&cs.every(c=>c.groups.length>1)?" · ทุกวิชาเปิดสองกลุ่มเรียน คือนิสิตไทยและนิสิตจีน เรียนวิชาเดียวกัน มคอ.3 เดียวกัน แยกกลุ่มเรียน":"")+"</div>";
+  // ตารางแผนการศึกษา
+  const cell=a=>(a||[]).map(x=>x.code==="elective"?"<b>วิชาเลือก</b> <span class=cr>"+x.cr+" นก.</span>":esc(x.code.slice(0,4)+" "+x.code.slice(4))+" "+esc(x.name)+" <span class=cr>"+x.cr+" นก.</span>").join("<br>")||"–";
+  $("planTbl").innerHTML="<thead><tr><th>ปีและภาค</th>"+pl.tracks.map(t=>"<th>"+esc(t)+"</th>").join("")+"</tr></thead><tbody>"+pl.slots.map(s=>'<tr class="'+(s[0]===T.slot?"cur":"")+'"><td class="sl">'+esc(s[1])+"</td>"+s[2].map(a=>"<td>"+cell(a)+"</td>").join("")+"</tr>").join("")+"</tbody>";
+  $("planSrc").textContent="ที่มา: "+pl.source;
+  // ภาพรวมรายวิชา × PLO + สัดส่วนการวัด
+  const plos=[...new Set(cs.flatMap(c=>c.plos))].sort();
+  const mix=c=>{let ex=0,wk=0;(c.matrix||[]).slice(1).forEach(r=>{if(/^รวม/.test(r[0]))return;const v=+r[r.length-1]||0;/สอบ/.test(r[0])?ex+=v:wk+=v;});return [ex,wk];};
+  $("ovTbl").innerHTML="<thead><tr><th>รายวิชา</th><th>หน่วยกิต</th><th>CLO</th>"+plos.map(x=>"<th>"+esc(x)+"</th>").join("")+"<th>การวัด: สอบ / งานที่มอบหมาย</th></tr></thead><tbody>"+
+    cs.map(c=>{const [ex,wk]=mix(c),t=ex+wk||1;return "<tr><td><a href=\"#c-"+c.code+"\">"+esc(c.codeFmt)+"</a> "+esc(c.nameTh)+"</td><td class=n>"+crNum(c)+"</td><td class=n>"+c.clo.length+"</td>"+plos.map(x=>'<td class="c">'+(c.plos.includes(x)?"✓":"")+"</td>").join("")+'<td><div class="bar2" title="สอบ '+ex+'% · งาน '+wk+'%"><i class="ex" style="width:'+ex/t*100+'%"></i><i class="wk" style="width:'+wk/t*100+'%"></i></div><span class="na" style="font-size:12px">สอบ '+ex+"% · งาน "+wk+"%</span></td></tr>";}).join("")+"</tbody>";
+  const pd={};cs.forEach(c=>c.ploClo.forEach(x=>{const m=x.plo.match(/^(PLO-?\s?\d+[A-Z]?)\s*(.*)$/s);if(m&&m[2]&&!pd[m[1]])pd[m[1]]=m[2].replace(/\n/g," ");}));
+  $("ploList").innerHTML=Object.keys(pd).length?'<p class="legend2"><b style="background:var(--accent)"></b>สอบ<b style="background:var(--ok)"></b>งานที่มอบหมาย (รายงาน นำเสนอ โครงการ)</p><details style="margin-top:8px"><summary style="cursor:pointer;font-weight:700">PLO ที่รายวิชาภาคนี้รับผิดชอบ</summary><ul>'+Object.keys(pd).sort().map(k=>"<li><b>"+esc(k)+"</b> "+esc(pd[k])+"</li>").join("")+"</ul></details>":"";
+  // รายละเอียดรายวิชา
+  $("courses").innerHTML=cs.length?cs.map(c=>'<details class="course" id="c-'+c.code+'"><summary><span class="cc">'+esc(c.codeFmt)+'</span><span class="cn"><b>'+esc(c.nameTh)+"</b><span>"+esc(c.nameEn)+" · "+esc(c.credits)+'</span><span class="chips"><span class="chip">'+esc(c.category)+"</span>"+c.groups.map(g=>'<span class="chip">กลุ่มเรียน'+esc(g)+"</span>").join("")+c.plos.map(x=>'<span class="chip p">'+esc(x)+"</span>").join("")+'</span></span></summary><div class="cbody">'+
+    "<h4>คำอธิบายรายวิชา</h4>"+c.desc.map(x=>"<p>"+esc(x)+"</p>").join("")+
+    "<p><b>ผู้เรียน:</b> "+esc(c.semester)+" · <b>รายวิชาที่ต้องเรียนมาก่อน:</b> "+esc(c.prereq||"ไม่มี")+"</p>"+
+    "<h4>ผลลัพธ์การเรียนรู้ของหลักสูตร (PLO) และของรายวิชา (CLO)</h4>"+TBL(["PLO","CLO"],c.ploClo.map(x=>[x.plo,x.clo]))+
+    "<h4>CLO วิธีการสอน และวิธีการวัดและประเมินผล</h4>"+TBL(["CLO","วิธีการสอน","วิธีการวัดและประเมินผล"],c.clo.map(x=>[x.clo,x.teach,x.assess]))+
+    "<h4>แผนการประเมินผล</h4>"+TBL(c.assessHead,c.assess)+
+    (c.matrix.length?"<h4>สัดส่วนคะแนนตาม CLO</h4>"+TBL(c.matrix[0],c.matrix.slice(1)):"")+
+    (c.hours.length?"<h4>จำนวนชั่วโมงต่อภาคการศึกษา</h4>"+TBL(c.hours[0],c.hours.slice(1)):"")+
+    "<details><summary>แผนการสอนรายสัปดาห์ ("+c.weeks.length+" ช่วง)</summary>"+TBL(c.weeksHead,c.weeks)+"</details>"+
+    c.rubrics.map(r=>"<details><summary>"+esc(r.title)+"</summary>"+TBL(r.head,r.rows)+"</details>").join("")+
+    (c.grade.length?"<details><summary>เกณฑ์การให้ระดับคะแนน (อิงเกณฑ์)</summary>"+TBL(["ระดับคะแนน","ช่วงคะแนน"],c.grade)+"</details>":"")+
+    (c.verify.length?"<h4>การทวนสอบผลลัพธ์การเรียนรู้</h4>"+c.verify.map(x=>"<p>"+esc(x)+"</p>").join(""):"")+
+    (c.dev.length?"<h4>การปรับปรุงรายวิชาจากรอบก่อน</h4>"+c.dev.map(x=>"<p>"+esc(x)+"</p>").join(""):"")+
+    "</div></details>").join(""):'<div class="empty">ยังไม่มีข้อมูลรายวิชาของภาคนี้</div>';
+  if(location.hash.startsWith("#c-")){const e=document.getElementById(location.hash.slice(1));if(e){e.open=true;e.scrollIntoView();}}
+}
 function render(){
   const p=D.programs[P];
   $("tabs").innerHTML=Object.entries(D.programs).map(([k,v])=>'<button role="tab" aria-selected="'+(k===P)+'" class="'+(k===P?"on":"")+'" data-k="'+k+'">'+esc(v.short)+"</button>").join("");
   $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{P=b.dataset.k;history.replaceState(null,"","#"+P);render();});
   $("pname").textContent=p.name;
   const n=filled(p);
-  $("crit").innerHTML=CRIT.map(c=>{const st=c[0]===8?(n?["ok","มีข้อมูล "+n+" ตัวชี้วัด"]:["wait","กำลังจัดทำ"]):["next","ถัดไป"];
+  const nc=CRS.filter(c=>c.level===P).length;
+  $("crit").innerHTML=CRIT.map(c=>{const st=c[0]===8?(n?["ok","มีข้อมูล "+n+" ตัวชี้วัด"]:["wait","แบบเก็บข้อมูลพร้อม"]):[2,3,4].includes(c[0])&&nc?["ok","แผนการเรียน + มคอ.3 "+nc+" วิชา"]:["next","ถัดไป"];
     const inner='<div class="no">เกณฑ์ที่ '+c[0]+'</div><div class="nm">'+c[1]+'</div><span class="chip '+st[0]+'">'+st[1]+"</span>";
-    return c[0]===8?'<a href="#c8">'+inner+"</a>":"<div>"+inner+"</div>";}).join("");
+    return c[0]===8?'<a href="#c8">'+inner+"</a>":[2,3,4].includes(c[0])&&nc?'<a href="#term">'+inner+"</a>":"<div>"+inner+"</div>";}).join("");
   const Y=D.years;
-  $("c8body").innerHTML=C8.map(s=>'<div class="sc"><h3>'+s[0]+" "+s[1]+'</h3><div class="q">'+s[2]+'</div><div class="tw"><table><thead><tr><th>ตัวชี้วัด</th>'+Y.map(y=>"<th>"+y+"</th>").join("")+"<th>เป้าหมาย</th><th>คู่เทียบ</th></tr></thead><tbody>"+
+  $("c8body").innerHTML=C8.map(s=>'<div class="sc"><h3>'+s[0]+" "+s[1]+'</h3><div class="q">'+s[2]+'</div><div class="tw"><table><thead><tr><th>ตัวชี้วัด</th>'+Y.map(y=>"<th>"+y+"</th>").join("")+"<th>เป้าหมาย</th><th>คู่เทียบ*</th></tr></thead><tbody>"+
     s[3].map(i=>{const v=(p.values||{})[i[0]]||{},yv=v.y||{};
       return '<tr><td class="ind"><b>'+i[1]+"</b><span>"+esc(i[2])+(i[3]?" · หน่วย "+esc(i[3]):"")+(v.src?" · ที่มา "+esc(v.src):"")+"</span></td>"+Y.map(y=>'<td class="n">'+fmt(yv[y])+"</td>").join("")+'<td class="n">'+fmt(v.target)+'</td><td class="n">'+fmt(v.bench)+(v.benchSrc?'<br><span class="na">'+esc(v.benchSrc)+"</span>":"")+"</td></tr>";}).join("")+"</tbody></table></div></div>").join("")+
-    (n?"":'<div class="empty">ยังไม่มีตัวเลข อยู่ระหว่างรวบรวมจากระบบทะเบียน แบบสำรวจ และรายงานของหลักสูตร</div>');
-  $("mko3").innerHTML=(p.mko3||[]).length?'<div class="dl">'+p.mko3.map(m=>'<a href="'+esc(m.file)+'" download><span class="code">'+esc(m.code)+"</span><span>"+esc(m.name)+"<small>ภาคการศึกษา "+esc(m.sem)+" · PDF</small></span></a>").join("")+"</div>":'<div class="empty">อยู่ระหว่างจัดเตรียมฉบับเผยแพร่</div>';
+    '<p class="srcnote">* คู่เทียบแสดงเป็นรหัส (เช่น มหาวิทยาลัย xxx) ระบุชื่อในรายงานการประเมินตนเอง</p>'+(n?"":'<div class="empty">ยังไม่มีตัวเลข อยู่ระหว่างรวบรวมจากระบบทะเบียน แบบสำรวจ และรายงานของหลักสูตร</div>');
+  renderTerm(p);
   $("evalbox").innerHTML=D.evaluatorLink?'<p style="margin-top:12px"><a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="na">(ต้องได้รับสิทธิ์เข้าถึง)</span></p>':"";
 }
-fetch("bizinno_data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{D=d;if(location.hash==="#phd")P="phd";$("draft").hidden=d.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+d.updated;render();}).catch(()=>{$("c8body").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';});
+Promise.all([fetch("bizinno_data.json",{cache:"no-cache"}).then(r=>r.json()),null]).then(([d])=>fetch(d.coursesFile,{cache:"no-cache"}).then(r=>r.ok?r.json():{courses:[]}).catch(()=>({courses:[]})).then(c=>{D=d;CRS=c.courses||[];if(location.hash==="#phd")P="phd";$("draft").hidden=d.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+d.updated;render();})).catch(()=>{$("c8body").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';});
 })();
 </script>
 <script data-goatcounter="https://waruwut.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
