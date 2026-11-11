@@ -196,5 +196,41 @@
     "label": "หลักสูตร C"
    }
   ]
+ },
+ "advisorLoadByStaff": {
+  "staff": {
+   "warawut": {
+    "main_ma": 3,
+    "co_phd": 3,
+    "main_phd": 4,
+    "gco": 1,
+    "gmain": 2,
+    "mainTotal": 7,
+    "cap": 5
+   },
+   "kittipol": {
+    "main_phd": 11,
+    "co_phd": 2,
+    "gmain": 5,
+    "mainTotal": 11,
+    "cap": 10
+   },
+   "kanjana": {
+    "main_phd": 1,
+    "co_phd": 4,
+    "gmain": 2,
+    "mainTotal": 1,
+    "cap": 5
+   },
+   "cattaleeya": {
+    "main_phd": 1,
+    "main_other": 2,
+    "main_ma": 1,
+    "mainTotal": 2,
+    "cap": 5
+   }
+  },
+  "bizEnrolled": 61,
+  "bizWithMain": 22
  }
 }
