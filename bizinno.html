@@ -7,137 +7,111 @@
 <meta name="description" content="ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร บธ.ม. และ ปร.ด. สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล มหาวิทยาลัยมหาสารคาม">
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1F2A37;--muted:#5C6B7A;--line:#DDE3EA;--bg:#F6F8FA;--card:#FFFFFF;--accent:#1F4E8C;--soft:#EAF1FA;--ok:#1F7A5A;--okbg:#E6F5EE;--wait:#8A5A00;--waitbg:#FBF3DF;--next:#5C6B7A;--nextbg:#EEF1F5}
-@media (prefers-color-scheme: dark){:root{--ink:#E6EBF0;--muted:#9AA8B6;--line:#2C3642;--bg:#12171D;--card:#1A2129;--accent:#7FB0F0;--soft:#1E2A38;--ok:#7FD0AE;--okbg:#17302A;--wait:#E8C27A;--waitbg:#33291A;--next:#9AA8B6;--nextbg:#222A33}}
+:root{--ink:#1F2A37;--muted:#5C6B7A;--line:#DDE3EA;--bg:#F3F5F8;--card:#FFFFFF;--accent:#1F4E8C;--soft:#EAF1FA;--ok:#1F7A5A;--okbg:#E6F5EE;--wait:#8A5A00;--waitbg:#FBF3DF;--nextbg:#EEF1F5;
+--c1:#2a78d6;--c2:#1baf7a;--c3:#eb6834;--c4:#7a5ac8;--c5:#c2417a;--c6:#0f8a96;--c7:#8a6d1e;--c8:#1F4E8C}
 *{box-sizing:border-box}
 body{margin:0;font-family:'Sarabun','Segoe UI',Tahoma,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
 a{color:var(--accent)}
-main{max-width:1040px;margin:0 auto;padding:32px 16px 24px}
-.crumb{font-size:14px;margin-bottom:10px}
-h1{font-size:28px;margin:0 0 4px;line-height:1.3}
-.lead{color:var(--muted);margin:0 0 16px}
-.draft{background:var(--waitbg);color:var(--wait);border-radius:10px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 18px}
-.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:22px;padding:8px 16px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
-.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.pname{font-size:15px;color:var(--muted);margin:-8px 0 18px}
-h2{font-size:21px;margin:30px 0 4px}
-.sub{color:var(--muted);font-size:14.5px;margin:0 0 12px}
-.crit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.crit>a,.crit>div{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:inherit}
-.crit>a:hover{border-color:var(--accent)}
-.crit .no{font-size:12.5px;font-weight:800;color:var(--accent)}
-.crit .nm{font-weight:700;line-height:1.35;margin:2px 0 6px;font-size:15px}
-.chip{display:inline-block;border-radius:20px;padding:1px 9px;font-size:12px;font-weight:700}
-.chip.ok{background:var(--okbg);color:var(--ok)}.chip.wait{background:var(--waitbg);color:var(--wait)}.chip.next{background:var(--nextbg);color:var(--next)}
-.sc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
-.sc h3{font-size:16.5px;margin:0 0 2px;color:var(--accent)}
-.sc .q{font-size:13.5px;color:var(--muted);margin-bottom:8px}
+.top{background:linear-gradient(135deg,#14284d,#1F4E8C);color:#fff}
+.top .in{max-width:1240px;margin:0 auto;padding:26px 16px 18px}
+.top h1{font-size:26px;margin:0 0 4px;line-height:1.3}.top p{margin:0;color:#D5E1F5;font-size:15px}
+.tabs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tabs button{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;border-radius:22px;padding:7px 18px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.tabs button.on{background:#fff;color:#14284d}
+.draft{background:var(--waitbg);color:var(--wait);font-size:14px;padding:8px 16px;text-align:center}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.sum{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.sum div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.sum b{display:block;font-size:22px;color:var(--accent);line-height:1.2}.sum span{font-size:13px;color:var(--muted)}
+.lay>*{min-width:0}
+.lay{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+.side{position:sticky;top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.side .h{font-size:12.5px;font-weight:800;color:var(--muted);margin:2px 6px 6px}
+.side a{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:14px;line-height:1.35}
+.side a:hover,.side a.on{background:var(--soft)}
+.side i{flex:0 0 22px;height:22px;border-radius:6px;color:#fff;font-style:normal;font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center}
+.cb{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--cc);border-radius:14px;margin-bottom:18px;scroll-margin-top:12px}
+.cb>header{padding:14px 18px 10px;border-bottom:1px solid var(--line)}
+.cb>header .no{font-size:12.5px;font-weight:800;color:var(--cc);letter-spacing:.5px}
+.cb>header h2{margin:0;font-size:20px;line-height:1.35}
+.cb>header .ev{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.chip{display:inline-block;border-radius:20px;padding:1px 9px;font-size:12px;font-weight:700;background:var(--nextbg);color:var(--muted)}
+.chip.ok{background:var(--okbg);color:var(--ok)}.chip.wait{background:var(--waitbg);color:var(--wait)}
+.cb>.bd{padding:12px 18px 16px}
+h3{font-size:16px;margin:16px 0 8px;color:var(--ink)}h3:first-child{margin-top:4px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 8px}
 .tw{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:14px}
-th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:700;padding:6px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
-td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-td.ind b{display:block;font-weight:700}td.ind span{display:block;font-size:12.5px;color:var(--muted)}
-.na{color:var(--muted)}
-.dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
-.dl a{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:inherit}
-.dl a:hover{border-color:var(--accent)}.dl .code{font-weight:800;color:var(--accent);white-space:nowrap}.dl small{display:block;color:var(--muted)}
-.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:14px;color:var(--muted);font-size:14.5px}
-.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.links a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:inherit}
-.links a:hover{border-color:var(--accent)}.links b{color:var(--accent)}.links span{display:block;font-size:13.5px;color:var(--muted)}
-.priv{font-size:13.5px;color:var(--muted);margin-top:8px}
-footer{max-width:1040px;margin:24px auto 0;padding:16px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
-@media(max-width:760px){.crit{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:23px}}
-@media print{.tabs,footer .gc-views{display:none}.sc,.crit>a,.crit>div{break-inside:avoid}}
-.h3{font-size:16.5px;margin:22px 0 8px}
-.why{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:15px}
-.why b{color:var(--accent)}
-table.plan th,table.plan td{border:1px solid var(--line)}
-table.plan td{font-size:13.5px;min-width:150px}table.plan td.sl{font-weight:700;white-space:nowrap;min-width:0}
-table.plan tr.cur td{background:var(--waitbg)}table.plan tr.cur td.sl::after{content:" ◀ ภาคนี้";color:var(--wait);font-size:12px}
-table.plan .cr{color:var(--muted);font-size:12px}
-.srcnote{font-size:12.5px;color:var(--muted);margin-top:6px}
-table.ov td.c{text-align:center;font-weight:700;color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:700;padding:6px 8px;border-bottom:2px solid var(--line);background:#FAFBFC}
+td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+table.g th,table.g td{border:1px solid var(--line);text-align:center}table.g .l{text-align:left}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+details{margin-top:8px;border:1px solid var(--line);border-radius:10px;padding:0 12px}
+details>summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:8px 0}
+details[open]{padding-bottom:10px}
+.why{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:15px}
+.empty{border:1px dashed var(--line);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:14px;background:#FCFCFD}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.kpis div{border:1px solid var(--line);border-radius:10px;padding:8px 10px}.kpis b{display:block;font-size:20px;color:var(--cc,var(--accent))}.kpis span{font-size:13px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ul{margin:4px 0;padding-left:20px}li{margin:2px 0}
 .bar2{display:flex;height:10px;border-radius:6px;overflow:hidden;min-width:90px;background:var(--nextbg)}.bar2 i{display:block;height:100%}
-.bar2 .ex{background:var(--accent)}.bar2 .wk{background:var(--ok)}
-.legend2{font-size:12.5px;color:var(--muted);margin-top:6px}.legend2 b{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 10px;vertical-align:-1px}
-details.course{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
-details.course>summary{cursor:pointer;padding:12px 14px;list-style:none;display:flex;gap:12px;align-items:flex-start}
-details.course>summary::-webkit-details-marker{display:none}
-details.course>summary::before{content:"▸";color:var(--accent);font-weight:800;margin-top:1px}
-details.course[open]>summary::before{content:"▾"}
-details.course .cc{font-weight:800;color:var(--accent);white-space:nowrap}
-details.course .cn b{display:block}details.course .cn span{font-size:13px;color:var(--muted)}
-.chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
-.chips .chip{background:var(--nextbg);color:var(--next)}.chips .chip.p{background:var(--soft);color:var(--accent)}
-.cbody{padding:0 16px 14px 36px}
-.cbody h4{font-size:14.5px;margin:14px 0 6px;color:var(--accent)}
-.cbody p{margin:4px 0;font-size:14.5px}
-.cbody td{font-size:13.5px}
-.cbody details{margin-top:6px}.cbody details summary{cursor:pointer;font-weight:700;font-size:14px}
-@media(max-width:760px){.cbody{padding:0 12px 12px}}
-.toc{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 6px}
-.toc a{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:4px 12px;font-size:13.5px;text-decoration:none;font-weight:700}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.pcard h4{margin:0 0 6px;font-size:14.5px;color:var(--accent)}
-.pcard p,.pcard li{margin:2px 0;font-size:14.5px}.pcard ul{margin:0;padding-left:18px}
-.blk2{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
-.blk2>h3{font-size:16px;margin:0 0 8px;color:var(--accent)}
-.blk2 details{margin-top:8px}.blk2 details>summary{cursor:pointer;font-weight:700;font-size:14.5px}
-.plo{margin:4px 0}.plo>b{color:var(--accent)}.plo ul{margin:2px 0 6px;padding-left:22px}.plo li{font-size:14px}
-table.g th,table.g td{border:1px solid var(--line);font-size:13px;text-align:center}table.g td:first-child,table.g th:first-child{text-align:left}
-table.g td.l{text-align:left}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:760px){.two{grid-template-columns:1fr}}
+/* แผนภาพความเชื่อมโยง */
+.dg{position:relative;margin-top:6px}
+.dg .cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:26px;position:relative;z-index:1}
+.dg .colh{font-size:12.5px;font-weight:800;color:var(--muted);margin-bottom:6px;text-align:center}
+.dg .nd small b{color:var(--ink)}
+.dg .nd{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 8px;margin-bottom:6px;font-family:inherit;font-size:12.5px;line-height:1.35;cursor:pointer;color:var(--ink)}
+.dg .nd b{color:var(--accent)}
+.dg .nd.hi{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset;background:var(--soft)}
+.dg.sel .nd:not(.hi){opacity:.3}
+.dg svg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.dg path{fill:none;stroke:#B9C4D2;stroke-width:1.2;opacity:.55}
+.dg path.hi{stroke:var(--accent);stroke-width:2.2;opacity:1}.dg.sel path:not(.hi){opacity:.08}
+.dghint{font-size:13.5px;color:var(--muted);margin:0 0 6px}
+.nd small{display:block;color:var(--muted)}
+.cb{display:none}.cb.on{display:block}
+body.all .cb{display:block}
+.side .allbtn{display:block;width:100%;margin-top:8px;border:1px dashed var(--line);background:#fff;border-radius:8px;padding:6px;font-family:inherit;font-size:13px;color:var(--muted);cursor:pointer}
+.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
+.pager button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-family:inherit;font-size:14px;cursor:pointer;color:var(--accent);font-weight:700}
+body.all .pager{display:none}
+.coh{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 8px}
+.coh button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-family:inherit;font-size:13.5px;cursor:pointer}
+.coh button.on{background:var(--c2);border-color:var(--c2);color:#fff;font-weight:700}
+tr.now td{background:var(--waitbg)}
+@media print{.top .tabs,.side,.pager,.draft{display:none!important}.lay{display:block}.cb{display:block!important;break-inside:auto}}
+.sc{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.sc h3{margin:0 0 2px;color:var(--c8);font-size:15.5px}.sc .q{font-size:13px;color:var(--muted);margin-bottom:6px}
+td.ind b{display:block}td.ind span{display:block;font-size:12.5px;color:var(--muted)}
+.srcnote{font-size:12.5px;color:var(--muted);margin-top:6px}
+.evalbox{margin-top:4px}
+footer{max-width:1240px;margin:0 auto;padding:16px;color:var(--muted);font-size:13.5px}
+@media(max-width:900px){.lay{grid-template-columns:minmax(0,1fr)}.side{position:sticky;top:0;z-index:5;display:flex;flex-wrap:nowrap;overflow-x:auto;gap:4px;padding:6px;border-radius:10px}.side .h,.side .allbtn{display:none}.side a{flex:0 0 auto;white-space:nowrap}.sum{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}
+ .dg .cols{grid-template-columns:1fr;gap:4px}.dg svg{display:none}}
 </style>
 </head>
 <body>
-<main>
-<h1>ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร</h1>
-<p class="lead">สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · ตามเกณฑ์ AUN-QA ระดับหลักสูตร ฉบับที่ 4.0 · ใช้ประกอบรายงานการประเมินตนเอง (SAR) ไม่แทน SAR</p>
-<div class="draft" id="draft" hidden>ฉบับร่าง: ตัวเลขและเอกสารในหน้านี้ยังไม่ผ่านความเห็นชอบของคณะกรรมการบริหารหลักสูตร</div>
-
-<div class="tabs" role="tablist" id="tabs"></div>
-<p class="pname" id="pname"></p>
-
-<nav class="toc" aria-label="สารบัญหน้า"><a href="#prog">ภาพรวมหลักสูตร</a><a href="#crit-h">ภาพรวมรายเกณฑ์</a><a href="#term">แผนการเรียนและรายวิชา</a><a href="#c8">เกณฑ์ที่ 8</a></nav>
-
-<h2 id="prog">ภาพรวมหลักสูตร</h2>
-<p class="sub">ข้อมูลจาก มคอ.2 หลักสูตรปรับปรุง พ.ศ. 2567 · กดหัวข้อที่มีลูกศรเพื่อกางรายละเอียด</p>
-<div id="progBody"></div>
-
-<h2 id="crit-h">ภาพรวมรายเกณฑ์</h2>
-<p class="sub">จัดทำทีละเกณฑ์ เริ่มจากเกณฑ์ที่ 8 ผลผลิตและผลลัพธ์</p>
-<div class="crit" id="crit"></div>
-
-<h2 id="term">แผนการเรียนและรายวิชาภาคการศึกษา <span id="termLbl"></span></h2>
-<p class="sub">เกณฑ์ที่ 2 โครงสร้างหลักสูตร · 3 การเรียนการสอน · 4 การประเมินผู้เรียน · ข้อมูลจาก มคอ.2 และ มคอ.3 ของหลักสูตร แสดงบนหน้าเว็บโดยไม่ต้องดาวน์โหลด</p>
-<div id="termWhy"></div>
-<h3 class="h3">แผนการศึกษาตลอดหลักสูตร</h3>
-<div class="tw"><table class="plan" id="planTbl"></table></div>
-<p class="srcnote" id="planSrc"></p>
-<h3 class="h3">ภาพรวมรายวิชาที่เปิดภาคนี้</h3>
-<div class="tw"><table class="ov" id="ovTbl"></table></div>
-<div id="ploList"></div>
-<h3 class="h3">รายละเอียดรายวิชา <span class="na" style="font-size:13.5px;font-weight:400">กดชื่อวิชาเพื่อดู CLO วิธีสอน การวัดและประเมินผล แผนรายสัปดาห์ และเกณฑ์การให้คะแนน</span></h3>
-<div id="courses"></div>
-
-<h2 id="c8">เกณฑ์ที่ 8 ผลผลิตและผลลัพธ์ (Output and Outcomes)</h2>
-<p class="sub">แบบเก็บข้อมูล: รวบรวมข้อมูลภาคการศึกษา 2/2569 เพื่อนำเสนอเดือนมิถุนายน 2570 · ย้อนหลัง 5 ปีการศึกษา พร้อมเป้าหมายและคู่เทียบ (ไม่เปิดเผยชื่อคู่เทียบบนหน้าเว็บ) · ตัวเลขสรุประดับหลักสูตร กลุ่มที่มีน้อยกว่า 5 คนแสดงเป็น "n&lt;5"</p>
-<div id="c8body"></div>
-
-<h2>เอกสารสำหรับผู้ประเมิน</h2>
-<div id="evalbox"></div>
-<p class="priv">หน้านี้แสดงเฉพาะตัวเลขสรุปที่ไม่ระบุตัวบุคคล ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 หลักฐานที่ระบุตัวนิสิตจัดเก็บในระบบของมหาวิทยาลัย และเปิดให้ผู้ประเมินตรวจตามคำขอ</p>
-</main>
+<div class="top"><div class="in">
+  <h1>ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร</h1>
+  <p>สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · เกณฑ์ AUN-QA ระดับหลักสูตร ฉบับที่ 4.0 · ใช้ประกอบรายงานการประเมินตนเอง (SAR)</p>
+  <div class="tabs" id="tabs"></div>
+</div></div>
+<div class="draft" id="draft" hidden>ฉบับร่าง: ข้อมูลในหน้านี้ยังไม่ผ่านความเห็นชอบของคณะกรรมการบริหารหลักสูตร</div>
+<div class="wrap">
+  <div class="sum" id="sum"></div>
+  <div class="lay">
+    <nav class="side" id="nav" aria-label="เกณฑ์"></nav>
+    <main><div id="blocks"></div><div class="evalbox" id="evalbox"></div></main>
+  </div>
+</div>
 <footer>หลักสูตรบริหารธุรกิจมหาบัณฑิต และหลักสูตรปรัชญาดุษฎีบัณฑิต สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล · คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · <span id="upd"></span></footer>
-
 <script>
-(function(){
-const CRIT=[[1,"ผลการเรียนรู้ที่คาดหวัง","Expected Learning Outcomes"],[2,"โครงสร้างและเนื้อหาของหลักสูตร","Programme Structure and Content"],[3,"แนวทางการเรียนการสอน","Teaching and Learning Approach"],[4,"การประเมินผู้เรียน","Student Assessment"],[5,"บุคลากรสายวิชาการ","Academic Staff"],[6,"การบริการสนับสนุนผู้เรียน","Student Support Services"],[7,"สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน","Facilities and Infrastructure"],[8,"ผลผลิตและผลลัพธ์","Output and Outcomes"]];
-// เกณฑ์ย่อยและตัวชี้วัด ตามร่างใน QA vault: 30_Projects/AUN-QA/ร่างตัวชี้วัด_Dashboard_เกณฑ์8_BizInno_2569.md
+(async function(){
+const J=u=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null);
+const D=await J("bizinno_data.json");if(!D){document.getElementById("blocks").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';return;}
+const [CJ,PRG,STU]=await Promise.all([J(D.coursesFile),J(D.programsFile),J(D.studentsFile)]);
+const CRS=(CJ&&CJ.courses)||[],UNIV=D.univPhilosophy||"";
 const C8=[
  ["8.1","อัตราผ่าน อัตราพ้นสภาพ และระยะเวลาเฉลี่ยที่ใช้สำเร็จการศึกษา","pass rate, dropout rate and average time to graduate",[
    ["grad","อัตราสำเร็จการศึกษาตามระยะเวลาของหลักสูตร","รายรุ่น · ผู้สำเร็จภายในระยะเวลา ÷ ผู้เข้าศึกษา","%"],
@@ -158,104 +132,157 @@ const C8=[
    ["plo","ร้อยละการบรรลุ PLO รายข้อ (วัดโดยตรง)","ร้อยละนิสิตที่ได้ระดับ rubric ตามเกณฑ์ในรายวิชาที่เชื่อมกับ PLO นั้น","%"]]],
  ["8.5","ความพึงพอใจของผู้มีส่วนได้ส่วนเสีย","satisfaction of stakeholders",[
    ["satS","นิสิตปัจจุบัน","ค่าเฉลี่ย 5 ระดับ","/5"],["satG","บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satE","ผู้ใช้บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satF","อาจารย์","ค่าเฉลี่ย 5 ระดับ","/5"]]]];
-let D=null,P="ma",CRS=[],PRG=null;
+
+let P=/^#phd/.test(location.hash)?"phd":"ma";
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
 const $=id=>document.getElementById(id);
-const fmt=v=>v==null||v===""?'<span class="na">–</span>':esc(v);
-function filled(p){return Object.keys(p.values||{}).length;}
-
-const TBL=(head,rows,cls)=>'<div class="tw"><table'+(cls?' class="'+cls+'"':'')+'><thead><tr>'+head.map(h=>"<th>"+esc(h)+"</th>").join("")+"</tr></thead><tbody>"+rows.map(r=>"<tr>"+r.map(c=>"<td>"+esc(c).replace(/\n/g,"<br>")+"</td>").join("")+"</tr>").join("")+"</tbody></table></div>";
-const crNum=c=>{const m=String(c.credits).match(/(\d+)\s*หน่วยกิต/);return m?+m[1]:0;};
-function renderTerm(p){
-  const T=D.term||{},pl=p.plan,cs=CRS.filter(c=>c.level===P);
-  $("termLbl").textContent=T.label||"";
-  if(!pl){$("planTbl").innerHTML="";return;}
-  // เหตุผลที่เปิดวิชาเหล่านี้: คำนวณจากแผนการศึกษาและรายวิชาที่เปิด
-  const cur=pl.slots.find(s=>s[0]===T.slot);
-  const need=cur?pl.tracks.map((t,i)=>[t,(cur[2][i]||[]).filter(x=>x.code==="elective").reduce((a,x)=>a+x.cr,0)]).filter(x=>x[1]):[];
-  const sum=cs.reduce((a,c)=>a+crNum(c),0);
-  $("termWhy").innerHTML='<div class="why"><b>ทำไมภาคนี้จึงเปิดรายวิชาเหล่านี้</b><br>'+esc(T.why||"")+
-    (need.length?" ซึ่งกำหนดให้เรียนวิชาเลือก "+need.map(x=>esc(x[0])+" "+x[1]+" หน่วยกิต").join(" และ ")+" หลักสูตรจึงเปิดวิชาเลือก "+cs.length+" วิชา รวม "+sum+" หน่วยกิต ให้นิสิตลงทะเบียนได้ครบตามแผน":"")+
-    (cs.length&&cs.every(c=>c.groups.length>1)?" · ทุกวิชาเปิดสองกลุ่มเรียน คือนิสิตไทยและนิสิตจีน เรียนวิชาเดียวกัน มคอ.3 เดียวกัน แยกกลุ่มเรียน":"")+"</div>";
-  // ตารางแผนการศึกษา
-  const cell=a=>(a||[]).map(x=>x.code==="elective"?"<b>วิชาเลือก</b> <span class=cr>"+x.cr+" นก.</span>":esc(x.code.slice(0,4)+" "+x.code.slice(4))+" "+esc(x.name)+" <span class=cr>"+x.cr+" นก.</span>").join("<br>")||"–";
-  $("planTbl").innerHTML="<thead><tr><th>ปีและภาค</th>"+pl.tracks.map(t=>"<th>"+esc(t)+"</th>").join("")+"</tr></thead><tbody>"+pl.slots.map(s=>'<tr class="'+(s[0]===T.slot?"cur":"")+'"><td class="sl">'+esc(s[1])+"</td>"+s[2].map(a=>"<td>"+cell(a)+"</td>").join("")+"</tr>").join("")+"</tbody>";
-  $("planSrc").textContent="ที่มา: "+pl.source;
-  // ภาพรวมรายวิชา × PLO + สัดส่วนการวัด
-  const plos=[...new Set(cs.flatMap(c=>c.plos))].sort();
-  const mix=c=>{let ex=0,wk=0;(c.matrix||[]).slice(1).forEach(r=>{if(/^รวม/.test(r[0]))return;const v=+r[r.length-1]||0;/สอบ/.test(r[0])?ex+=v:wk+=v;});return [ex,wk];};
-  $("ovTbl").innerHTML="<thead><tr><th>รายวิชา</th><th>หน่วยกิต</th><th>CLO</th>"+plos.map(x=>"<th>"+esc(x)+"</th>").join("")+"<th>การวัด: สอบ / งานที่มอบหมาย</th></tr></thead><tbody>"+
-    cs.map(c=>{const [ex,wk]=mix(c),t=ex+wk||1;return "<tr><td><a href=\"#c-"+c.code+"\">"+esc(c.codeFmt)+"</a> "+esc(c.nameTh)+"</td><td class=n>"+crNum(c)+"</td><td class=n>"+c.clo.length+"</td>"+plos.map(x=>'<td class="c">'+(c.plos.includes(x)?"✓":"")+"</td>").join("")+'<td><div class="bar2" title="สอบ '+ex+'% · งาน '+wk+'%"><i class="ex" style="width:'+ex/t*100+'%"></i><i class="wk" style="width:'+wk/t*100+'%"></i></div><span class="na" style="font-size:12px">สอบ '+ex+"% · งาน "+wk+"%</span></td></tr>";}).join("")+"</tbody>";
-  const pd={};cs.forEach(c=>c.ploClo.forEach(x=>{const m=x.plo.match(/^(PLO-?\s?\d+[A-Z]?)\s*(.*)$/s);if(m&&m[2]&&!pd[m[1]])pd[m[1]]=m[2].replace(/\n/g," ");}));
-  $("ploList").innerHTML=Object.keys(pd).length?'<p class="legend2"><b style="background:var(--accent)"></b>สอบ<b style="background:var(--ok)"></b>งานที่มอบหมาย (รายงาน นำเสนอ โครงการ)</p><details style="margin-top:8px"><summary style="cursor:pointer;font-weight:700">PLO ที่รายวิชาภาคนี้รับผิดชอบ</summary><ul>'+Object.keys(pd).sort().map(k=>"<li><b>"+esc(k)+"</b> "+esc(pd[k])+"</li>").join("")+"</ul></details>":"";
-  // รายละเอียดรายวิชา
-  $("courses").innerHTML=cs.length?cs.map(c=>'<details class="course" id="c-'+c.code+'"><summary><span class="cc">'+esc(c.codeFmt)+'</span><span class="cn"><b>'+esc(c.nameTh)+"</b><span>"+esc(c.nameEn)+" · "+esc(c.credits)+'</span><span class="chips"><span class="chip">'+esc(c.category)+"</span>"+c.groups.map(g=>'<span class="chip">กลุ่มเรียน'+esc(g)+"</span>").join("")+c.plos.map(x=>'<span class="chip p">'+esc(x)+"</span>").join("")+'</span></span></summary><div class="cbody">'+
-    "<h4>คำอธิบายรายวิชา</h4>"+c.desc.map(x=>"<p>"+esc(x)+"</p>").join("")+
-    "<p><b>ผู้เรียน:</b> "+esc(c.semester)+" · <b>รายวิชาที่ต้องเรียนมาก่อน:</b> "+esc(c.prereq||"ไม่มี")+"</p>"+
-    "<h4>ผลลัพธ์การเรียนรู้ของหลักสูตร (PLO) และของรายวิชา (CLO)</h4>"+TBL(["PLO","CLO"],c.ploClo.map(x=>[x.plo,x.clo]))+
-    "<h4>CLO วิธีการสอน และวิธีการวัดและประเมินผล</h4>"+TBL(["CLO","วิธีการสอน","วิธีการวัดและประเมินผล"],c.clo.map(x=>[x.clo,x.teach,x.assess]))+
-    "<h4>แผนการประเมินผล</h4>"+TBL(c.assessHead,c.assess)+
-    (c.matrix.length?"<h4>สัดส่วนคะแนนตาม CLO</h4>"+TBL(c.matrix[0],c.matrix.slice(1)):"")+
-    (c.hours.length?"<h4>จำนวนชั่วโมงต่อภาคการศึกษา</h4>"+TBL(c.hours[0],c.hours.slice(1)):"")+
-    "<details><summary>แผนการสอนรายสัปดาห์ ("+c.weeks.length+" ช่วง)</summary>"+TBL(c.weeksHead,c.weeks)+"</details>"+
-    c.rubrics.map(r=>"<details><summary>"+esc(r.title)+"</summary>"+TBL(r.head,r.rows)+"</details>").join("")+
-    (c.grade.length?"<details><summary>เกณฑ์การให้ระดับคะแนน (อิงเกณฑ์)</summary>"+TBL(["ระดับคะแนน","ช่วงคะแนน"],c.grade)+"</details>":"")+
-    (c.verify.length?"<h4>การทวนสอบผลลัพธ์การเรียนรู้</h4>"+c.verify.map(x=>"<p>"+esc(x)+"</p>").join(""):"")+
-    (c.dev.length?"<h4>การปรับปรุงรายวิชาจากรอบก่อน</h4>"+c.dev.map(x=>"<p>"+esc(x)+"</p>").join(""):"")+
-    "</div></details>").join(""):'<div class="empty">ยังไม่มีข้อมูลรายวิชาของภาคนี้</div>';
-  if(location.hash.startsWith("#c-")){const e=document.getElementById(location.hash.slice(1));if(e){e.open=true;e.scrollIntoView();}}
-}
-
-// ภาพรวมหลักสูตรจาก มคอ.2 (bizinno_programs.json)
-const cellT=c=>Array.isArray(c)?c[0]:c, cellS=c=>Array.isArray(c)?c[1]:1;
-function GT(rows,nh,opt){opt=opt||{};if(!rows||!rows.length)return "";
-  return '<div class="tw"><table class="g"><tbody>'+rows.map((r,i)=>"<tr>"+r.map((c,j)=>{const tag=i<nh||(opt.boldRows||[]).includes(i)?"th":"td",sp=cellS(c);return "<"+tag+(sp>1?' colspan="'+sp+'"':"")+(j===0||opt.left?' class="l"':"")+">"+esc(cellT(c)).replace(/\n/g,"<br>")+"</"+tag+">";}).join("")+"</tr>").join("")+"</tbody></table></div>";}
+const cT=c=>Array.isArray(c)?c[0]:c, cS=c=>Array.isArray(c)?c[1]:1;
+const sup=n=>n>0&&n<5?"n&lt;5":n;
+function GT(rows,nh,o){o=o||{};if(!rows||!rows.length)return"";return'<div class="tw"><table class="g"><tbody>'+rows.map((r,i)=>"<tr>"+r.map((c,j)=>{const t=i<nh||(o.bold||[]).includes(i)?"th":"td";return"<"+t+(cS(c)>1?' colspan="'+cS(c)+'"':"")+(j===0||o.left?' class="l"':"")+">"+esc(cT(c)).replace(/\n/g,"<br>")+"</"+t+">";}).join("")+"</tr>").join("")+"</tbody></table></div>";}
+function TB(head,rows){return'<div class="tw"><table><thead><tr>'+head.map(h=>"<th>"+esc(h)+"</th>").join("")+"</tr></thead><tbody>"+rows.map(r=>"<tr>"+r.map(c=>"<td>"+esc(c).replace(/\n/g,"<br>")+"</td>").join("")+"</tr>").join("")+"</tbody></table></div>";}
 const UL=a=>"<ul>"+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>";
-const DET=(t,h,open)=>h?"<details"+(open?" open":"")+"><summary>"+esc(t)+"</summary>"+h+"</details>":"";
-function renderProg(){
-  const g=PRG&&PRG[P];if(!g){$("progBody").innerHTML='<div class="empty">ยังไม่มีข้อมูลภาพรวมหลักสูตร</div>';return;}
-  const I=g.info;
-  // PLO เป็นข้อหลักและข้อย่อย
-  const plo=[];g.plos.forEach(x=>{const m=x.match(/^PLO-(\d+):\s*(.*)$/);if(m){plo.push({c:"PLO-"+m[1],t:m[2],s:[]});return;}const n=x.match(/^(\d[A-Z]):\s*(.*)$/);if(n&&plo.length)plo[plo.length-1].s.push([n[1],n[2]]);else if(plo.length)plo[plo.length-1].t+=" "+x;});
-  const strip=a=>a.map(x=>x.replace(/^\d+(\.\d+)*\s*/,""));
-  let h='<div class="pgrid">'+
-   '<div class="pcard"><h4>ชื่อปริญญา</h4>'+I.degree.map(x=>"<p>"+esc(x)+"</p>").join("")+"</div>"+
-   '<div class="pcard"><h4>จำนวนหน่วยกิตตลอดหลักสูตร</h4>'+UL(I.credits)+"</div>"+
-   '<div class="pcard"><h4>รูปแบบหลักสูตร</h4><p>หลักสูตรคุณวุฒิระดับที่ '+esc(I.level)+"</p>"+I.language.map(x=>"<p>"+esc(x)+"</p>").join("")+I.admit.map(x=>"<p>"+esc(x)+"</p>").join("")+"</div>"+
-   '<div class="pcard"><h4>สถานภาพและปฏิทิน</h4>'+strip(I.status).filter(x=>/เริ่มใช้/.test(x)).map(x=>"<p>"+esc(x)+"</p>").join("")+I.schedule.map(x=>"<p>"+esc(x)+"</p>").join("")+"</div></div>";
-  h+='<div class="blk2"><h3>ปรัชญาและวัตถุประสงค์ (เกณฑ์ 1)</h3>'+g.philosophy.map(x=>"<p>"+esc(x)+"</p>").join("")+"<p><b>วัตถุประสงค์</b></p>"+g.objectives.map(x=>"<p>"+esc(x)+"</p>").join("")+
-     DET("ความสำคัญและการวิเคราะห์สภาพแวดล้อม (SWOT)",g.importance.map(x=>"<p>"+esc(x)+"</p>").join("")+GT(g.swot,0,{boldRows:[0,2],left:true}))+"</div>";
-  h+='<div class="blk2"><h3>ผลลัพธ์การเรียนรู้ที่คาดหวังของหลักสูตร (PLO) (เกณฑ์ 1)</h3>'+plo.map(p=>'<div class="plo"><b>'+esc(p.c)+"</b> "+esc(p.t)+(p.s.length?"<ul>"+p.s.map(s=>"<li><b>"+esc(s[0])+"</b> "+esc(s[1])+"</li>").join("")+"</ul>":"")+"</div>").join("")+
-     DET("ความสัมพันธ์ระหว่างวัตถุประสงค์ของหลักสูตรกับ PLO",GT(g.objPlo,3))+DET("PLO กับหมวดวิชา",GT(g.ploGroup,1))+DET("ผลลัพธ์การเรียนรู้รายชั้นปี (YLO)",GT(g.ylo,1,{left:true}))+DET("PLO จำแนกตาม Bloom's Taxonomy",GT(g.bloom,2))+DET("ผลลัพธ์การเรียนรู้ตามกรอบมาตรฐานคุณวุฒิ (TQF)",UL(g.tqf))+"</div>";
-  const ser=[...new Set(g.mapping.map(m=>m.series))];
-  h+='<div class="blk2"><h3>โครงสร้างหลักสูตรและรายวิชา (เกณฑ์ 2)</h3>'+GT(g.structure,3)+
-     DET("รายวิชาในหลักสูตร",g.courses.map(c=>"<p><b>"+esc(c.group)+"</b></p>"+GT(c.rows,0,{left:true})).join(""))+
-     ser.map(sr=>DET("แผนที่การกระจายความรับผิดชอบ (Curriculum Mapping) "+sr,g.mapping.filter(m=>m.series===sr).map((m,i,a)=>(i===0||a[i-1].plan!==m.plan?"<p><b>"+esc(m.plan)+"</b></p>":"")+GT(m.rows,/PLO/.test(sr)?3:2)).join(""))).join("")+"</div>";
-  h+='<div class="two"><div class="blk2"><h3>ผู้เรียน (เกณฑ์ 6)</h3>'+DET("คุณสมบัติผู้เข้าศึกษา",g.entry.map(x=>"<p>"+esc(x)+"</p>").join(""),false)+"<p><b>ปัญหาของนิสิตแรกเข้า</b></p>"+UL(strip(g.problems))+"<p><b>กลยุทธ์แก้ไข</b></p>"+UL(strip(g.strategies))+"</div>"+
-     '<div class="blk2"><h3>ความต้องการของผู้มีส่วนได้ส่วนเสียและอาชีพ (เกณฑ์ 1)</h3><p><b>อาชีพที่ประกอบได้หลังสำเร็จการศึกษา</b></p>'+UL(strip(g.careers))+DET("ความต้องการของตลาดแรงงานและสังคม",GT(g.market,1,{left:true}))+"</div></div>";
-  h+='<div class="blk2"><h3>การปรับปรุงหลักสูตร พ.ศ. 2567 (เกณฑ์ 1–2)</h3>'+GT(g.improve,1,{left:true})+"</div>";
-  h+='<div class="blk2"><h3>อาจารย์ผู้รับผิดชอบหลักสูตร (เกณฑ์ 5)</h3>'+GT([["ชื่อ-สกุล","ตำแหน่งทางวิชาการ","คุณวุฒิ (สาขาวิชา)","สถาบัน","ปีที่สำเร็จ"]].concat(g.faculty.flatMap(f=>f.deg.map((d,i)=>[i?"":f.name.replace(/\n/g," "),i?"":f.title,d[0],d[1],d[2]]))),1,{left:true})+"</div>";
-  $("progBody").innerHTML=h;
+const DET=(t,h)=>h?"<details><summary>"+esc(t)+"</summary>"+h+"</details>":"";
+const strip=a=>a.map(x=>x.replace(/^\d+(\.\d+)*\s*/,""));
+const crNum=c=>{const m=String(c.credits).match(/(\d+)\s*หน่วยกิต/);return m?+m[1]:0;};
+const EMPTY=t=>'<div class="empty">'+t+"</div>";
+
+function plos(g){const o=[];g.plos.forEach(x=>{const m=x.match(/^PLO-(\d+):\s*(.*)$/);if(m){o.push({n:+m[1],c:"PLO-"+m[1],t:m[2],s:[]});return;}const s=x.match(/^(\d[A-Z]):\s*(.*)$/);if(s&&o.length)o[o.length-1].s.push([s[1],s[2]]);else if(o.length)o[o.length-1].t+=" "+x;});return o;}
+function progCourses(g){const m=new Map();g.mapping.filter(x=>/TQF/.test(x.series)).forEach(t=>t.rows.forEach(r=>{const a=cT(r[0]).match(/^(\d{4})\s?(\d{3})\s*(.*)/s);if(!a)return;const code=a[1]+a[2],name=a[3].split("\n")[0].trim(),pl=[...new Set((cT(r[r.length-1]).match(/PLO-?\s?(\d)/g)||[]).map(x=>+x.replace(/\D/g,"")))];if(!m.has(code))m.set(code,{code,name,pl});}));return[...m.values()];}
+
+// ---------- แผนภาพ ปรัชญา → วัตถุประสงค์ → PLO → รายวิชา → CLO ----------
+function diagram(g){
+  const P6=plos(g),cs=progCourses(g),term=CRS.filter(c=>c.level===P);
+  const N=[],E=[];const add=(id,col,html)=>N.push({id,col,html});
+  add("U",0,"<b>ปรัชญาการศึกษามหาวิทยาลัยมหาสารคาม</b><small>"+esc(UNIV)+"</small>");
+  g.philosophy.forEach((x,i)=>add("PH",0,"<b>ปรัชญาหลักสูตร</b><small>"+esc(x)+"</small>"));E.push(["U","PH"]);
+  const obj=g.objectives.filter(x=>/^\d\)/.test(x));obj.forEach((x,i)=>{add("O"+i,1,"<b>วัตถุประสงค์ "+(i+1)+"</b><small>"+esc(x.replace(/^\d\)\s*/,""))+"</small>");E.push(["PH","O"+i]);});
+  // วัตถุประสงค์ → PLO จากตาราง 1.4 (คอลัมน์ข้อย่อย)
+  const sub=(g.objPlo[2]||[]).map(cT);let last=0;const colPlo=sub.map((s,j)=>{if(j===0)return 0;const m=s.match(/^(\d)/);if(m){last=+m[1];return last;}return 0;});
+  // คอลัมน์ว่างท้ายตาราง = PLO4–6 ตามลำดับ
+  let k=4;for(let j=sub.length-1;j>0;j--)if(!sub[j]){}
+  const tail=sub.map((s,j)=>j>0&&!s?j:-1).filter(j=>j>0);tail.forEach((j,i)=>colPlo[j]=4+i);
+  (g.objPlo.slice(3)).forEach((r,i)=>{const set=new Set();r.forEach((c,j)=>{if(j&&/✓/.test(cT(c))&&colPlo[j])set.add(colPlo[j]);});set.forEach(n=>E.push(["O"+i,"P"+n]));});
+  P6.forEach(p=>add("P"+p.n,2,"<b>"+esc(p.c)+"</b> "+esc(p.t)+(p.s.length?"<small>ข้อย่อย "+p.s.map(s=>s[0]).join(" ")+"</small>":"")));
+  cs.forEach(c=>{const t=term.find(x=>x.code===c.code);add("C"+c.code,3,"<b>"+esc(c.code.slice(0,4)+" "+c.code.slice(4))+"</b> "+esc(c.name)+(t?"<small>เปิดภาคนี้ · มี มคอ.3</small>":""));c.pl.forEach(n=>E.push(["P"+n,"C"+c.code]));});
+  term.forEach(c=>{const id="L"+c.code;add(id,4,"<b>"+esc(c.codeFmt)+" "+esc(c.nameTh)+"</b>"+c.clo.map(x=>{const k=x.clo.slice(0,4);const pl=((c.ploClo.find(y=>y.clo.startsWith(k))||{}).plo||"").match(/PLO-?\d[A-Z]?/);return "<small><b>"+esc(k)+"</b> → "+esc(pl?pl[0]:"")+" · วัดด้วย "+esc(x.assess.replace(/\n/g," / ").slice(0,48))+"</small>";}).join(""));E.push(["C"+c.code,id]);});
+  const heads=["ปรัชญา","วัตถุประสงค์ของหลักสูตร","ผลลัพธ์การเรียนรู้ (PLO)","รายวิชา (curriculum mapping)","CLO และการวัด (มคอ.3 ภาค "+(D.term.label||"")+")"];
+  let h='<p class="dghint">กดกล่องใดก็ได้ เพื่อดูเส้นทางความเชื่อมโยงทั้งสายจากปรัชญาถึง CLO และวิธีวัด กดซ้ำเพื่อยกเลิก</p><div class="dg" id="dg"><svg id="dgs"></svg><div class="cols">';
+  for(let c=0;c<5;c++)h+='<div><div class="colh">'+heads[c]+"</div>"+N.filter(n=>n.col===c).map(n=>'<button class="nd" data-id="'+n.id+'">'+n.html+"</button>").join("")+(c===4&&!term.length?'<div class="empty">ยังไม่มี มคอ.3 ของภาคนี้</div>':"")+"</div>";
+  h+="</div></div>";
+  return {h,N,E};
 }
+function wireDiagram(G){
+  const dg=$("dg");if(!dg)return;const svg=$("dgs");
+  const ad={};G.E.forEach(([a,b])=>{(ad[a]=ad[a]||{d:[],u:[]}).d.push(b);(ad[b]=ad[b]||{d:[],u:[]}).u.push(a);});
+  function draw(){svg.innerHTML="";if(getComputedStyle(svg).display==="none")return;const R=dg.getBoundingClientRect();
+    G.E.forEach(([a,b])=>{const A=dg.querySelector('[data-id="'+a+'"]'),B=dg.querySelector('[data-id="'+b+'"]');if(!A||!B)return;const ra=A.getBoundingClientRect(),rb=B.getBoundingClientRect();
+      const x1=ra.right-R.left,y1=ra.top+ra.height/2-R.top,x2=rb.left-R.left,y2=rb.top+rb.height/2-R.top;
+      if(x2<=x1){return;}const p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d","M"+x1+","+y1+" C"+(x1+(x2-x1)/2)+","+y1+" "+(x1+(x2-x1)/2)+","+y2+" "+x2+","+y2);p.dataset.a=a;p.dataset.b=b;svg.appendChild(p);});
+    mark();}
+  let sel=null;
+  function chain(id){const s=new Set([id]);const go=(x,dir)=>((ad[x]||{})[dir]||[]).forEach(y=>{if(!s.has(y)){s.add(y);go(y,dir);}});go(id,"d");go(id,"u");return s;}
+  function mark(){const s=sel?chain(sel):null;dg.classList.toggle("sel",!!s);dg.querySelectorAll(".nd").forEach(n=>n.classList.toggle("hi",!!s&&s.has(n.dataset.id)));svg.querySelectorAll("path").forEach(p=>p.classList.toggle("hi",!!s&&s.has(p.dataset.a)&&s.has(p.dataset.b)));}
+  dg.querySelectorAll(".nd").forEach(b=>b.onclick=()=>{sel=sel===b.dataset.id?null:b.dataset.id;mark();});
+  REDRAW=()=>setTimeout(draw,40);draw();addEventListener("resize",draw);document.querySelectorAll("details").forEach(d=>d.addEventListener("toggle",draw));
+}
+
+// ---------- บล็อกรายเกณฑ์ ----------
+const CRIT=[[1,"ผลการเรียนรู้ที่คาดหวัง","Expected Learning Outcomes"],[2,"โครงสร้างและเนื้อหาของหลักสูตร","Programme Structure and Content"],[3,"แนวทางการเรียนการสอน","Teaching and Learning Approach"],[4,"การประเมินผู้เรียน","Student Assessment"],[5,"บุคลากรสายวิชาการ","Academic Staff"],[6,"การบริการสนับสนุนผู้เรียน","Student Support Services"],[7,"สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน","Facilities and Infrastructure"],[8,"ผลผลิตและผลลัพธ์","Output and Outcomes"]];
+function block(n,ev,status,body){const c=CRIT[n-1];return'<section class="cb" id="k'+n+'" style="--cc:var(--c'+n+')"><header><div class="no">เกณฑ์ที่ '+n+" · "+c[2]+"</div><h2>"+c[1]+'</h2><div class="ev"><span class="chip '+status[0]+'">'+status[1]+"</span>"+ev.map(e=>'<span class="chip">'+esc(e)+"</span>").join("")+'</div></header><div class="bd">'+body+"</div></section>";}
+
+function semNo(k){const m=k.match(/^([12])\/(25\d\d)$/),c=D.term.label.match(/^([12])\/(25\d\d)$/);if(!m||!c)return 0;return(+c[2]-+m[2])*2+(+c[1]-+m[1])+1;}
+function semTxt(k){const n=semNo(k),pl=D.programs[P].plan;if(!n)return"–";if(pl&&n>pl.slots.length)return"ภาคที่ "+n+" (เกินระยะเวลาตามแผน "+pl.slots.length+" ภาค)";return"ภาคที่ "+n+(pl?" · "+pl.slots[n-1][1]+" ของแผน":"");}
+function wireCohort(){const st=STU[P],box=$("coh");if(!box||!st||!st.cohorts)return;const ks=Object.keys(st.cohorts);
+  const pick=k=>{box.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.k===k));const n=semNo(k),pl=D.programs[P].plan,v=st.cohorts[k];
+    $("planT").querySelectorAll("tr[data-i]").forEach(r=>r.classList.toggle("now",+r.dataset.i===n));
+    $("cohTxt").innerHTML="<b>นิสิตที่เข้าศึกษาภาค "+esc(k)+"</b> ("+sup(v.n)+" คน) ภาค "+esc(D.term.label)+" เป็น"+esc(semTxt(k))+(n>pl.slots.length?" กำลังทำวิทยานิพนธ์หรือการค้นคว้าอิสระต่อ":n?" รายวิชาตามแผนอยู่ในแถวที่ไฮไลต์":"")+(k.startsWith("2/")?"<br><span class='sub'>รุ่นที่เข้าภาคปลาย เริ่มแผนภาคที่ 1 ในภาคปลาย ลำดับรายวิชาจึงเลื่อนหนึ่งภาคจากรุ่นที่เข้าภาคต้น</span>":"");};
+  box.innerHTML=ks.map(k=>'<button data-k="'+k+'">เข้า '+esc(k)+" · "+sup(st.cohorts[k].n)+" คน</button>").join("");
+  box.querySelectorAll("button").forEach(b=>b.onclick=()=>pick(b.dataset.k));
+  pick(ks.includes("1/"+D.term.label.slice(2))?"1/"+D.term.label.slice(2):ks[ks.length-1]);}
 function render(){
-  const p=D.programs[P];
-  $("tabs").innerHTML=Object.entries(D.programs).map(([k,v])=>'<button role="tab" aria-selected="'+(k===P)+'" class="'+(k===P?"on":"")+'" data-k="'+k+'">'+esc(v.short)+"</button>").join("");
-  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{P=b.dataset.k;history.replaceState(null,"","#"+P);render();});
-  $("pname").textContent=p.name;
-  const n=filled(p);
-  const nc=CRS.filter(c=>c.level===P).length;
-  $("crit").innerHTML=CRIT.map(c=>{const st=c[0]===8?(n?["ok","มีข้อมูล "+n+" ตัวชี้วัด"]:["wait","แบบเก็บข้อมูลพร้อม"]):[2,3,4].includes(c[0])&&nc?["ok","แผนการเรียน + มคอ.3 "+nc+" วิชา"]:["next","ถัดไป"];
-    const inner='<div class="no">เกณฑ์ที่ '+c[0]+'</div><div class="nm">'+c[1]+'</div><span class="chip '+st[0]+'">'+st[1]+"</span>";
-    return c[0]===8?'<a href="#c8">'+inner+"</a>":[2,3,4].includes(c[0])&&nc?'<a href="#term">'+inner+"</a>":"<div>"+inner+"</div>";}).join("");
-  const Y=D.years;
-  $("c8body").innerHTML=C8.map(s=>'<div class="sc"><h3>'+s[0]+" "+s[1]+'</h3><div class="q">'+s[2]+'</div><div class="tw"><table><thead><tr><th>ตัวชี้วัด</th>'+Y.map(y=>"<th>"+y+"</th>").join("")+"<th>เป้าหมาย</th><th>คู่เทียบ*</th></tr></thead><tbody>"+
+  const fmt=v=>v==null||v===""?'<span class="sub">–</span>':esc(v);const Y=D.years;
+
+  const g=PRG[P],p=D.programs[P],term=CRS.filter(c=>c.level===P),st=STU[P],P6=plos(g);
+  $("tabs").innerHTML=Object.entries(D.programs).map(([k,v])=>'<button class="'+(k===P?"on":"")+'" data-k="'+k+'">'+esc(v.short)+" "+esc(v.name.replace(/^หลักสูตร/,"").split(" สาขา")[0])+"</button>").join("");
+  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{P=b.dataset.k;render();});
+  $("sum").innerHTML=[[g.info.credits.length+" แผน",g.info.credits.map(x=>x.match(/\((.+?)\)|แบบ [\d.]+/)?.[0]||"").join(" · ")],[P6.length+" PLO",P6.reduce((a,x)=>a+x.s.length,0)+" ข้อย่อย"],[term.length+" วิชา","เปิดภาค "+D.term.label],[st?st.total+" คน":"–","นิสิตปัจจุบัน "+D.term.label],[g.faculty.length+" คน","อาจารย์ผู้รับผิดชอบหลักสูตร"]].map(x=>"<div><b>"+esc(x[0])+"</b><span>"+esc(x[1])+"</span></div>").join("");
+  $("nav").innerHTML='<div class="h">เลือกเกณฑ์ AUN-QA</div>'+CRIT.map(c=>'<a href="#'+P+'-k'+c[0]+'" data-k="'+c[0]+'" role="tab"><i style="background:var(--c'+c[0]+')">'+c[0]+"</i>"+c[1]+"</a>").join("")+'<button class="allbtn" id="allbtn">แสดงทุกเกณฑ์ (สำหรับพิมพ์)</button>';
+  const G=diagram(g);
+  let H="";
+  // 1
+  H+=block(1,["ปรัชญา","วัตถุประสงค์","PLO","YLO","ความต้องการผู้มีส่วนได้ส่วนเสีย"],["ok","มีข้อมูลจาก มคอ.2"],
+    "<h3>ความเชื่อมโยงจากปรัชญาถึง CLO</h3>"+G.h+
+    '<div class="two"><div><h3>ปรัชญาและวัตถุประสงค์</h3>'+g.philosophy.map(x=>"<p>"+esc(x)+"</p>").join("")+UL(g.objectives.filter(x=>/^\d\)/.test(x)).map(x=>x.replace(/^\d\)\s*/,"")))+"</div>"+
+    "<div><h3>อาชีพหลังสำเร็จการศึกษา</h3>"+UL(strip(g.careers))+"</div></div>"+
+    "<h3>ผลลัพธ์การเรียนรู้ที่คาดหวัง (PLO)</h3>"+P6.map(p=>"<p style='margin:4px 0'><b style='color:var(--c1)'>"+esc(p.c)+"</b> "+esc(p.t)+"</p>"+(p.s.length?UL(p.s.map(s=>s[0]+" "+s[1])):"")).join("")+
+    DET("ความสัมพันธ์ระหว่างวัตถุประสงค์กับ PLO",GT(g.objPlo,3))+DET("ผลลัพธ์การเรียนรู้รายชั้นปี (YLO)",GT(g.ylo,1,{left:true}))+DET("PLO จำแนกตาม Bloom's Taxonomy",GT(g.bloom,2))+DET("ความต้องการของตลาดแรงงานและสังคม",GT(g.market,1,{left:true}))+DET("ความสำคัญและ SWOT",g.importance.map(x=>"<p>"+esc(x)+"</p>").join("")+GT(g.swot,0,{bold:[0,2],left:true})));
+  // 2
+  const pl=p.plan,T=D.term,cur=pl&&pl.slots.find(s=>s[0]===T.slot);
+  const need=cur?pl.tracks.map((t,i)=>[t,(cur[2][i]||[]).filter(x=>x.code==="elective").reduce((a,x)=>a+x.cr,0)]).filter(x=>x[1]):[];
+  const cell=a=>(a||[]).map(x=>x.code==="elective"?"<b>วิชาเลือก</b> "+x.cr+" นก.":esc(x.code.slice(0,4)+" "+x.code.slice(4)+" "+x.name)+" "+x.cr+" นก.").join("<br>");
+  const plos2=[...new Set(term.flatMap(c=>c.plos))].sort();
+  H+=block(2,["โครงสร้างหลักสูตร","แผนการศึกษา","curriculum mapping","รายวิชาภาคนี้"],["ok","มีข้อมูลจาก มคอ.2 และ มคอ.3"],
+    "<h3>โครงสร้างหลักสูตร</h3>"+GT(g.structure,3)+
+    "<h3>แผนการศึกษาและรายวิชาภาค "+esc(T.label)+'</h3><div class="why"><b>ทำไมภาคนี้จึงเปิดรายวิชาเหล่านี้</b><br>'+esc(T.why)+(need.length?" ซึ่งกำหนดให้เรียนวิชาเลือก "+need.map(x=>esc(x[0])+" "+x[1]+" หน่วยกิต").join(" และ ")+" หลักสูตรจึงเปิดวิชาเลือก "+term.length+" วิชา รวม "+term.reduce((a,c)=>a+crNum(c),0)+" หน่วยกิต":"")+"</div>"+
+    (pl?'<h3>นิสิตแต่ละรุ่นอยู่ช่วงใดของแผนการศึกษา</h3><p class="sub">หลักสูตรรับนิสิตทั้งภาคต้นและภาคปลาย เลือกภาคที่เข้าศึกษา เพื่อดูว่าในภาค '+esc(T.label)+' รุ่นนั้นเรียนอยู่ภาคที่เท่าใดของแผน</p><div class="coh" id="coh"></div><div id="cohTxt" class="why"></div><div class="tw" style="margin-top:8px"><table class="g" id="planT"><tr><th class="l">ภาคที่ของแผน</th>'+pl.tracks.map(t=>"<th>"+esc(t)+"</th>").join("")+"</tr>"+pl.slots.map((s,i)=>'<tr data-i="'+(i+1)+'"><td class="l"><b>ภาคที่ '+(i+1)+"</b> · "+esc(s[1])+"</td>"+s[2].map(a=>'<td class="l">'+cell(a)+"</td>").join("")+"</tr>").join("")+"</table></div>":"")+
+    "<h3>รายวิชาที่เปิดภาคนี้กับ PLO</h3>"+TB(["รายวิชา","หน่วยกิต"].concat(plos2),term.map(c=>[c.codeFmt+" "+c.nameTh,crNum(c)].concat(plos2.map(x=>c.plos.includes(x)?"✓":""))))+
+    DET("รายวิชาทั้งหมดในหลักสูตร",g.courses.map(c=>"<p><b>"+esc(c.group)+"</b></p>"+GT(c.rows,0,{left:true})).join(""))+
+    [...new Set(g.mapping.map(m=>m.series))].map(sr=>DET("Curriculum mapping "+sr,g.mapping.filter(m=>m.series===sr).map((m,i,a)=>(i===0||a[i-1].plan!==m.plan?"<p><b>"+esc(m.plan)+"</b></p>":"")+GT(m.rows,/PLO/.test(sr)?3:2)).join(""))).join("")+
+    DET("การปรับปรุงหลักสูตร พ.ศ. 2567",GT(g.improve,1,{left:true})));
+  // 3
+  H+=block(3,["วิธีการสอนราย CLO","ชั่วโมงเรียน","แผนการสอนรายสัปดาห์"],term.length?["ok","มีข้อมูลจาก มคอ.3 "+term.length+" วิชา"]:["wait","รอข้อมูล"],
+    term.length?"<h3>วิธีการสอนที่ออกแบบให้ตรงกับ CLO</h3>"+TB(["รายวิชา","CLO","วิธีการสอน"],term.flatMap(c=>c.clo.map((x,i)=>[i?"":c.codeFmt+" "+c.nameTh,x.clo,x.teach])))+
+    term.map(c=>DET(c.codeFmt+" "+c.nameTh+" · แผนการสอนรายสัปดาห์",TB(c.weeksHead,c.weeks)+(c.hours.length?TB(c.hours[0],c.hours.slice(1)):""))).join("")+
+    '<p class="sub" style="margin-top:8px">นิสิตไทยและนิสิตจีนเรียนวิชาเดียวกัน ใช้ มคอ.3 เดียวกัน แยกกลุ่มเรียน · ผู้สอนแต่ละกลุ่มเป็นไปตามที่คณะมอบหมาย</p>':EMPTY("ยังไม่มี มคอ.3 ของภาคนี้"));
+  // 4
+  const mix=c=>{let ex=0,wk=0;(c.matrix||[]).slice(1).forEach(r=>{if(/^รวม/.test(r[0]))return;const v=+r[r.length-1]||0;/สอบ/.test(r[0])?ex+=v:wk+=v;});return[ex,wk];};
+  H+=block(4,["แผนการประเมิน","สัดส่วนคะแนนตาม CLO","รูบริก","การทวนสอบ"],term.length?["ok","มีข้อมูลจาก มคอ.3 "+term.length+" วิชา"]:["wait","รอข้อมูล"],
+    term.length?"<h3>สัดส่วนการวัด: สอบกับงานที่มอบหมาย</h3>"+'<div class="tw"><table><thead><tr><th>รายวิชา</th><th>จำนวนวิธีวัด</th><th>รูบริก</th><th>สอบ / งาน</th></tr></thead><tbody>'+term.map(c=>{const[ex,wk]=mix(c),t=ex+wk||1;return"<tr><td>"+esc(c.codeFmt+" "+c.nameTh)+'</td><td class="n">'+c.assess.filter(r=>!/^รวม/.test(r[0])).length+'</td><td class="n">'+c.rubrics.length+'</td><td><div class="bar2"><i style="width:'+ex/t*100+'%;background:var(--c4)"></i><i style="width:'+wk/t*100+'%;background:var(--c2)"></i></div><span class="sub">สอบ '+ex+"% · งาน "+wk+"%</span></td></tr>";}).join("")+"</tbody></table></div>"+
+    term.map(c=>DET(c.codeFmt+" "+c.nameTh+" · แผนการประเมิน สัดส่วนตาม CLO และรูบริก",TB(c.assessHead,c.assess)+(c.matrix.length?GT(c.matrix,1):"")+c.rubrics.map(r=>"<p><b>"+esc(r.title)+"</b></p>"+TB(r.head,r.rows)).join("")+(c.grade.length?"<p><b>เกณฑ์การให้ระดับคะแนน</b></p>"+TB(["ระดับคะแนน","ช่วงคะแนน"],c.grade):"")+(c.verify.length?"<p><b>การทวนสอบ</b></p>"+c.verify.map(x=>"<p>"+esc(x)+"</p>").join(""):""))).join(""):EMPTY("ยังไม่มี มคอ.3 ของภาคนี้"));
+  // 5
+  const AL=STU&&STU.advisorLoad;
+  H+=block(5,["อาจารย์ผู้รับผิดชอบหลักสูตร","คุณวุฒิ","ภาระที่ปรึกษา"],["wait","มีข้อมูลบางส่วน"],
+    "<h3>อาจารย์ผู้รับผิดชอบหลักสูตร</h3>"+GT([["ชื่อ-สกุล","ตำแหน่งทางวิชาการ","คุณวุฒิ (สาขาวิชา)","สถาบัน","ปีที่สำเร็จ"]].concat(g.faculty.flatMap(f=>f.deg.map((d,i)=>[i?"":f.name.replace(/\n/g," "),i?"":f.title,d[0],d[1],d[2]]))),1,{left:true})+
+    (AL?'<h3>ภาระอาจารย์ที่ปรึกษาวิทยานิพนธ์หลัก (ทั้งสองหลักสูตร ภาค '+esc(D.term.label)+')</h3><div class="kpis"><div><b>'+AL.advisors+'</b><span>อาจารย์ที่ปรึกษาหลัก</span></div><div><b>'+AL.avg+'</b><span>นิสิตเฉลี่ยต่อคน</span></div><div><b>'+AL.max+"</b><span>สูงสุดต่อคน</span></div></div>":"")+
+    "<h3>รอข้อมูลเพิ่ม</h3>"+UL(["รายชื่ออาจารย์ประจำหลักสูตรชุดปัจจุบัน ตำแหน่งทางวิชาการ และสัดส่วนคุณวุฒิปริญญาเอก","ผลงานวิจัยต่ออาจารย์ (ดึงจาก Scopus หรือ OpenAlex ได้เมื่อมี ORCID)","การพัฒนาอาจารย์รายปี (อบรม สัมมนา ทุนวิจัย)"]));
+  // 6
+  H+=block(6,["ปัญหาและกลยุทธ์ผู้เรียนแรกเข้า","ความก้าวหน้าของนิสิต","ระบบอาจารย์ที่ปรึกษา"],st?["ok","มีข้อมูล"]:["wait","รอข้อมูล"],
+    (st?"<h3>นิสิตปัจจุบัน ภาค "+esc(D.term.label)+'</h3><div class="kpis" style="--cc:var(--c6)"><div><b>'+st.total+'</b><span>นิสิตทั้งหมด</span></div>'+
+      Object.entries(st.year).sort().map(([y,n])=>"<div><b>"+sup(n)+"</b><span>เข้าศึกษาปี "+esc(y)+"</span></div>").join("")+
+      Object.entries(st.system).map(([y,n])=>"<div><b>"+sup(n)+"</b><span>"+esc(y)+"</span></div>").join("")+"</div>"+
+      (st.cohorts?"<h3>นิสิตจำแนกตามภาคที่เข้าศึกษา</h3>"+TB(["ภาคที่เข้าศึกษา","จำนวน","สถานภาพ","ขณะนี้เรียนอยู่"],Object.entries(st.cohorts).map(([k,v])=>[k,String(sup(v.n)).replace("&lt;","<"),v.leave?(v.n<5?"มีผู้ลาพักการเรียน":"ปกติ "+v.normal+" · ลาพัก "+v.leave):"ปกติทั้งหมด",semTxt(k)])):"")+
+      "<h3>ความก้าวหน้าตามแผน</h3>"+TB(["รายการ","จำนวน","ร้อยละ"],[["มีอาจารย์ที่ปรึกษาหลักแล้ว",st.advisor],...(st.qe!=null?[["ผ่านการสอบวัดคุณสมบัติ (QE/CE)",st.qe]]:[]),["สอบเค้าโครง (3 บท) แล้วหรือมีกำหนด",st.ch3],["กำหนดสอบ 5 บท ภาค "+D.term.label+" (คาดว่าจะสำเร็จ)",st.ch5now],["ผ่านเกณฑ์ภาษาต่างประเทศ",st.lang],["ผ่านเกณฑ์ IT",st.it]].map(r=>[r[0],String(sup(r[1])).replace("&lt;","<"),r[1]>=5?Math.round(r[1]/st.total*100)+"%":"–"]))+
+      '<p class="sub">นับรวมจากทะเบียนนิสิตของหลักสูตร ไม่ระบุตัวบุคคล · กลุ่มที่น้อยกว่า 5 คนแสดงเป็น n&lt;5</p>':EMPTY("รอข้อมูลนิสิตปัจจุบัน"))+
+    '<div class="two"><div><h3>ปัญหาของนิสิตแรกเข้า</h3>'+UL(strip(g.problems))+"</div><div><h3>กลยุทธ์แก้ไข</h3>"+UL(strip(g.strategies))+"</div></div>"+
+    DET("ระบบการให้คำปรึกษาและช่วยเหลือนิสิต (มคอ.2)",GT(g.advising,1,{left:true}))+DET("คุณสมบัติผู้เข้าศึกษาและการคัดเลือก",g.entry.map(x=>"<p>"+esc(x)+"</p>").join(""))+
+    "<h3>รอข้อมูลเพิ่ม</h3>"+UL(["โครงการที่จัดจริงตามกลยุทธ์ (อ่านบทความวิจัย สืบค้นฐานข้อมูล ภาษาอังกฤษ) พร้อมจำนวนผู้เข้าร่วม","การสนับสนุนนิสิตต่างชาติ","ความพึงพอใจต่อการบริการ"]));
+  // 7
+  H+=block(7,["แผนทรัพยากรการเรียนการสอน"],["wait","มีข้อมูลบางส่วน"],
+    "<h3>แผนพัฒนาทรัพยากรประกอบการเรียนการสอน (มคอ.2)</h3>"+GT(g.resources,1,{left:true})+
+    "<h3>รอข้อมูลเพิ่ม</h3>"+UL(["ห้องเรียน ห้องปฏิบัติการ และพื้นที่การเรียนรู้ด้วยตนเองที่ใช้จริง","ซอฟต์แวร์วิเคราะห์ข้อมูลและฐานข้อมูลวิจัยที่นิสิตใช้ได้","ผลความพึงพอใจต่อสิ่งสนับสนุนการเรียนรู้"]));
+  // 8
+  H+=block(8,["8.1 สำเร็จ/พ้นสภาพ/ระยะเวลา","8.2 การได้งาน","8.3 ผลงานวิจัย","8.4 การบรรลุ PLO","8.5 ความพึงพอใจ"],Object.keys(p.values||{}).length?["ok","มีข้อมูล "+Object.keys(p.values).length+" ตัวชี้วัด"]:["wait","แบบเก็บข้อมูลพร้อม"],
+    "<p class='sub'>แบบเก็บข้อมูลภาค "+esc(D.term.label)+" เพื่อนำเสนอเดือนมิถุนายน 2570 · ย้อนหลัง 5 ปีการศึกษา พร้อมเป้าหมายและคู่เทียบ · ตัวเลขสรุประดับหลักสูตร กลุ่มที่มีน้อยกว่า 5 คนแสดงเป็น n&lt;5</p>"+
+    (st?'<div class="kpis" style="--cc:var(--c8);margin-bottom:10px"><div><b>'+sup(st.ch5now)+"</b><span>กำหนดสอบ 5 บท ภาค "+esc(D.term.label)+" (คาดว่าจะสำเร็จ)</span></div><div><b>"+st.total+"</b><span>นิสิตปัจจุบัน</span></div></div>":"")+
+    '<div id="c8body"></div>');
+  $("evalbox").innerHTML=D.evaluatorLink?'<a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="sub">(ต้องได้รับสิทธิ์เข้าถึง)</span>':'<div class="empty">หลักฐานที่ระบุตัวบุคคลจัดเก็บในระบบของมหาวิทยาลัย หลักสูตรจะแจ้งช่องทางเข้าถึงแก่ผู้ประเมินโดยตรง</div>';
+  $("blocks").innerHTML=H;
+    const n=Object.keys(p.values||{}).length;
+  if($("c8body"))$("c8body").innerHTML=C8.map(s=>'<div class="sc"><h3>'+s[0]+" "+s[1]+'</h3><div class="q">'+s[2]+'</div><div class="tw"><table><thead><tr><th>ตัวชี้วัด</th>'+Y.map(y=>"<th>"+y+"</th>").join("")+"<th>เป้าหมาย</th><th>คู่เทียบ*</th></tr></thead><tbody>"+
     s[3].map(i=>{const v=(p.values||{})[i[0]]||{},yv=v.y||{};
       return '<tr><td class="ind"><b>'+i[1]+"</b><span>"+esc(i[2])+(i[3]?" · หน่วย "+esc(i[3]):"")+(v.src?" · ที่มา "+esc(v.src):"")+"</span></td>"+Y.map(y=>'<td class="n">'+fmt(yv[y])+"</td>").join("")+'<td class="n">'+fmt(v.target)+'</td><td class="n">'+fmt(v.bench)+(v.benchSrc?'<br><span class="na">'+esc(v.benchSrc)+"</span>":"")+"</td></tr>";}).join("")+"</tbody></table></div></div>").join("")+
     '<p class="srcnote">* คู่เทียบแสดงเป็นรหัส (เช่น มหาวิทยาลัย xxx) ระบุชื่อในรายงานการประเมินตนเอง</p>'+(n?"":'<div class="empty">ยังไม่มีตัวเลข อยู่ระหว่างรวบรวมจากระบบทะเบียน แบบสำรวจ และรายงานของหลักสูตร</div>');
-  renderTerm(p);renderProg();
-  $("evalbox").innerHTML=D.evaluatorLink?'<p style="margin-top:12px"><a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="na">(ต้องได้รับสิทธิ์เข้าถึง)</span></p>':'<div class="empty">หลักฐานที่ระบุตัวบุคคลจัดเก็บในระบบของมหาวิทยาลัย หลักสูตรจะแจ้งช่องทางเข้าถึงแก่ผู้ประเมินโดยตรง</div>';
+
+  document.querySelectorAll(".cb").forEach(s=>{const n=+s.id.slice(1);s.insertAdjacentHTML("beforeend",'<div class="bd" style="padding-top:0"><div class="pager">'+(n>1?'<button data-go="'+(n-1)+'">← เกณฑ์ที่ '+(n-1)+" "+CRIT[n-2][1]+"</button>":"<span></span>")+(n<8?'<button data-go="'+(n+1)+'">เกณฑ์ที่ '+(n+1)+" "+CRIT[n][1]+" →</button>":"")+"</div></div>");});
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(+b.dataset.go,true));
+  $("nav").querySelectorAll("a").forEach(a=>a.onclick=e=>{e.preventDefault();show(+a.dataset.k,true);});
+  $("allbtn").onclick=()=>{document.body.classList.toggle("all");$("allbtn").textContent=document.body.classList.contains("all")?"แสดงทีละเกณฑ์":"แสดงทุกเกณฑ์ (สำหรับพิมพ์)";REDRAW();};
+  wireDiagram(G);wireCohort();
+  const m=location.hash.match(/k(\d)/);show(m?+m[1]:CUR);
 }
-Promise.all([fetch("bizinno_data.json",{cache:"no-cache"}).then(r=>r.json()),null]).then(([d])=>fetch(d.coursesFile,{cache:"no-cache"}).then(r=>r.ok?r.json():{courses:[]}).catch(()=>({courses:[]})).then(c=>fetch("bizinno_programs.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null).then(pg=>{PRG=pg;D=d;CRS=c.courses||[];if(location.hash==="#phd")P="phd";$("draft").hidden=d.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+d.updated;render();}))).catch(()=>{$("c8body").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';});
+let CUR=1,REDRAW=()=>{};
+function show(n,top){CUR=n;document.querySelectorAll(".cb").forEach(s=>s.classList.toggle("on",s.id==="k"+n));$("nav").querySelectorAll("a").forEach(a=>a.classList.toggle("on",+a.dataset.k===n));const on=$("nav").querySelector("a.on");if(on&&on.scrollIntoView)on.scrollIntoView({block:"nearest",inline:"center"});history.replaceState(null,"","#"+P+"-k"+n);if(top)document.querySelector(".lay").scrollIntoView({behavior:"smooth"});REDRAW();}
+$("draft").hidden=D.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+D.updated;render();
 })();
 </script>
 <script data-goatcounter="https://waruwut.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
