@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUN-QA หลักสูตร BizInno · อ.ดร.วราวุฒิ นาคบุญนำ</title>
+<meta name="description" content="ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร บธ.ม. และ ปร.ด. สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล มหาวิทยาลัยมหาสารคาม">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1F2A37;--muted:#5C6B7A;--line:#DDE3EA;--bg:#F6F8FA;--card:#FFFFFF;--accent:#1F4E8C;--soft:#EAF1FA;--ok:#1F7A5A;--okbg:#E6F5EE;--wait:#8A5A00;--waitbg:#FBF3DF;--next:#5C6B7A;--nextbg:#EEF1F5}
+@media (prefers-color-scheme: dark){:root{--ink:#E6EBF0;--muted:#9AA8B6;--line:#2C3642;--bg:#12171D;--card:#1A2129;--accent:#7FB0F0;--soft:#1E2A38;--ok:#7FD0AE;--okbg:#17302A;--wait:#E8C27A;--waitbg:#33291A;--next:#9AA8B6;--nextbg:#222A33}}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Sarabun','Segoe UI',Tahoma,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+a{color:var(--accent)}
+main{max-width:1040px;margin:0 auto;padding:32px 16px 24px}
+.crumb{font-size:14px;margin-bottom:10px}
+h1{font-size:28px;margin:0 0 4px;line-height:1.3}
+.lead{color:var(--muted);margin:0 0 16px}
+.draft{background:var(--waitbg);color:var(--wait);border-radius:10px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 18px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:22px;padding:8px 16px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.pname{font-size:15px;color:var(--muted);margin:-8px 0 18px}
+h2{font-size:21px;margin:30px 0 4px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 12px}
+.crit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.crit>a,.crit>div{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:inherit}
+.crit>a:hover{border-color:var(--accent)}
+.crit .no{font-size:12.5px;font-weight:800;color:var(--accent)}
+.crit .nm{font-weight:700;line-height:1.35;margin:2px 0 6px;font-size:15px}
+.chip{display:inline-block;border-radius:20px;padding:1px 9px;font-size:12px;font-weight:700}
+.chip.ok{background:var(--okbg);color:var(--ok)}.chip.wait{background:var(--waitbg);color:var(--wait)}.chip.next{background:var(--nextbg);color:var(--next)}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.sc h3{font-size:16.5px;margin:0 0 2px;color:var(--accent)}
+.sc .q{font-size:13.5px;color:var(--muted);margin-bottom:8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:700;padding:6px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.ind b{display:block;font-weight:700}td.ind span{display:block;font-size:12.5px;color:var(--muted)}
+.na{color:var(--muted)}
+.dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.dl a{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:inherit}
+.dl a:hover{border-color:var(--accent)}.dl .code{font-weight:800;color:var(--accent);white-space:nowrap}.dl small{display:block;color:var(--muted)}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:14px;color:var(--muted);font-size:14.5px}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.links a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:inherit}
+.links a:hover{border-color:var(--accent)}.links b{color:var(--accent)}.links span{display:block;font-size:13.5px;color:var(--muted)}
+.priv{font-size:13.5px;color:var(--muted);margin-top:8px}
+footer{max-width:1040px;margin:24px auto 0;padding:16px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+@media(max-width:760px){.crit{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:23px}}
+@media print{.tabs,footer .gc-views{display:none}.sc,.crit>a,.crit>div{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<div class="crumb"><a href="index.html">← AUN-QA และ OBE</a></div>
+<h1>ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร</h1>
+<p class="lead">สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · ตามเกณฑ์ AUN-QA ระดับหลักสูตร ฉบับที่ 4.0 · ใช้ประกอบรายงานการประเมินตนเอง (SAR) ไม่แทน SAR</p>
+<div class="draft" id="draft" hidden>ฉบับร่าง: ตัวเลขและเอกสารในหน้านี้ยังไม่ผ่านความเห็นชอบของคณะกรรมการบริหารหลักสูตร</div>
+
+<div class="tabs" role="tablist" id="tabs"></div>
+<p class="pname" id="pname"></p>
+
+<h2>ภาพรวมรายเกณฑ์</h2>
+<p class="sub">จัดทำทีละเกณฑ์ เริ่มจากเกณฑ์ที่ 8 ผลผลิตและผลลัพธ์</p>
+<div class="crit" id="crit"></div>
+
+<h2 id="c8">เกณฑ์ที่ 8 ผลผลิตและผลลัพธ์ (Output and Outcomes)</h2>
+<p class="sub">ย้อนหลัง 5 ปีการศึกษา พร้อมเป้าหมายและคู่เทียบ · ตัวเลขสรุประดับหลักสูตร กลุ่มที่มีน้อยกว่า 5 คนแสดงเป็น "n&lt;5"</p>
+<div id="c8body"></div>
+
+<h2 id="docs">มคอ.3 รายวิชา</h2>
+<p class="sub">ฉบับเผยแพร่ ตัดอีเมลและเบอร์โทรศัพท์ออก</p>
+<div id="mko3"></div>
+
+<h2>หลักฐานที่เกี่ยวข้อง</h2>
+<div class="links">
+  <a href="OBE-Alignment-Tool.html"><b>OBE Constructive Alignment Tool</b><span>ตรวจความสอดคล้อง PLO CLO การสอน และการวัดผล (เกณฑ์ 1–4)</span></a>
+  <a href="https://aj-warawut.github.io/academic-web-teaching/research.html#pubs"><b>ผลงานตีพิมพ์ของอาจารย์</b><span>ผลงาน การอ้างอิง และบทบาทผู้ประพันธ์ (เกณฑ์ 5 และ 8.3)</span></a>
+  <a href="https://aj-warawut.github.io/academic-web-teaching/teaching.html#grad"><b>สื่อการสอนระดับบัณฑิตศึกษา</b><span>บทเรียนออนไลน์ที่ใช้ในหลักสูตร (เกณฑ์ 3)</span></a>
+  <a href="https://aj-warawut.github.io/academic-web-teaching/research.html"><b>การเป็นที่ปรึกษาวิทยานิพนธ์</b><span>ตัวเลขสรุปผลลัพธ์ของนิสิตในความดูแล (เกณฑ์ 8.1 และ 8.3)</span></a>
+</div>
+<div id="evalbox"></div>
+<p class="priv">หน้านี้แสดงเฉพาะตัวเลขสรุปที่ไม่ระบุตัวบุคคล ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 หลักฐานที่ระบุตัวนิสิตจัดเก็บในระบบของมหาวิทยาลัย และเปิดให้ผู้ประเมินตรวจตามคำขอ</p>
+</main>
+<footer>อ.ดร.วราวุฒิ นาคบุญนำ · คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · <span id="upd"></span></footer>
+
+<script>
+(function(){
+const CRIT=[[1,"ผลการเรียนรู้ที่คาดหวัง","Expected Learning Outcomes"],[2,"โครงสร้างและเนื้อหาของหลักสูตร","Programme Structure and Content"],[3,"แนวทางการเรียนการสอน","Teaching and Learning Approach"],[4,"การประเมินผู้เรียน","Student Assessment"],[5,"บุคลากรสายวิชาการ","Academic Staff"],[6,"การบริการสนับสนุนผู้เรียน","Student Support Services"],[7,"สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน","Facilities and Infrastructure"],[8,"ผลผลิตและผลลัพธ์","Output and Outcomes"]];
+// เกณฑ์ย่อยและตัวชี้วัด ตามร่างใน QA vault: 30_Projects/AUN-QA/ร่างตัวชี้วัด_Dashboard_เกณฑ์8_BizInno_2569.md
+const C8=[
+ ["8.1","อัตราผ่าน อัตราพ้นสภาพ และระยะเวลาเฉลี่ยที่ใช้สำเร็จการศึกษา","pass rate, dropout rate and average time to graduate",[
+   ["grad","อัตราสำเร็จการศึกษาตามระยะเวลาของหลักสูตร","รายรุ่น · ผู้สำเร็จภายในระยะเวลา ÷ ผู้เข้าศึกษา","%"],
+   ["drop","อัตราการพ้นสภาพ","รายรุ่น · ผู้พ้นสภาพ ÷ ผู้เข้าศึกษา","%"],
+   ["ret","อัตราคงอยู่ปีที่ 2","ผู้ยังศึกษาต้นปีที่ 2 ÷ ผู้เข้าศึกษา","%"],
+   ["time","ระยะเวลาเฉลี่ยที่ใช้สำเร็จการศึกษา","ปี","ปี"],
+   ["prog","นิสิตปัจจุบันที่สอบตามแผนที่กำหนด","สอบ 3 บทหรือ 5 บทตามกำหนด","%"]]],
+ ["8.2","การได้งาน การประกอบอาชีพอิสระ และความก้าวหน้าในงาน","employability, self-employment, entrepreneurship and advancement",[
+   ["emp","มีงานทำหรือศึกษาต่อภายใน 1 ปี","ระบุอัตราตอบกลับ","%"],
+   ["ent","ประกอบอาชีพอิสระหรือเป็นผู้ประกอบการ","แยกจากการมีงานทำ","%"],
+   ["adv","ได้เลื่อนตำแหน่งหรือก้าวหน้าในงานหลังสำเร็จ","จากผู้ตอบที่ทำงานแล้ว","%"]]],
+ ["8.3","ผลงานวิจัยและงานสร้างสรรค์ของอาจารย์และนิสิต","research and creative work output",[
+   ["pubS","ผลงานของอาจารย์","จำนวนต่อปี","เรื่อง"],["pubT","ผลงานของนิสิต (รวมที่ร่วมกับอาจารย์)","จำนวนต่อปี","เรื่อง"],
+   ["pps","ผลงานต่ออาจารย์ประจำหลักสูตร","ผลงานรวม ÷ จำนวนอาจารย์","เรื่อง/คน"],
+   ["q12","สัดส่วนผลงาน Scopus Q1–Q2","ระบุปีและแหล่งของ quartile","%"],
+   ["gpub","บัณฑิตที่ผลงานตีพิมพ์ตามเกณฑ์สำเร็จการศึกษา","","%"]]],
+ ["8.4","การบรรลุผลการเรียนรู้ของหลักสูตร (PLO)","achievement of programme learning outcomes",[
+   ["plo","ร้อยละการบรรลุ PLO รายข้อ (วัดโดยตรง)","ร้อยละนิสิตที่ได้ระดับ rubric ตามเกณฑ์ในรายวิชาที่เชื่อมกับ PLO นั้น","%"]]],
+ ["8.5","ความพึงพอใจของผู้มีส่วนได้ส่วนเสีย","satisfaction of stakeholders",[
+   ["satS","นิสิตปัจจุบัน","ค่าเฉลี่ย 5 ระดับ","/5"],["satG","บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satE","ผู้ใช้บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satF","อาจารย์","ค่าเฉลี่ย 5 ระดับ","/5"]]]];
+let D=null,P="ma";
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+const $=id=>document.getElementById(id);
+const fmt=v=>v==null||v===""?'<span class="na">–</span>':esc(v);
+function filled(p){return Object.keys(p.values||{}).length;}
+function render(){
+  const p=D.programs[P];
+  $("tabs").innerHTML=Object.entries(D.programs).map(([k,v])=>'<button role="tab" aria-selected="'+(k===P)+'" class="'+(k===P?"on":"")+'" data-k="'+k+'">'+esc(v.short)+"</button>").join("");
+  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{P=b.dataset.k;history.replaceState(null,"","#"+P);render();});
+  $("pname").textContent=p.name;
+  const n=filled(p);
+  $("crit").innerHTML=CRIT.map(c=>{const st=c[0]===8?(n?["ok","มีข้อมูล "+n+" ตัวชี้วัด"]:["wait","กำลังจัดทำ"]):["next","ถัดไป"];
+    const inner='<div class="no">เกณฑ์ที่ '+c[0]+'</div><div class="nm">'+c[1]+'</div><span class="chip '+st[0]+'">'+st[1]+"</span>";
+    return c[0]===8?'<a href="#c8">'+inner+"</a>":"<div>"+inner+"</div>";}).join("");
+  const Y=D.years;
+  $("c8body").innerHTML=C8.map(s=>'<div class="sc"><h3>'+s[0]+" "+s[1]+'</h3><div class="q">'+s[2]+'</div><div class="tw"><table><thead><tr><th>ตัวชี้วัด</th>'+Y.map(y=>"<th>"+y+"</th>").join("")+"<th>เป้าหมาย</th><th>คู่เทียบ</th></tr></thead><tbody>"+
+    s[3].map(i=>{const v=(p.values||{})[i[0]]||{},yv=v.y||{};
+      return '<tr><td class="ind"><b>'+i[1]+"</b><span>"+esc(i[2])+(i[3]?" · หน่วย "+esc(i[3]):"")+(v.src?" · ที่มา "+esc(v.src):"")+"</span></td>"+Y.map(y=>'<td class="n">'+fmt(yv[y])+"</td>").join("")+'<td class="n">'+fmt(v.target)+'</td><td class="n">'+fmt(v.bench)+(v.benchSrc?'<br><span class="na">'+esc(v.benchSrc)+"</span>":"")+"</td></tr>";}).join("")+"</tbody></table></div></div>").join("")+
+    (n?"":'<div class="empty">ยังไม่มีตัวเลข อยู่ระหว่างรวบรวมจากระบบทะเบียน แบบสำรวจ และรายงานของหลักสูตร</div>');
+  $("mko3").innerHTML=(p.mko3||[]).length?'<div class="dl">'+p.mko3.map(m=>'<a href="'+esc(m.file)+'" download><span class="code">'+esc(m.code)+"</span><span>"+esc(m.name)+"<small>ภาคการศึกษา "+esc(m.sem)+" · PDF</small></span></a>").join("")+"</div>":'<div class="empty">อยู่ระหว่างจัดเตรียมฉบับเผยแพร่</div>';
+  $("evalbox").innerHTML=D.evaluatorLink?'<p style="margin-top:12px"><a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="na">(ต้องได้รับสิทธิ์เข้าถึง)</span></p>':"";
+}
+fetch("bizinno_data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{D=d;if(location.hash==="#phd")P="phd";$("draft").hidden=d.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+d.updated;render();}).catch(()=>{$("c8body").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';});
+})();
+</script>
+<script data-goatcounter="https://waruwut.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
