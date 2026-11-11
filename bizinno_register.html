@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แผนการลงทะเบียนเรียน · BizInno มหาวิทยาลัยมหาสารคาม</title>
+<meta name="description" content="แผนการลงทะเบียนเรียนภาคการศึกษาปัจจุบัน สำหรับนิสิต บธ.ม. และ ปร.ด. สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* หน้าสำหรับนิสิต: อ่านข้อมูลชุดเดียวกับหน้าข้อมูลหลักสูตร (bizinno_data.json, มคอ.3 ของภาค) ไม่มีเนื้อหาด้านการประเมินคุณภาพ */
+:root{--ink:#1F2A37;--muted:#5C6B7A;--line:#DDE3EA;--bg:#F3F5F8;--card:#fff;--accent:#1F4E8C;--soft:#EAF1FA;--ok:#1F7A5A;--okbg:#E6F5EE;--wait:#8A5A00;--waitbg:#FBF3DF}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Sarabun','Segoe UI',Tahoma,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+a{color:var(--accent)}
+.top{background:linear-gradient(135deg,#14284d,#1F4E8C);color:#fff}
+.top .in{max-width:960px;margin:0 auto;padding:22px 16px 18px;position:relative}
+.top h1{font-size:25px;margin:0 0 2px;line-height:1.3}.top p{margin:0;color:#D5E1F5;font-size:15px}
+.lang{position:absolute;right:16px;top:18px;display:flex;border:1px solid rgba(255,255,255,.4);border-radius:20px;overflow:hidden}
+.lang button{background:none;border:0;color:#fff;font-family:inherit;font-size:13px;font-weight:700;padding:4px 12px;cursor:pointer}.lang button.on{background:#fff;color:#14284d}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.box h2{font-size:18px;margin:0 0 10px}
+.pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pick label{font-size:13px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 12px;font-family:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.res{border-left:6px solid var(--accent)}
+.res .head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.res .head b{font-size:19px}.big{font-size:28px;font-weight:800;color:var(--accent);line-height:1}
+.note{background:var(--soft);border-radius:10px;padding:8px 12px;font-size:14.5px;margin:8px 0}
+.warn{background:var(--waitbg);color:var(--wait);border-radius:10px;padding:8px 12px;font-size:14.5px;margin:8px 0}
+.course{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.course .nm{flex:1 1 280px}.course .nm small{display:block;color:var(--muted)}
+.cr{font-weight:800;color:var(--accent);white-space:nowrap}
+.tag{display:inline-block;border-radius:20px;padding:0 8px;font-size:12px;font-weight:700;margin-left:4px;vertical-align:1px}
+.tag.ok{background:var(--okbg);color:var(--ok)}.tag.wait{background:var(--waitbg);color:var(--wait)}
+.btn{border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:20px;padding:5px 12px;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--accent);color:#fff}
+.sub{color:var(--muted);font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{text-align:left;font-size:13px;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--line);background:#FAFBFC}
+td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tw{overflow-x:auto}
+.tba{color:var(--wait);font-weight:700}
+details{border:1px solid var(--line);border-radius:10px;padding:0 12px;margin-top:8px}details>summary{cursor:pointer;font-weight:700;padding:8px 0}details[open]{padding-bottom:10px}
+/* รายละเอียดรายวิชา */
+.dlg{position:fixed;inset:0;background:rgba(20,40,77,.45);display:none;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto;z-index:20}
+.dlg.on{display:flex}
+.dlg .in{background:#fff;border-radius:16px;max-width:760px;width:100%;padding:16px 18px;position:relative}
+.dlg h3{margin:0 34px 2px 0;font-size:19px}.dlg h4{margin:14px 0 6px;font-size:15.5px}
+.x{position:absolute;right:12px;top:10px;border:0;background:var(--soft);border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer}
+ol,ul{margin:4px 0;padding-left:22px}li{margin:3px 0}
+footer{max-width:960px;margin:0 auto;padding:4px 16px 24px;color:var(--muted);font-size:13px}
+@media(max-width:700px){.pick{grid-template-columns:minmax(0,1fr)}.top h1{font-size:21px;margin-right:84px}}
+@media print{.lang,.btn,.pick{display:none!important}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <div class="lang" role="group" aria-label="language"><button data-l="th" class="on">ไทย</button><button data-l="en">EN</button></div>
+  <h1 id="h1"></h1><p id="h1s"></p>
+</div></div>
+<div class="wrap">
+  <div class="box">
+    <h2 id="tPick"></h2>
+    <div class="pick">
+      <div><label id="lP"></label><div class="seg" id="sP"></div></div>
+      <div><label id="lE"></label><div class="seg" id="sE"></div></div>
+      <div><label id="lT"></label><div class="seg" id="sT"></div></div>
+    </div>
+  </div>
+  <div class="box res" id="res"></div>
+  <div class="box" id="opened"></div>
+  <div class="box" id="cal"></div>
+  <div class="box" id="help"></div>
+</div>
+<footer id="foot"></footer>
+<div class="dlg" id="dlg" role="dialog" aria-modal="true"><div class="in"><button class="x" id="x" aria-label="close">×</button><div id="dlgB"></div></div></div>
+<script>
+(async function(){
+const J=u=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null);
+const D=await J("bizinno_data.json");if(!D)return;
+const CJ=await J(D.coursesFile),CRS=(CJ&&CJ.courses)||[],REG=D.register||{};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+const $=id=>document.getElementById(id);
+const store={get:k=>{try{return localStorage.getItem("bzreg_"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("bzreg_"+k,v)}catch(e){}}};
+const Q=new URLSearchParams(location.search);
+let L=Q.get("lang")||store.get("lang")||"th";
+const T={
+ th:{h1:"แผนการลงทะเบียนเรียน ภาคการศึกษา {t}",h1s:"สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม",pick:"เลือกข้อมูลของคุณ",lP:"หลักสูตร",lE:"ภาคที่เข้าศึกษา",lT:"แผนการเรียน",
+  ma:"ปริญญาโท (บธ.ม.)",phd:"ปริญญาเอก (ปร.ด.)",before:"ก่อนหน้านั้น",you:"ภาค {t} คุณต้องลงทะเบียน",sem:"ภาคที่ {n} ของแผน · {s}",cr:"หน่วยกิต",total:"รวม",
+  open:"เปิดภาคนี้",thesis:"ลงทะเบียนได้ทุกภาค · ร่วมกับอาจารย์ที่ปรึกษา",notopen:"ไม่เปิดภาคนี้",detail:"รายละเอียด",elective:"วิชาเลือก {c} หน่วยกิต",elecPick:"เลือกจากวิชาเลือกที่เปิดภาคนี้:",
+  over:"คุณเรียนครบตามแผนการศึกษาแล้ว ลงทะเบียนวิทยานิพนธ์หรือการค้นคว้าอิสระต่อ และรักษาสภาพนิสิตทุกภาค ปรึกษาอาจารย์ที่ปรึกษาก่อนลงทะเบียน",
+  late:"รุ่นที่เข้าภาคปลายเริ่มแผนภาคที่ 1 ในภาคปลาย วิชาบางวิชาจึงอาจไม่เปิดตรงภาค ปรึกษาอาจารย์ที่ปรึกษาหรือเจ้าหน้าที่หลักสูตรก่อนลงทะเบียน",
+  notopenNote:"มีวิชาตามแผนที่ไม่เปิดภาคนี้ ปรึกษาอาจารย์ที่ปรึกษาเพื่อวางแผนลงทะเบียน",
+  opened:"รายวิชาที่เปิดสอนภาคนี้",groups:"กลุ่มเรียน",cal:"กำหนดการสำคัญ",tba:"รอประกาศ",calLink:"ปฏิทินการศึกษาของมหาวิทยาลัย",regLink:"ระบบลงทะเบียน",
+  help:"ติดต่อและช่วยเหลือ",helpTxt:"ข้อสงสัยเรื่องคะแนนหรือผลการประเมิน ขอดูรายละเอียดหรือยื่นคำร้องได้ {w}",appealForm:"แบบฟอร์มขอดูรายละเอียดและอุทธรณ์ผลการประเมิน",appealTba:"แบบฟอร์มออนไลน์ (อยู่ระหว่างจัดทำ) ติดต่อเจ้าหน้าที่หลักสูตร",contactTba:"ช่องทางติดต่อหลักสูตร: รอประกาศ",
+  cdesc:"คำอธิบายรายวิชา",cclo:"เมื่อเรียนจบ นิสิตจะสามารถ",cas:"งานและการสอบ",wk:"สัปดาห์",what:"งาน / การสอบ",wt:"สัดส่วน",cpre:"วิชาที่ต้องเรียนก่อน",sched:"วัน เวลา ห้อง",
+  foot:"ข้อมูลจากแผนการศึกษาใน มคอ.2 และ มคอ.3 ภาค {t} · ปรับปรุง {u} · กรณีข้อมูลต่างจากประกาศของมหาวิทยาลัย ให้ถือตามประกาศของมหาวิทยาลัย",
+  link:"คัดลอกลิงก์ของฉัน",copied:"คัดลอกลิงก์แล้ว"},
+ en:{h1:"Course Registration Plan, Semester {t}",h1s:"Business and Digital Innovation, Mahasarakham Business School, Mahasarakham University",pick:"Select your details",lP:"Programme",lE:"Semester you entered",lT:"Study plan",
+  ma:"Master's (M.B.A.)",phd:"Doctoral (Ph.D.)",before:"Earlier",you:"In semester {t} you register for",sem:"Plan semester {n} · {s}",cr:"credits",total:"Total",
+  open:"Offered this semester",thesis:"Every semester · with your advisor",notopen:"Not offered this semester",detail:"Details",elective:"Elective, {c} credits",elecPick:"Choose from the electives offered this semester:",
+  over:"You have completed the coursework in your study plan. Register for thesis or independent study and maintain your student status each semester. Please consult your advisor before registering.",
+  late:"Students who entered in the second semester start plan semester 1 in the second semester, so some courses may not be offered on schedule. Please consult your advisor or programme staff before registering.",
+  notopenNote:"Some courses in your plan are not offered this semester. Please consult your advisor.",
+  opened:"Courses offered this semester",groups:"Sections",cal:"Key dates",tba:"To be announced",calLink:"University academic calendar",regLink:"Registration system",
+  help:"Contact and support",helpTxt:"If you have questions about a score or grade, you can request details or submit an appeal {w}.",appealForm:"Request and appeal form",appealTba:"Online form (in preparation): please contact programme staff",contactTba:"Programme contact: to be announced",
+  cdesc:"Course description",cclo:"On completion, students will be able to",cas:"Assignments and examinations",wk:"Week",what:"Assignment / exam",wt:"Weight",cpre:"Prerequisite",sched:"Day, time, room",
+  foot:"Based on the study plan (TQF 2) and course specifications (TQF 3) for semester {t} · updated {u} · University announcements take precedence.",
+  link:"Copy my link",copied:"Link copied"}};
+const t=(k,v)=>{let s=(T[L][k]??T.th[k]??k);Object.entries(v||{}).forEach(([a,b])=>{s=s.replace("{"+a+"}",b);});return s;};
+const SLOT_EN=s=>s.replace(/ปีที่\s*(\d)\s*ภาคต้น/,"Year $1, Semester 1").replace(/ปีที่\s*(\d)\s*ภาคปลาย/,"Year $1, Semester 2");
+const TRK=x=>L==="en"?x.replace("แผน ก1","Plan A1").replace("แผน ก2","Plan A2").replace("แผน ข","Plan B").replace("แบบ","Type"):x;
+const GRP=x=>L==="en"?x.replace("นิสิตไทย","Thai students").replace("นิสิตจีน","Chinese students"):x;
+const cnum=c=>{const m=String(c.credits).match(/(\d+)\s*หน่วยกิต/);return m?+m[1]:0;};
+const [tS,tY]=D.term.label.split("/").map(Number);
+const entryOf=n=>{let s=tS,y=tY;for(let i=1;i<n;i++){if(s===2)s=1;else{s=2;y--;}}return s+"/"+y;};   // ภาคที่ n ของแผน ↔ ภาคที่เข้าศึกษา
+let P=Q.get("p")||store.get("p")||"ma",E=+(Q.get("e")||store.get("e")||2),K=+(Q.get("t")||store.get("t")||-1);
+
+function render(){
+  document.documentElement.lang=L;document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===L));
+  $("h1").textContent=t("h1",{t:D.term.label});$("h1s").textContent=t("h1s");document.title=t("h1",{t:D.term.label})+" · BizInno";
+  $("tPick").textContent=t("pick");$("lP").textContent=t("lP");$("lE").textContent=t("lE");$("lT").textContent=t("lT");
+  const pl=D.programs[P].plan,N=pl.slots.length;if(K<0||K>=pl.tracks.length)K=pl.tracks.findIndex(x=>/ก2|2\.1/.test(x));if(K<0)K=0;if(E<1||E>N+1)E=Math.min(2,N);
+  $("sP").innerHTML=Object.keys(D.programs).map(k=>'<button data-v="'+k+'"'+(k===P?' class="on"':"")+">"+esc(t(k))+"</button>").join("");
+  $("sE").innerHTML=Array.from({length:N},(_,i)=>i+1).map(n=>'<button data-v="'+n+'"'+(n===E?' class="on"':"")+">"+entryOf(n)+"</button>").join("")+'<button data-v="'+(N+1)+'"'+(E===N+1?' class="on"':"")+">"+esc(t("before"))+"</button>";
+  $("sT").innerHTML=pl.tracks.map((x,i)=>'<button data-v="'+i+'"'+(i===K?' class="on"':"")+">"+esc(TRK(x))+"</button>").join("");
+  $("sP").querySelectorAll("button").forEach(b=>b.onclick=()=>{P=b.dataset.v;K=-1;save();render();});
+  $("sE").querySelectorAll("button").forEach(b=>b.onclick=()=>{E=+b.dataset.v;save();render();});
+  $("sT").querySelectorAll("button").forEach(b=>b.onclick=()=>{K=+b.dataset.v;save();render();});
+  const here=CRS.filter(c=>c.level===P),byCode=Object.fromEntries(here.map(c=>[c.code,c])),elec=here.filter(c=>/เลือก/.test(c.category));
+  const nm=c=>L==="en"&&c.nameEn?c.nameEn:c.nameTh;
+  const row=(code,name,cr,c)=>'<div class="course"><div class="nm"><b>'+esc(code.slice(0,4)+" "+code.slice(4))+"</b> "+esc(c?nm(c):L==="en"?name.replace("วิทยานิพนธ์","Thesis").replace("การค้นคว้าอิสระ","Independent Study"):name)+(c?'<span class="tag ok">'+esc(t("open"))+"</span>":/วิทยานิพนธ์|ค้นคว้าอิสระ/.test(name)?'<span class="tag ok">'+esc(t("thesis"))+"</span>":'<span class="tag wait">'+esc(t("notopen"))+"</span>")+(c&&L==="th"&&c.nameEn?"<small>"+esc(c.nameEn)+"</small>":"")+'</div><span class="cr">'+cr+" "+esc(t("cr"))+"</span>"+(c?'<button class="btn" data-c="'+c.code+'">'+esc(t("detail"))+"</button>":"")+"</div>";
+  let h="";
+  if(E>N){h='<div class="head"><b>'+esc(t("you",{t:D.term.label}))+"</b></div><div class='note'>"+esc(t("over"))+"</div>";}
+  else{const s=pl.slots[E-1],items=s[2][K]||[];let miss=false,tot=0;
+    h='<div class="head"><b>'+esc(t("you",{t:D.term.label}))+'</b><span class="sub">'+esc(t("sem",{n:E,s:L==="en"?SLOT_EN(s[1]):s[1]}))+" · "+esc(TRK(pl.tracks[K]))+"</span></div>";
+    items.forEach(x=>{tot+=x.cr;if(x.code==="elective"){h+='<div class="course"><div class="nm"><b>'+esc(t("elective",{c:x.cr}))+"</b><small>"+esc(t("elecPick"))+"</small></div></div>"+elec.map(c=>row(c.code,c.nameTh,cnum(c),c)).join("");if(!elec.length)miss=true;}
+      else{const c=byCode[x.code];if(!c&&!/วิทยานิพนธ์|ค้นคว้าอิสระ/.test(x.name))miss=true;h+=row(x.code,x.name,x.cr,c);}});
+    h+='<p style="margin:10px 0 0;text-align:right">'+esc(t("total"))+' <span class="big">'+tot+"</span> "+esc(t("cr"))+"</p>";
+    if(miss)h+="<div class='warn'>"+esc(t("notopenNote"))+"</div>";
+    if(entryOf(E).startsWith("2/")&&E>1)h+="<div class='note'>"+esc(t("late"))+"</div>";}
+  h+='<p style="margin:8px 0 0"><button class="btn" id="cp">🔗 '+esc(t("link"))+'</button> <span class="sub" id="cpm"></span></p>';
+  $("res").innerHTML=h;
+  $("opened").innerHTML="<h2>"+esc(t("opened"))+" ("+here.length+")</h2>"+'<div class="tw"><table><thead><tr><th></th><th>'+esc(t("cr"))+"</th><th>"+esc(t("groups"))+"</th><th>"+esc(t("sched"))+"</th><th></th></tr></thead><tbody>"+
+    here.map(c=>{const sc=(REG.schedule||{})[c.code];return"<tr><td><b>"+esc(c.codeFmt)+"</b> "+esc(nm(c))+"</td><td>"+cnum(c)+"</td><td>"+esc((c.groups||[]).map(GRP).join(" · "))+"</td><td>"+(sc?esc(sc):'<span class="tba">'+esc(t("tba"))+"</span>")+'</td><td><button class="btn" data-c="'+c.code+'">'+esc(t("detail"))+"</button></td></tr>";}).join("")+"</tbody></table></div>";
+  $("cal").innerHTML="<h2>"+esc(t("cal"))+"</h2>"+'<div class="tw"><table><tbody>'+(REG.calendar||[]).map(r=>"<tr><td>"+esc(L==="en"?r[1]:r[0])+"</td><td>"+(r[2]?esc(r[2]):'<span class="tba">'+esc(t("tba"))+"</span>")+"</td></tr>").join("")+"</tbody></table></div>"+
+    '<p class="sub" style="margin:8px 0 0">'+[REG.calUrl?'<a href="'+esc(REG.calUrl)+'" target="_blank" rel="noopener">'+esc(t("calLink"))+"</a>":esc(t("calLink"))+": "+esc(t("tba")),REG.regUrl?'<a href="'+esc(REG.regUrl)+'" target="_blank" rel="noopener">'+esc(t("regLink"))+"</a>":esc(t("regLink"))+": "+esc(t("tba"))].join(" · ")+"</p>";
+  const A=D.appeal,w=A&&A.steps&&A.steps[1]?(L==="en"?"within 7 days of the announcement":A.steps[1].when):"";
+  $("help").innerHTML="<h2>"+esc(t("help"))+"</h2><p style='margin:0 0 6px'>"+esc(t("helpTxt",{w}))+"</p><p style='margin:0 0 6px'>"+(A&&A.formUrl?'<a href="'+esc(A.formUrl)+'" target="_blank" rel="noopener">'+esc(t("appealForm"))+"</a>":esc(t("appealTba")))+"</p><p class='sub' style='margin:0'>"+((REG.contact||[]).length?REG.contact.map(c=>esc(c)).join(" · "):esc(t("contactTba")))+"</p>";
+  $("foot").textContent=t("foot",{t:D.term.label,u:D.updated});
+  document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>openC(b.dataset.c));
+  $("cp").onclick=async()=>{const u=location.origin+location.pathname+"?p="+P+"&e="+E+"&t="+K+(L==="en"?"&lang=en":"");try{await navigator.clipboard.writeText(u);$("cpm").textContent=t("copied");}catch(e){$("cpm").textContent=u;}};
+}
+function openC(code){const c=CRS.find(x=>x.code===code);if(!c)return;const sc=(REG.schedule||{})[c.code];
+  const as=c.assess.filter(r=>!/^รวม/.test(r[0])).slice().sort((a,b)=>(parseInt(a[3])||0)-(parseInt(b[3])||0));
+  $("dlgB").innerHTML="<h3>"+esc(c.codeFmt)+" "+esc(L==="en"&&c.nameEn?c.nameEn:c.nameTh)+"</h3><p class='sub' style='margin:0'>"+esc(L==="en"?c.nameTh:c.nameEn)+" · "+esc(c.credits)+"</p>"+
+    "<p class='sub' style='margin:4px 0 0'>"+esc(t("groups"))+": "+esc((c.groups||[]).map(GRP).join(" · "))+" · "+esc(t("sched"))+": "+(sc?esc(sc):esc(t("tba")))+" · "+esc(t("cpre"))+": "+esc(c.prereq||"–")+"</p>"+
+    "<h4>"+esc(t("cdesc"))+"</h4>"+(c.desc||[]).map(x=>"<p style='margin:0 0 6px'>"+esc(x)+"</p>").join("")+
+    "<h4>"+esc(t("cclo"))+"</h4><ol>"+c.clo.map(x=>"<li>"+esc(x.clo.replace(/^CLO\d+\s*/,"").replace(/\s*\((Cognitive|Psychomotor|Affective)[^)]*\)\s*$/,""))+"</li>").join("")+"</ol>"+
+    "<h4>"+esc(t("cas"))+'</h4><div class="tw"><table><thead><tr><th>'+esc(t("wk"))+"</th><th>"+esc(t("what"))+"</th><th>"+esc(t("wt"))+"</th></tr></thead><tbody>"+as.map(r=>"<tr><td>"+esc(r[3])+"</td><td>"+esc(r[1])+"</td><td>"+esc(String(r[4]).replace("ร้อยละ ",""))+"%</td></tr>").join("")+"</tbody></table></div>"+
+    (L==="en"?"<p class='sub' style='margin-top:8px'>Course details are in Thai, as in the official course specification.</p>":"");
+  $("dlg").classList.add("on");$("x").focus();}
+function save(){store.set("p",P);store.set("e",E);store.set("t",K);}
+$("x").onclick=()=>$("dlg").classList.remove("on");$("dlg").onclick=e=>{if(e.target.id==="dlg")$("dlg").classList.remove("on");};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("dlg").classList.remove("on");});
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{L=b.dataset.l;store.set("lang",L);render();});
+render();
+})();
+</script>
+</body>
+</html>
