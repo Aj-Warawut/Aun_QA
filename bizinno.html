@@ -277,7 +277,7 @@ function wireCohort(){const st=STU[P],box=$("coh");if(!box||!st||!st.cohorts)ret
   pick(ks.includes("1/"+D.term.label.slice(2))?"1/"+D.term.label.slice(2):ks[ks.length-1]);}
 
 function APPEAL(){const A=D.appeal;let h="<h3>การขอดูรายละเอียดและการอุทธรณ์ผลการประเมิน</h3>";
-  if(A){h+=(A.status==="draft"?"<p class='sub'><span class='chip wait'>ร่าง</span> "+esc(A.note)+"</p>":"")+"<p class='sub'>ขอบเขต: "+esc(A.scope)+"</p>"+
+  if(A){h+=(A.status==="draft"?"<p class='sub'><span class='chip wait'>ร่าง</span> "+esc(A.note)+"</p>":"<p class='sub'>"+esc(A.note)+"</p>")+"<p class='sub'>ขอบเขต: "+esc(A.scope)+"</p>"+
     '<div class="flow">'+A.steps.map(s=>'<div class="fs"><div class="fn">'+esc(s.no)+'</div><div class="fw">'+esc(s.what)+'</div><div class="fh">'+esc(s.who)+'</div><div class="ft">⏱ '+esc(s.when)+"</div></div>").join('<div class="fa">→</div>')+"</div>"+
     "<p>ช่องทาง: "+(A.formUrl?'<a href="'+esc(A.formUrl)+'" target="_blank" rel="noopener">แบบฟอร์มขอดูรายละเอียดและอุทธรณ์ผลการประเมิน</a>':"แบบฟอร์มออนไลน์ของหลักสูตร (อยู่ระหว่างจัดทำ)")+" · ทุกคำร้องได้รับคำตอบเป็นลายลักษณ์อักษรพร้อมเหตุผล และนิสิตไม่ได้รับผลกระทบจากการยื่นคำร้อง</p>";
     const L=Object.entries(A.log||{});h+="<p><b>สรุปคำร้องรายภาค</b> (นับรวม ไม่ระบุตัวบุคคล)</p>"+(L.length?TB(["ภาคการศึกษา","จำนวนคำร้อง","คงผลเดิม","ปรับผล","จำนวนวันเฉลี่ยที่ใช้"],L.map(([t,v])=>[t,v.n,v.kept??"–",v.changed??"–",v.days??"–"])):EMPTY("เริ่มบันทึกตั้งแต่ภาค "+esc(D.term.label)+" · ปีการศึกษา 2566 ไม่มีคำร้อง (มคอ.7)"));}
@@ -397,7 +397,7 @@ function render(){
    ["3.2","3.3","3.4","3.5"].forEach(k=>A(k,k==="3.2"?["วิธีการสอนออกแบบราย CLO ในทุกรายวิชา (ตารางด้านล่าง)"]:[],k==="3.2"?teachT:"",[M3+" หมวด 2 ข้อ 3"],["ตัวอย่างกิจกรรมที่เกิดขึ้นจริงและผลประเมินการสอนโดยนิสิต"]));
    A("3.6",term.flatMap(c=>c.dev.slice(0,1).map(x=>c.codeFmt+": "+x)),"",[M3+" หมวด 2 ข้อ 4"]);
    A("4.1",["สัดส่วนการวัดต่อรายวิชา: "+term.map(c=>{const[e,w]=mix(c);return c.codeFmt+" สอบ "+e+"% งาน "+w+"%";}).join(" · ")],term.length?WT(["รายวิชา","CLO","วิธีการประเมิน","สัปดาห์","สัดส่วน"],term.flatMap(c=>c.assess.filter(r=>!/^รวม/.test(r[0])).map((r,i)=>[i?"":c.codeFmt,r[0],r[1],r[3],r[4]]))):"",[M3+" หมวด 4 ข้อ 2.1"]);
-   A("4.2",(D.appeal?["แนวปฏิบัติของหลักสูตร ("+(D.appeal.status==="draft"?"ร่าง":"ประกาศใช้")+"): "+D.appeal.steps.map(s=>s.no+") "+s.what+" · "+s.who+" · "+s.when).join(" | ")]:[]).concat([...new Set(term.flatMap(c=>c.appeal||[]))]),term[0]&&term[0].grade.length?WT(["ระดับคะแนน","ช่วงคะแนน"],term[0].grade):"",[M3+" หมวด 4 ข้อ 2.3–2.4"]);
+   A("4.2",(D.appeal?["แนวปฏิบัติการอุทธรณ์ผลการประเมินของหลักสูตร: "+D.appeal.steps.map(s=>s.no+") "+s.what+" · "+s.who+" · "+s.when).join(" | ")]:[]).concat([...new Set(term.flatMap(c=>c.appeal||[]))]),term[0]&&term[0].grade.length?WT(["ระดับคะแนน","ช่วงคะแนน"],term[0].grade):"",[M3+" หมวด 4 ข้อ 2.3–2.4"]);
    A("4.3",st?["นิสิตที่มีกำหนดสอบภาค "+TL+": มีที่ปรึกษาหลัก "+st.advisor+", ผ่าน QE/CE "+(st.qe??"–")+", สอบเค้าโครงแล้วหรือมีกำหนด "+st.ch3+", กำหนดสอบ 5 บท "+st.ch5now+" (จาก "+st.total+" คน)"]:[],"",["รายชื่อนิสิตมีกำหนดสอบ ภาค "+TL+" (นับรวม)"],["เกณฑ์และกระบวนการสอบ QE/CE เค้าโครง และวิทยานิพนธ์"]);
    A("4.4",["รูบริกในรายวิชาภาคนี้ "+term.reduce((a,c)=>a+c.rubrics.length,0)+" ชุด: "+term.flatMap(c=>c.rubrics.map(r=>c.codeFmt+" "+r.title)).join(" · ")],"",[M3+" หมวด 4 ข้อ 2.2"],["รูบริกการสอบวิทยานิพนธ์"]);
    A("4.5",["สัดส่วนคะแนนตาม CLO กำหนดในทุกรายวิชา"],"",[M3+" หมวด 4 ข้อ 2.1"],["ผลการบรรลุ CLO และ PLO จริง"]);
