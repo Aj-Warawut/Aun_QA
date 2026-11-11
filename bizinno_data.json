@@ -438,5 +438,6 @@
  "programsFile": "bizinno_programs.json",
  "univPhilosophy": "การจัดการศึกษาแบบบูรณาการศาสตร์ เพื่อการเรียนรู้ตลอดชีวิต การสร้างสรรค์นวัตกรรมและการส่งเสริมภูมิปัญญาท้องถิ่นสู่สากล",
  "statusFile": "bizinno_status_2-2569.json",
- "mko7File": "bizinno_mko7.json"
+ "mko7File": "bizinno_mko7.json",
+ "staffFile": "bizinno_staff.json"
 }
