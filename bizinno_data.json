@@ -436,5 +436,7 @@
  },
  "studentsFile": "bizinno_students_2-2569.json",
  "programsFile": "bizinno_programs.json",
- "univPhilosophy": "การจัดการศึกษาแบบบูรณาการศาสตร์ เพื่อการเรียนรู้ตลอดชีวิต การสร้างสรรค์นวัตกรรมและการส่งเสริมภูมิปัญญาท้องถิ่นสู่สากล"
+ "univPhilosophy": "การจัดการศึกษาแบบบูรณาการศาสตร์ เพื่อการเรียนรู้ตลอดชีวิต การสร้างสรรค์นวัตกรรมและการส่งเสริมภูมิปัญญาท้องถิ่นสู่สากล",
+ "statusFile": "bizinno_status_2-2569.json",
+ "mko7File": "bizinno_mko7.json"
 }

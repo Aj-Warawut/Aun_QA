@@ -1,0 +1,200 @@
+{
+ "source": "ทะเบียนสถานภาพนิสิตระดับบัณฑิตศึกษา คณะการบัญชีและการจัดการ (นับรวม ไม่ระบุตัวบุคคล)",
+ "ma": {
+  "status": {
+   "พ้นสภาพ": 8,
+   "ลาพัก": 1,
+   "ปกติ": 17
+  },
+  "enrolled": 18,
+  "byEntry": {
+   "1/2566": {
+    "ลาพัก": 1
+   },
+   "1/2567": {
+    "ปกติ": 3,
+    "พ้นสภาพ": 1
+   },
+   "1/2568": {
+    "ปกติ": 4
+   },
+   "2/2568": {
+    "ปกติ": 5
+   },
+   "1/2569": {
+    "ปกติ": 5
+   },
+   "ไม่ระบุ": {
+    "พ้นสภาพ": 7
+   }
+  },
+  "graduates": 14,
+  "keep": 1,
+  "gradByYear": {
+   "2564": 3,
+   "2565": 1,
+   "2567": 3,
+   "2568": 1,
+   "2569": 4,
+   "ไม่ระบุ": 2
+  },
+  "timeToGrad": {
+   "n": 3
+  },
+  "international": 11
+ },
+ "phd": {
+  "status": {
+   "พ้นสภาพ": 10,
+   "ปกติ": 42,
+   "ลาพัก": 1
+  },
+  "enrolled": 43,
+  "byEntry": {
+   "1/2562": {
+    "พ้นสภาพ": 1
+   },
+   "1/2564": {
+    "พ้นสภาพ": 2
+   },
+   "1/2566": {
+    "ปกติ": 2,
+    "ลาพัก": 1
+   },
+   "1/2567": {
+    "ปกติ": 7,
+    "พ้นสภาพ": 1
+   },
+   "2/2567": {
+    "ปกติ": 4
+   },
+   "1/2568": {
+    "ปกติ": 15
+   },
+   "2/2568": {
+    "ปกติ": 4
+   },
+   "1/2569": {
+    "ปกติ": 10
+   },
+   "ไม่ระบุ": {
+    "พ้นสภาพ": 6
+   }
+  },
+  "graduates": 42,
+  "keep": 3,
+  "gradByYear": {
+   "2565": 2,
+   "2566": 8,
+   "2567": 9,
+   "2568": 9,
+   "ไม่ระบุ": 14
+  },
+  "timeToGrad": {
+   "n": 2
+  },
+  "international": 14
+ },
+ "benchmark": {
+  "ma": [
+   {
+    "self": true,
+    "enrolled": 16,
+    "graduates": 14,
+    "dropped": 8,
+    "attrition": 36.4,
+    "label": "หลักสูตรนี้"
+   },
+   {
+    "self": false,
+    "enrolled": 8,
+    "graduates": 23,
+    "dropped": 10,
+    "attrition": 30.3,
+    "label": "หลักสูตร A"
+   },
+   {
+    "self": false,
+    "enrolled": 7,
+    "graduates": 7,
+    "dropped": 5,
+    "attrition": 41.7,
+    "label": "หลักสูตร B"
+   },
+   {
+    "self": false,
+    "enrolled": 6,
+    "graduates": 9,
+    "dropped": 1,
+    "attrition": 10.0,
+    "label": "หลักสูตร C"
+   },
+   {
+    "self": false,
+    "enrolled": 6,
+    "graduates": 3,
+    "dropped": 6,
+    "attrition": 66.7,
+    "label": "หลักสูตร D"
+   },
+   {
+    "self": false,
+    "enrolled": 5,
+    "graduates": 0,
+    "dropped": 5,
+    "attrition": 100.0,
+    "label": "หลักสูตร E"
+   },
+   {
+    "self": false,
+    "enrolled": 1,
+    "graduates": 3,
+    "dropped": 5,
+    "attrition": 62.5,
+    "label": "หลักสูตร F"
+   },
+   {
+    "self": false,
+    "enrolled": 0,
+    "graduates": 2,
+    "dropped": 4,
+    "attrition": 66.7,
+    "label": "หลักสูตร G"
+   }
+  ],
+  "phd": [
+   {
+    "self": true,
+    "enrolled": 43,
+    "graduates": 42,
+    "dropped": 10,
+    "attrition": 19.2,
+    "label": "หลักสูตรนี้"
+   },
+   {
+    "self": false,
+    "enrolled": 27,
+    "graduates": 8,
+    "dropped": 16,
+    "attrition": 66.7,
+    "label": "หลักสูตร A"
+   },
+   {
+    "self": false,
+    "enrolled": 11,
+    "graduates": 8,
+    "dropped": 0,
+    "attrition": 0.0,
+    "label": "หลักสูตร B"
+   },
+   {
+    "self": false,
+    "enrolled": 2,
+    "graduates": 13,
+    "dropped": 0,
+    "attrition": 0.0,
+    "label": "หลักสูตร C"
+   }
+  ]
+ }
+}
