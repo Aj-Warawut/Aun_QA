@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AUN-QA หลักสูตร BizInno · อ.ดร.วราวุฒิ นาคบุญนำ</title>
+<title>AUN-QA หลักสูตรบริหารธุรกิจและนวัตกรรมดิจิทัล · มหาวิทยาลัยมหาสารคาม</title>
 <meta name="description" content="ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร บธ.ม. และ ปร.ด. สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล มหาวิทยาลัยมหาสารคาม">
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -78,11 +78,23 @@ details.course .cn b{display:block}details.course .cn span{font-size:13px;color:
 .cbody td{font-size:13.5px}
 .cbody details{margin-top:6px}.cbody details summary{cursor:pointer;font-weight:700;font-size:14px}
 @media(max-width:760px){.cbody{padding:0 12px 12px}}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 6px}
+.toc a{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:4px 12px;font-size:13.5px;text-decoration:none;font-weight:700}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.pcard h4{margin:0 0 6px;font-size:14.5px;color:var(--accent)}
+.pcard p,.pcard li{margin:2px 0;font-size:14.5px}.pcard ul{margin:0;padding-left:18px}
+.blk2{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+.blk2>h3{font-size:16px;margin:0 0 8px;color:var(--accent)}
+.blk2 details{margin-top:8px}.blk2 details>summary{cursor:pointer;font-weight:700;font-size:14.5px}
+.plo{margin:4px 0}.plo>b{color:var(--accent)}.plo ul{margin:2px 0 6px;padding-left:22px}.plo li{font-size:14px}
+table.g th,table.g td{border:1px solid var(--line);font-size:13px;text-align:center}table.g td:first-child,table.g th:first-child{text-align:left}
+table.g td.l{text-align:left}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:760px){.two{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
-<div class="crumb"><a href="index.html">← AUN-QA และ OBE</a></div>
 <h1>ข้อมูลประกอบการประเมิน AUN-QA ระดับหลักสูตร</h1>
 <p class="lead">สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · ตามเกณฑ์ AUN-QA ระดับหลักสูตร ฉบับที่ 4.0 · ใช้ประกอบรายงานการประเมินตนเอง (SAR) ไม่แทน SAR</p>
 <div class="draft" id="draft" hidden>ฉบับร่าง: ตัวเลขและเอกสารในหน้านี้ยังไม่ผ่านความเห็นชอบของคณะกรรมการบริหารหลักสูตร</div>
@@ -90,7 +102,13 @@ details.course .cn b{display:block}details.course .cn span{font-size:13px;color:
 <div class="tabs" role="tablist" id="tabs"></div>
 <p class="pname" id="pname"></p>
 
-<h2>ภาพรวมรายเกณฑ์</h2>
+<nav class="toc" aria-label="สารบัญหน้า"><a href="#prog">ภาพรวมหลักสูตร</a><a href="#crit-h">ภาพรวมรายเกณฑ์</a><a href="#term">แผนการเรียนและรายวิชา</a><a href="#c8">เกณฑ์ที่ 8</a></nav>
+
+<h2 id="prog">ภาพรวมหลักสูตร</h2>
+<p class="sub">ข้อมูลจาก มคอ.2 หลักสูตรปรับปรุง พ.ศ. 2567 · กดหัวข้อที่มีลูกศรเพื่อกางรายละเอียด</p>
+<div id="progBody"></div>
+
+<h2 id="crit-h">ภาพรวมรายเกณฑ์</h2>
 <p class="sub">จัดทำทีละเกณฑ์ เริ่มจากเกณฑ์ที่ 8 ผลผลิตและผลลัพธ์</p>
 <div class="crit" id="crit"></div>
 
@@ -110,17 +128,11 @@ details.course .cn b{display:block}details.course .cn span{font-size:13px;color:
 <p class="sub">แบบเก็บข้อมูล: รวบรวมข้อมูลภาคการศึกษา 2/2569 เพื่อนำเสนอเดือนมิถุนายน 2570 · ย้อนหลัง 5 ปีการศึกษา พร้อมเป้าหมายและคู่เทียบ (ไม่เปิดเผยชื่อคู่เทียบบนหน้าเว็บ) · ตัวเลขสรุประดับหลักสูตร กลุ่มที่มีน้อยกว่า 5 คนแสดงเป็น "n&lt;5"</p>
 <div id="c8body"></div>
 
-<h2>หลักฐานที่เกี่ยวข้อง</h2>
-<div class="links">
-  <a href="OBE-Alignment-Tool.html"><b>OBE Constructive Alignment Tool</b><span>ตรวจความสอดคล้อง PLO CLO การสอน และการวัดผล (เกณฑ์ 1–4)</span></a>
-  <a href="https://aj-warawut.github.io/academic-web-teaching/research.html#pubs"><b>ผลงานตีพิมพ์ของอาจารย์</b><span>ผลงาน การอ้างอิง และบทบาทผู้ประพันธ์ (เกณฑ์ 5 และ 8.3)</span></a>
-  <a href="https://aj-warawut.github.io/academic-web-teaching/teaching.html#grad"><b>สื่อการสอนระดับบัณฑิตศึกษา</b><span>บทเรียนออนไลน์ที่ใช้ในหลักสูตร (เกณฑ์ 3)</span></a>
-  <a href="https://aj-warawut.github.io/academic-web-teaching/research.html"><b>การเป็นที่ปรึกษาวิทยานิพนธ์</b><span>ตัวเลขสรุปผลลัพธ์ของนิสิตในความดูแล (เกณฑ์ 8.1 และ 8.3)</span></a>
-</div>
+<h2>เอกสารสำหรับผู้ประเมิน</h2>
 <div id="evalbox"></div>
 <p class="priv">หน้านี้แสดงเฉพาะตัวเลขสรุปที่ไม่ระบุตัวบุคคล ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 หลักฐานที่ระบุตัวนิสิตจัดเก็บในระบบของมหาวิทยาลัย และเปิดให้ผู้ประเมินตรวจตามคำขอ</p>
 </main>
-<footer>อ.ดร.วราวุฒิ นาคบุญนำ · คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · <span id="upd"></span></footer>
+<footer>หลักสูตรบริหารธุรกิจมหาบัณฑิต และหลักสูตรปรัชญาดุษฎีบัณฑิต สาขาวิชาบริหารธุรกิจและนวัตกรรมดิจิทัล · คณะการบัญชีและการจัดการ มหาวิทยาลัยมหาสารคาม · <span id="upd"></span></footer>
 
 <script>
 (function(){
@@ -146,7 +158,7 @@ const C8=[
    ["plo","ร้อยละการบรรลุ PLO รายข้อ (วัดโดยตรง)","ร้อยละนิสิตที่ได้ระดับ rubric ตามเกณฑ์ในรายวิชาที่เชื่อมกับ PLO นั้น","%"]]],
  ["8.5","ความพึงพอใจของผู้มีส่วนได้ส่วนเสีย","satisfaction of stakeholders",[
    ["satS","นิสิตปัจจุบัน","ค่าเฉลี่ย 5 ระดับ","/5"],["satG","บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satE","ผู้ใช้บัณฑิต","ค่าเฉลี่ย 5 ระดับ","/5"],["satF","อาจารย์","ค่าเฉลี่ย 5 ระดับ","/5"]]]];
-let D=null,P="ma",CRS=[];
+let D=null,P="ma",CRS=[],PRG=null;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
 const $=id=>document.getElementById(id);
 const fmt=v=>v==null||v===""?'<span class="na">–</span>':esc(v);
@@ -193,6 +205,38 @@ function renderTerm(p){
     "</div></details>").join(""):'<div class="empty">ยังไม่มีข้อมูลรายวิชาของภาคนี้</div>';
   if(location.hash.startsWith("#c-")){const e=document.getElementById(location.hash.slice(1));if(e){e.open=true;e.scrollIntoView();}}
 }
+
+// ภาพรวมหลักสูตรจาก มคอ.2 (bizinno_programs.json)
+const cellT=c=>Array.isArray(c)?c[0]:c, cellS=c=>Array.isArray(c)?c[1]:1;
+function GT(rows,nh,opt){opt=opt||{};if(!rows||!rows.length)return "";
+  return '<div class="tw"><table class="g"><tbody>'+rows.map((r,i)=>"<tr>"+r.map((c,j)=>{const tag=i<nh||(opt.boldRows||[]).includes(i)?"th":"td",sp=cellS(c);return "<"+tag+(sp>1?' colspan="'+sp+'"':"")+(j===0||opt.left?' class="l"':"")+">"+esc(cellT(c)).replace(/\n/g,"<br>")+"</"+tag+">";}).join("")+"</tr>").join("")+"</tbody></table></div>";}
+const UL=a=>"<ul>"+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>";
+const DET=(t,h,open)=>h?"<details"+(open?" open":"")+"><summary>"+esc(t)+"</summary>"+h+"</details>":"";
+function renderProg(){
+  const g=PRG&&PRG[P];if(!g){$("progBody").innerHTML='<div class="empty">ยังไม่มีข้อมูลภาพรวมหลักสูตร</div>';return;}
+  const I=g.info;
+  // PLO เป็นข้อหลักและข้อย่อย
+  const plo=[];g.plos.forEach(x=>{const m=x.match(/^PLO-(\d+):\s*(.*)$/);if(m){plo.push({c:"PLO-"+m[1],t:m[2],s:[]});return;}const n=x.match(/^(\d[A-Z]):\s*(.*)$/);if(n&&plo.length)plo[plo.length-1].s.push([n[1],n[2]]);else if(plo.length)plo[plo.length-1].t+=" "+x;});
+  const strip=a=>a.map(x=>x.replace(/^\d+(\.\d+)*\s*/,""));
+  let h='<div class="pgrid">'+
+   '<div class="pcard"><h4>ชื่อปริญญา</h4>'+I.degree.map(x=>"<p>"+esc(x)+"</p>").join("")+"</div>"+
+   '<div class="pcard"><h4>จำนวนหน่วยกิตตลอดหลักสูตร</h4>'+UL(I.credits)+"</div>"+
+   '<div class="pcard"><h4>รูปแบบหลักสูตร</h4><p>หลักสูตรคุณวุฒิระดับที่ '+esc(I.level)+"</p>"+I.language.map(x=>"<p>"+esc(x)+"</p>").join("")+I.admit.map(x=>"<p>"+esc(x)+"</p>").join("")+"</div>"+
+   '<div class="pcard"><h4>สถานภาพและปฏิทิน</h4>'+strip(I.status).filter(x=>/เริ่มใช้/.test(x)).map(x=>"<p>"+esc(x)+"</p>").join("")+I.schedule.map(x=>"<p>"+esc(x)+"</p>").join("")+"</div></div>";
+  h+='<div class="blk2"><h3>ปรัชญาและวัตถุประสงค์ (เกณฑ์ 1)</h3>'+g.philosophy.map(x=>"<p>"+esc(x)+"</p>").join("")+"<p><b>วัตถุประสงค์</b></p>"+g.objectives.map(x=>"<p>"+esc(x)+"</p>").join("")+
+     DET("ความสำคัญและการวิเคราะห์สภาพแวดล้อม (SWOT)",g.importance.map(x=>"<p>"+esc(x)+"</p>").join("")+GT(g.swot,0,{boldRows:[0,2],left:true}))+"</div>";
+  h+='<div class="blk2"><h3>ผลลัพธ์การเรียนรู้ที่คาดหวังของหลักสูตร (PLO) (เกณฑ์ 1)</h3>'+plo.map(p=>'<div class="plo"><b>'+esc(p.c)+"</b> "+esc(p.t)+(p.s.length?"<ul>"+p.s.map(s=>"<li><b>"+esc(s[0])+"</b> "+esc(s[1])+"</li>").join("")+"</ul>":"")+"</div>").join("")+
+     DET("ความสัมพันธ์ระหว่างวัตถุประสงค์ของหลักสูตรกับ PLO",GT(g.objPlo,3))+DET("PLO กับหมวดวิชา",GT(g.ploGroup,1))+DET("ผลลัพธ์การเรียนรู้รายชั้นปี (YLO)",GT(g.ylo,1,{left:true}))+DET("PLO จำแนกตาม Bloom's Taxonomy",GT(g.bloom,2))+DET("ผลลัพธ์การเรียนรู้ตามกรอบมาตรฐานคุณวุฒิ (TQF)",UL(g.tqf))+"</div>";
+  const ser=[...new Set(g.mapping.map(m=>m.series))];
+  h+='<div class="blk2"><h3>โครงสร้างหลักสูตรและรายวิชา (เกณฑ์ 2)</h3>'+GT(g.structure,3)+
+     DET("รายวิชาในหลักสูตร",g.courses.map(c=>"<p><b>"+esc(c.group)+"</b></p>"+GT(c.rows,0,{left:true})).join(""))+
+     ser.map(sr=>DET("แผนที่การกระจายความรับผิดชอบ (Curriculum Mapping) "+sr,g.mapping.filter(m=>m.series===sr).map((m,i,a)=>(i===0||a[i-1].plan!==m.plan?"<p><b>"+esc(m.plan)+"</b></p>":"")+GT(m.rows,/PLO/.test(sr)?3:2)).join(""))).join("")+"</div>";
+  h+='<div class="two"><div class="blk2"><h3>ผู้เรียน (เกณฑ์ 6)</h3>'+DET("คุณสมบัติผู้เข้าศึกษา",g.entry.map(x=>"<p>"+esc(x)+"</p>").join(""),false)+"<p><b>ปัญหาของนิสิตแรกเข้า</b></p>"+UL(strip(g.problems))+"<p><b>กลยุทธ์แก้ไข</b></p>"+UL(strip(g.strategies))+"</div>"+
+     '<div class="blk2"><h3>ความต้องการของผู้มีส่วนได้ส่วนเสียและอาชีพ (เกณฑ์ 1)</h3><p><b>อาชีพที่ประกอบได้หลังสำเร็จการศึกษา</b></p>'+UL(strip(g.careers))+DET("ความต้องการของตลาดแรงงานและสังคม",GT(g.market,1,{left:true}))+"</div></div>";
+  h+='<div class="blk2"><h3>การปรับปรุงหลักสูตร พ.ศ. 2567 (เกณฑ์ 1–2)</h3>'+GT(g.improve,1,{left:true})+"</div>";
+  h+='<div class="blk2"><h3>อาจารย์ผู้รับผิดชอบหลักสูตร (เกณฑ์ 5)</h3>'+GT([["ชื่อ-สกุล","ตำแหน่งทางวิชาการ","คุณวุฒิ (สาขาวิชา)","สถาบัน","ปีที่สำเร็จ"]].concat(g.faculty.flatMap(f=>f.deg.map((d,i)=>[i?"":f.name.replace(/\n/g," "),i?"":f.title,d[0],d[1],d[2]]))),1,{left:true})+"</div>";
+  $("progBody").innerHTML=h;
+}
 function render(){
   const p=D.programs[P];
   $("tabs").innerHTML=Object.entries(D.programs).map(([k,v])=>'<button role="tab" aria-selected="'+(k===P)+'" class="'+(k===P?"on":"")+'" data-k="'+k+'">'+esc(v.short)+"</button>").join("");
@@ -208,10 +252,10 @@ function render(){
     s[3].map(i=>{const v=(p.values||{})[i[0]]||{},yv=v.y||{};
       return '<tr><td class="ind"><b>'+i[1]+"</b><span>"+esc(i[2])+(i[3]?" · หน่วย "+esc(i[3]):"")+(v.src?" · ที่มา "+esc(v.src):"")+"</span></td>"+Y.map(y=>'<td class="n">'+fmt(yv[y])+"</td>").join("")+'<td class="n">'+fmt(v.target)+'</td><td class="n">'+fmt(v.bench)+(v.benchSrc?'<br><span class="na">'+esc(v.benchSrc)+"</span>":"")+"</td></tr>";}).join("")+"</tbody></table></div></div>").join("")+
     '<p class="srcnote">* คู่เทียบแสดงเป็นรหัส (เช่น มหาวิทยาลัย xxx) ระบุชื่อในรายงานการประเมินตนเอง</p>'+(n?"":'<div class="empty">ยังไม่มีตัวเลข อยู่ระหว่างรวบรวมจากระบบทะเบียน แบบสำรวจ และรายงานของหลักสูตร</div>');
-  renderTerm(p);
-  $("evalbox").innerHTML=D.evaluatorLink?'<p style="margin-top:12px"><a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="na">(ต้องได้รับสิทธิ์เข้าถึง)</span></p>':"";
+  renderTerm(p);renderProg();
+  $("evalbox").innerHTML=D.evaluatorLink?'<p style="margin-top:12px"><a href="'+esc(D.evaluatorLink)+'" target="_blank" rel="noopener"><b>📁 เอกสารสำหรับผู้ประเมิน</b></a> <span class="na">(ต้องได้รับสิทธิ์เข้าถึง)</span></p>':'<div class="empty">หลักฐานที่ระบุตัวบุคคลจัดเก็บในระบบของมหาวิทยาลัย หลักสูตรจะแจ้งช่องทางเข้าถึงแก่ผู้ประเมินโดยตรง</div>';
 }
-Promise.all([fetch("bizinno_data.json",{cache:"no-cache"}).then(r=>r.json()),null]).then(([d])=>fetch(d.coursesFile,{cache:"no-cache"}).then(r=>r.ok?r.json():{courses:[]}).catch(()=>({courses:[]})).then(c=>{D=d;CRS=c.courses||[];if(location.hash==="#phd")P="phd";$("draft").hidden=d.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+d.updated;render();})).catch(()=>{$("c8body").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';});
+Promise.all([fetch("bizinno_data.json",{cache:"no-cache"}).then(r=>r.json()),null]).then(([d])=>fetch(d.coursesFile,{cache:"no-cache"}).then(r=>r.ok?r.json():{courses:[]}).catch(()=>({courses:[]})).then(c=>fetch("bizinno_programs.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null).then(pg=>{PRG=pg;D=d;CRS=c.courses||[];if(location.hash==="#phd")P="phd";$("draft").hidden=d.status!=="draft";$("upd").textContent="ปรับปรุงข้อมูล "+d.updated;render();}))).catch(()=>{$("c8body").innerHTML='<div class="empty">โหลดข้อมูลไม่ได้</div>';});
 })();
 </script>
 <script data-goatcounter="https://waruwut.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
