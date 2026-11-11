@@ -201,32 +201,40 @@
   "staff": {
    "warawut": {
     "main_ma": 3,
+    "main_thesis": 7,
     "co_phd": 3,
     "main_phd": 4,
     "gco": 1,
     "gmain": 2,
     "mainTotal": 7,
+    "equiv": 7.0,
     "cap": 5
    },
    "kittipol": {
     "main_phd": 11,
+    "main_thesis": 11,
     "co_phd": 2,
     "gmain": 5,
     "mainTotal": 11,
+    "equiv": 11.0,
     "cap": 10
    },
    "kanjana": {
     "main_phd": 1,
+    "main_thesis": 1,
     "co_phd": 4,
     "gmain": 2,
     "mainTotal": 1,
+    "equiv": 1.0,
     "cap": 5
    },
    "cattaleeya": {
     "main_phd": 1,
     "main_other": 2,
+    "main_thesis": 2,
     "main_ma": 1,
     "mainTotal": 2,
+    "equiv": 2.0,
     "cap": 5
    }
   },
