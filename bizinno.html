@@ -104,6 +104,11 @@ body.check .chip.wait,body.check .chip.part,body.check .chip.ext{background:var(
 .prac{border:1px solid var(--line);border-left:4px solid var(--c2);border-radius:10px;padding:8px 12px;margin:0 0 12px;font-size:14px}
 .prac .t{font-weight:700;color:var(--c2)}
 #k9{order:-1}#k9 .chip{white-space:nowrap}
+details.ix{border-left:5px solid var(--cc)}details.ix>summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ixn{flex:0 0 26px;height:26px;border-radius:7px;background:var(--cc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+.ixt{flex:1 1 200px}.ixb{display:flex;flex:0 0 140px;height:10px;border-radius:6px;overflow:hidden;background:var(--nextbg)}.ixb i{display:block}
+.ixb i.ok{background:var(--ok)}.ixb i.part{background:#E0A526}.ixb i.wait{background:#B8C2CC}.ixb i.ext{background:#DDE3EA}
+body.check .ixb i.wait,body.check .ixb i.ext{background:var(--bad)}.ixc{font-size:12.5px;color:var(--muted);font-weight:400;flex:0 0 130px}
 @media print{.checkbar{display:none!important}}
 .lnk{border:none;background:none;color:var(--accent);cursor:pointer;font-family:inherit;font-size:13px;padding:0;text-decoration:underline}
 .side .allbtn{display:block;width:100%;margin-top:8px;border:1px dashed var(--line);background:#fff;border-radius:8px;padding:6px;font-family:inherit;font-size:13px;color:var(--muted);cursor:pointer}
@@ -275,7 +280,7 @@ async function copySar(html,label){const txt=html.replace(/<br>/g,"\n").replace(
 // ---------- บล็อกรายเกณฑ์ ----------
 const CRIT=[[1,"ผลการเรียนรู้ที่คาดหวัง","Expected Learning Outcomes"],[2,"โครงสร้างและเนื้อหาของหลักสูตร","Programme Structure and Content"],[3,"แนวทางการเรียนการสอน","Teaching and Learning Approach"],[4,"การประเมินผู้เรียน","Student Assessment"],[5,"บุคลากรสายวิชาการ","Academic Staff"],[6,"การบริการสนับสนุนผู้เรียน","Student Support Services"],[7,"สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน","Facilities and Infrastructure"],[8,"ผลผลิตและผลลัพธ์","Output and Outcomes"]];
 function mk7(n){const R=MK7&&MK7[P+"-2566"]?[MK7[P+"-2566"]]:Object.values(MK7||{}).filter(x=>x.level===P);if(!R.length)return'<div class="empty">ยังไม่มีรายงานผลการดำเนินงาน (มคอ.7) ของหลักสูตรนี้ในระบบ</div>';
-  return R.map(r=>{const subs=Object.entries(r.subs).filter(([k,v])=>v.crit===n&&v.body.length);return subs.length?"<p class='sub'>ปีการศึกษา "+esc(r.year)+" · ที่มา: "+esc(r.source)+"</p>"+subs.map(([k,v])=>DET(k+" "+(t=>t.length>120?t.slice(0,120)+"…":t)(v.en.split("✔")[0].trim()),v.body.slice(0,14).map(x=>"<p>"+esc(x)+"</p>").join("")+(v.body.length>14?"<p class='sub'>… ฉบับเต็มในเอกสารสำหรับผู้ประเมิน</p>":""))).join(""):"";}).join("")||'<div class="empty">ไม่พบเนื้อหาของเกณฑ์นี้ในรายงาน</div>';}
+  return R.map(r=>{const subs=Object.entries(r.subs).filter(([k,v])=>v.crit===n&&v.body.length);return subs.length?"<p class='sub'>ปีการศึกษา "+esc(r.year)+" · ที่มา: "+esc(r.source)+"</p>"+subs.map(([k,v])=>DET((v.grp?v.grp[0]+"–"+v.grp[v.grp.length-1]+" (รายงานรวม)":k)+" "+(t=>t.length>120?t.slice(0,120)+"…":t)(v.en.split("✔")[0].trim()),v.body.slice(0,14).map(x=>typeof x==="string"?"<p>"+esc(x)+"</p>":GT(x.t,1,{left:true})).join("")+(v.body.length>14?"<p class='sub'>… ฉบับเต็มในเอกสารสำหรับผู้ประเมิน</p>":""))).join(""):"";}).join("")||'<div class="empty">ไม่พบเนื้อหาของเกณฑ์นี้ในรายงาน</div>';}
 function block(n,ev,status,body){const c=CRIT[n-1];return'<section class="cb" id="k'+n+'" style="--cc:var(--c'+n+')"><header><div class="no">เกณฑ์ที่ '+n+" · "+c[2]+"</div><h2>"+c[1]+'</h2><div class="ev"><span class="chip '+status[0]+'">'+status[1]+"</span>"+ev.map(e=>'<span class="chip">'+esc(e)+"</span>").join("")+'</div><button class="sarbtn" data-sar="'+n+'">📋 คัดลอกข้อมูลเกณฑ์นี้ไปเขียน SAR</button></header><div class="bd">'+body+(n>=1?"<h3>ผลการดำเนินงานและการปรับปรุงที่ผ่านมา (มคอ.7)</h3>"+mk7(n):"")+"</div></section>";}
 
 function semNo(k){const m=k.match(/^([12])\/(25\d\d)$/),c=D.term.label.match(/^([12])\/(25\d\d)$/);if(!m||!c)return 0;return(+c[2]-+m[2])*2+(+c[1]-+m[1])+1;}
@@ -342,8 +347,11 @@ function decorate(){const S=SUBS,due=D.gapDue||("เก็บข้อมูล�
   $("blocks").insertAdjacentHTML("beforeend",'<section class="cb" id="k9" style="--cc:var(--c0)"><header><div class="no">สำหรับผู้ประเมิน</div><h2>ดัชนีเกณฑ์ย่อย AUN-QA 53 ข้อ · หลักฐานอยู่ที่ใดในหน้านี้</h2></header><div class="bd">'+
     '<div class="kpis" style="--cc:var(--c8)">'+["ok","part","wait","ext"].map(k=>"<div><b>"+cnt(k)+"</b><span>"+STL[k]+"</span></div>").join("")+"</div>"+
     "<p class='sub' style='margin-top:8px'>✓ มีหลักฐานบนหน้านี้ · ◐ มีบางส่วน กำลังรวบรวมเพิ่ม · ○ อยู่ระหว่างรวบรวม ("+esc(due)+") · ข้อมูลระดับคณะหรือมหาวิทยาลัยจะเพิ่มเมื่อได้รับ</p>"+
-    CRIT.map(c=>"<p style='margin-top:12px'><b>เกณฑ์ที่ "+c[0]+" "+esc(c[1])+"</b> <button class='lnk' data-go='"+c[0]+"'>ไปที่เกณฑ์ "+c[0]+"</button></p>"+'<div class="tw"><table><thead><tr><th>ข้อ</th><th>หัวข้อ</th><th>สถานะ</th><th>ยังขาด</th></tr></thead><tbody>'+
-      all.filter(k=>+k.split(".")[0]===c[0]).map(k=>{const x=S[k],t=subSt(x);return"<tr><td><b>"+k+"</b></td><td>"+esc(SUBTH[k])+"<br><span class='sub'>"+esc(SUBT[k])+"</span></td><td><span class='chip "+t+"'>"+STL[t]+"</span></td><td>"+(x.miss.length?esc(x.miss.join(" · ")):"–")+"</td></tr>";}).join("")+"</tbody></table></div>").join("")+
+    "<p class='sub'>กดที่เกณฑ์เพื่อดูรายข้อ</p>"+
+    CRIT.map(c=>{const ks=all.filter(k=>+k.split(".")[0]===c[0]),n=t=>ks.filter(k=>subSt(S[k])===t).length;
+      return'<details class="ix" style="--cc:var(--c'+c[0]+')"><summary><span class="ixn">'+c[0]+'</span><span class="ixt">'+esc(c[1])+'</span><span class="ixb">'+["ok","part","wait","ext"].map(t=>'<i class="'+t+'" style="flex:'+n(t)+'"></i>').join("")+'</span><span class="ixc">'+["ok","part","wait","ext"].filter(t=>n(t)).map(t=>STL[t].split(" ")[0]+" "+n(t)).join(" · ")+"</span></summary>"+
+      '<div class="tw"><table><thead><tr><th>ข้อ</th><th>หัวข้อ</th><th>สถานะ</th><th>ยังขาด</th></tr></thead><tbody>'+
+      ks.map(k=>{const x=S[k],t=subSt(x);return"<tr><td><b>"+k+"</b></td><td>"+esc(SUBTH[k])+"<br><span class='sub'>"+esc(SUBT[k])+"</span></td><td><span class='chip "+t+"'>"+STL[t]+"</span></td><td>"+(x.miss.length?esc(x.miss.join(" · ")):"–")+"</td></tr>";}).join("")+"</tbody></table></div><p><button class='lnk' data-go='"+c[0]+"'>ไปที่เกณฑ์ "+c[0]+" →</button></p></details>";}).join("")+
     "</div></section>");
   $("checkbar").innerHTML="โหมดตรวจความครบ (สำหรับทีมหลักสูตร) · ยังขาด "+nm+" รายการ ใน "+all.filter(k=>S[k].miss.length).length+" เกณฑ์ย่อย · "+esc(due)+" · <button class='lnk' data-go='9'>ดูดัชนีเกณฑ์ย่อย</button>";}
 function render(){
@@ -487,7 +495,9 @@ function render(){
    A("8.3",SP?["ผลงานอาจารย์ผู้รับผิดชอบหลักสูตร 5 ปี (ไม่นับซ้ำ) "+SP.uniqueWorks+" เรื่อง ต่ออาจารย์ "+SP.perStaff]:[],SP?WT(STF.years.map(y=>String(+y+543)),[STF.years.map(y=>SP.byYear[y])]):"",[STF?STF.source:""],["ผลงานตีพิมพ์ของนิสิตและบัณฑิต","quartile จาก Scopus"]);
    A("8.4",[],"",[],["ผลการบรรลุ PLO รายข้อแบบวัดโดยตรง"]);
    A("8.5",[],"",[],["ความพึงพอใจของนิสิต บัณฑิต ผู้ใช้บัณฑิต และอาจารย์"]);
-   const mk=(k)=>{const r=MK7&&(MK7[P+"-2566"]||Object.values(MK7).find(x=>x.level===P));const v=r&&r.subs[k];return v&&v.body.length?"<p><i>ผลการดำเนินงานเดิม (มคอ.7 ปีการศึกษา "+esc(r.year)+")</i></p><p>"+v.body.slice(0,6).map(esc).join("<br>")+"</p>":"";};
+   const mk=(k)=>{const r=MK7&&(MK7[P+"-2566"]||Object.values(MK7).find(x=>x.level===P));if(!r)return"";const v=r.subs[k];if(!v){const h=Object.entries(r.subs).find(([,x])=>(x.grp||[]).includes(k));return h&&h[0]!==k?"<p><i>มคอ.7 ปีการศึกษา "+esc(r.year)+" รายงานข้อนี้รวมกับข้อ "+esc(h[1].grp.join(", "))+"</i></p>":"";}
+     if(!v.body.length)return"";const b=[];let np=0;for(const x of v.body){if(typeof x==="string"){if(np>=8)continue;np++;b.push("<p>"+esc(x)+"</p>");}else b.push(WT(x.t[0].map(cT),x.t.slice(1)));if(b.length>=14)break;}
+     return"<p><i>ผลการดำเนินงานเดิม (มคอ.7 ปีการศึกษา "+esc(r.year)+")</i></p>"+b.join("");};
    (D.practices||[]).filter(x=>(!x.level||x.level===P)&&S[x.sub]).forEach(x=>S[x.sub].facts.push("แนวปฏิบัติของหลักสูตร: "+x.what+(x.since?" (ตั้งแต่ "+x.since+")":"")+(x.evidence?" · หลักฐาน: "+x.evidence:"")));
    SUBS=S;
    SAR={};for(let n=1;n<=8;n++){let h="<h2>เกณฑ์ที่ "+n+" "+CRIT[n-1][1]+" ("+CRIT[n-1][2]+")</h2><p>"+esc(PN)+" · ข้อมูล ณ ภาค "+esc(TL)+" · ปรับปรุง "+esc(D.updated)+"</p>";
